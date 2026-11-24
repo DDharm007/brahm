@@ -40,6 +40,9 @@ pub enum BrahmError {
 
     #[error("Integrity hashing error for '{path}': {message}")]
     HashingError { path: PathBuf, message: String },
+
+    #[error("Parser error: {0}")]
+    Parser(#[from] crate::parser::ParserError),
 }
 
 /// Standard Result alias for BRAHM operations.
