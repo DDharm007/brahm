@@ -1,7 +1,10 @@
 //! Core filesystem traversal, safe symbolic link handling, and file inspection engine.
 
+use crate::classification::classify_file;
 use crate::config::BrahmConfig;
-use crate::models::{DirectoryEntry, FileClassification, FileEntry, FileType, ScanWarning};
+use crate::detection::detect_language;
+use crate::models::{DirectoryEntry, FileEntry, FileType, ScanWarning};
+
 use chrono::{DateTime, Utc};
 use std::collections::HashMap;
 use std::fs::{self, File};
@@ -260,6 +263,9 @@ impl Scanner {
             .and_then(|ext| ext.to_str())
             .map(|s| s.to_string());
 
+        let language = detect_language(&filename, extension.as_deref());
+        let classification = classify_file(&relative_path, &filename, extension.as_deref());
+
         Ok(FileEntry {
             relative_path,
             filename,
@@ -269,8 +275,8 @@ impl Scanner {
             is_binary,
             is_hidden,
             modified_at,
-            language: None, // Will be populated by detection engine (Milestone 04)
-            classification: FileClassification::Unknown, // Will be populated by classification (Milestone 04)
+            language,
+            classification,
             hash_blake3: None, // Will be populated by analysis engine (Milestone 05)
         })
     }
