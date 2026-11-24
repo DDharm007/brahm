@@ -119,7 +119,6 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
         md.push('\n');
     }
 
-
     md.push_str("## 7. Technical Limitations & Operational Context\n\n");
     md.push_str("- Deterministic Stage 01 analysis without AI runtime or AST inference.\n");
     md.push_str(

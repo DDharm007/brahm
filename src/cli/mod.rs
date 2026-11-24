@@ -5,6 +5,10 @@
 use clap::{Args, Parser, Subcommand, ValueEnum};
 use std::path::PathBuf;
 
+pub mod handlers;
+
+pub use handlers::{execute_init, prepare_scan_config};
+
 /// BRAHM — Blind Reverse-engineering & Adversarial Honeypot Mechanism
 /// Stage 01: Repository Analyzer
 #[derive(Parser, Debug)]

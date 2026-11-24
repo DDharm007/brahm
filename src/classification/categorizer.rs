@@ -155,7 +155,6 @@ pub fn classify_file(
         return FileClassification::SourceCode;
     }
 
-
     // 10. Unknown
     FileClassification::Unknown
 }

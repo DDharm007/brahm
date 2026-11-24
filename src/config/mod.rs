@@ -13,7 +13,6 @@ pub struct BrahmConfig {
     pub scanner: ScannerConfig,
 }
 
-
 /// Scanner subsystem configuration.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ScannerConfig {

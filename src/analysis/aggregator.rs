@@ -76,7 +76,6 @@ pub fn analyze_repository(
     // Sort languages descending by bytes
     language_distribution.sort_by_key(|a| std::cmp::Reverse(a.total_bytes));
 
-
     RepositoryStatistics {
         total_files,
         total_directories,
