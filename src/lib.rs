@@ -18,5 +18,6 @@ pub mod models;
 pub mod parser;
 pub mod reporting;
 pub mod scanner;
+pub mod symbols;
 
 pub use errors::{BrahmError, Result};
