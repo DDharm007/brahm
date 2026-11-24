@@ -12,6 +12,7 @@ pub mod analysis;
 pub mod classification;
 pub mod cli;
 pub mod config;
+pub mod dependencies;
 pub mod detection;
 pub mod errors;
 pub mod models;
