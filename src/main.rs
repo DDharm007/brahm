@@ -6,7 +6,7 @@ use brahm::cli::{Cli, Commands, InitArgs, ScanArgs};
 use brahm::errors::Result;
 use clap::Parser;
 use std::process::ExitCode;
-use tracing::{error, info};
+use tracing::error;
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 
 fn init_logging(verbose: bool) {
@@ -34,11 +34,8 @@ fn handle_init(args: InitArgs) -> Result<()> {
 
 fn handle_scan(args: ScanArgs) -> Result<()> {
     let (config, canonical_repo) = brahm::cli::prepare_scan_config(&args)?;
-    info!(
-        "Repository validated at '{}'. Configured with max file size {} MB.",
-        canonical_repo.display(),
-        config.scanner.max_file_size_mb
-    );
+    let report = brahm::analysis::run_repository_analysis(&canonical_repo, config)?;
+    brahm::reporting::dispatch_reports(&report, args.format, args.output.as_deref())?;
     Ok(())
 }
 

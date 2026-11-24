@@ -1,4 +1,7 @@
 //! Markdown report generator.
+//!
+//! Generates comprehensive GitHub-flavored Markdown intelligence reports
+//! conforming strictly to the Stage 01 specification.
 
 use crate::errors::Result;
 use crate::models::RepositoryReport;
@@ -12,6 +15,7 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
     md.push_str("# BRAHM Repository Intelligence Report\n\n");
     md.push_str("> Generated deterministically by **BRAHM (Blind Reverse-engineering & Adversarial Honeypot Mechanism)**\n\n");
 
+    // 1. Executive overview
     md.push_str("## 1. Executive Overview\n\n");
     md.push_str("| Metric | Value |\n");
     md.push_str("|---|---|\n");
@@ -40,7 +44,7 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
         report.statistics.total_directories
     ));
     md.push_str(&format!(
-        "| **Total Size** | `{}` |\n",
+        "| **Total Scanned Size** | `{}` |\n",
         report.statistics.formatted_size
     ));
     md.push_str(&format!(
@@ -52,24 +56,23 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
         report.statistics.warnings_count
     ));
 
-    md.push_str("## 2. Detected Frameworks & Architecture Indicators\n\n");
-    if report.frameworks.is_empty() {
-        md.push_str("_No specific application frameworks confirmed._\n\n");
-    } else {
-        md.push_str("| Framework | Confidence Level | Evidence Discovered |\n");
-        md.push_str("|---|---|---|\n");
-        for fw in &report.frameworks {
-            md.push_str(&format!(
-                "| **{}** | `{}` | {} |\n",
-                fw.name,
-                fw.confidence,
-                fw.evidence.join("; ")
-            ));
-        }
-        md.push('\n');
-    }
+    // 2. Repository structure
+    md.push_str("## 2. Repository Structure\n\n");
+    md.push_str("| Directory Depth | Discovered Directories | Total Files Encountered |\n");
+    md.push_str("|---|---|---|\n");
+    let max_depth = report
+        .directories
+        .iter()
+        .map(|d| d.depth)
+        .max()
+        .unwrap_or(0);
+    md.push_str(&format!(
+        "| Maximum Tree Depth: `{}` | `{}` directories | `{}` files |\n\n",
+        max_depth, report.statistics.total_directories, report.statistics.total_files
+    ));
 
-    md.push_str("## 3. Programming Language Distribution\n\n");
+    // 3. Language distribution
+    md.push_str("## 3. Language Distribution\n\n");
     if report.languages.is_empty() {
         md.push_str("_No recognized source code programming languages detected._\n\n");
     } else {
@@ -88,7 +91,26 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
         md.push('\n');
     }
 
-    md.push_str("## 4. File Classification Breakdown\n\n");
+    // 4. Framework detection
+    md.push_str("## 4. Framework Detection\n\n");
+    if report.frameworks.is_empty() {
+        md.push_str("_No specific application frameworks confirmed._\n\n");
+    } else {
+        md.push_str("| Framework | Confidence Level | Evidence Discovered |\n");
+        md.push_str("|---|---|---|\n");
+        for fw in &report.frameworks {
+            md.push_str(&format!(
+                "| **{}** | `{}` | {} |\n",
+                fw.name,
+                fw.confidence,
+                fw.evidence.join("; ")
+            ));
+        }
+        md.push('\n');
+    }
+
+    // 5. File classification
+    md.push_str("## 5. File Classification\n\n");
     md.push_str("| Classification Category | File Count |\n");
     md.push_str("|---|---|\n");
     for (category, count) in &report.statistics.classification_counts {
@@ -96,7 +118,8 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
     }
     md.push('\n');
 
-    md.push_str("## 5. Discovered Configuration & Manifest Files\n\n");
+    // 6. Important configurations
+    md.push_str("## 6. Important Configurations\n\n");
     if report.configurations.is_empty() {
         md.push_str("_No standard manifest or configuration files identified._\n\n");
     } else {
@@ -106,8 +129,48 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
         md.push('\n');
     }
 
-    if !report.warnings.is_empty() {
-        md.push_str("## 6. Scan Warnings & Diagnostics\n\n");
+    // 7. Repository statistics
+    md.push_str("## 7. Repository Statistics\n\n");
+    md.push_str(&format!(
+        "- **Total Scanned Bytes:** `{}`\n",
+        report.statistics.total_bytes
+    ));
+    md.push_str(&format!(
+        "- **Configuration Files Count:** `{}`\n",
+        report.statistics.configuration_count
+    ));
+    md.push_str(&format!(
+        "- **Package Manifest Count:** `{}`\n",
+        report.statistics.manifest_count
+    ));
+    md.push_str(&format!(
+        "- **Unknown File Format Count:** `{}`\n",
+        report.statistics.unknown_file_count
+    ));
+    md.push_str("\n### File Extension Summary\n\n");
+    md.push_str("| Extension | Count |\n");
+    md.push_str("|---|---|\n");
+    for (ext, count) in &report.statistics.extension_counts {
+        md.push_str(&format!("| `{}` | `{}` |\n", ext, count));
+    }
+    md.push('\n');
+
+    // 8. Excluded paths
+    md.push_str("## 8. Excluded Paths\n\n");
+    if report.excluded_paths.is_empty() {
+        md.push_str("_No paths were excluded during scanning._\n\n");
+    } else {
+        for ex in &report.excluded_paths {
+            md.push_str(&format!("- `[excluded]` `{}`\n", ex));
+        }
+        md.push('\n');
+    }
+
+    // 9. Scan warnings
+    md.push_str("## 9. Scan Warnings\n\n");
+    if report.warnings.is_empty() {
+        md.push_str("_Zero scan warnings recorded. Traversal was clean._\n\n");
+    } else {
         md.push_str("| Severity | Path | Diagnostic Message |\n");
         md.push_str("|---|---|---|\n");
         for w in &report.warnings {
@@ -119,17 +182,29 @@ pub fn generate_report(report: &RepositoryReport, output_path: Option<&Path>) ->
         md.push('\n');
     }
 
-    md.push_str("## 7. Technical Limitations & Operational Context\n\n");
-    md.push_str("- Deterministic Stage 01 analysis without AI runtime or AST inference.\n");
-    md.push_str(
-        "- File hashing represents integrity fingerprints, not dynamic trust evaluation.\n",
-    );
-    md.push_str("- Secret values are strictly masked and never stored in reports.\n\n");
+    // 10. Technical limitations
+    md.push_str("## 10. Technical Limitations\n\n");
+    md.push_str("- Deterministic Stage 01 analysis operates without runtime AI models or abstract syntax tree (AST) semantic inferencing.\n");
+    md.push_str("- File hashing represents cryptographic integrity fingerprints (BLAKE3), not dynamic trust evaluations or behavior validation.\n");
+    md.push_str("- Secret values, private keys, and credential stores are masked and intentionally excluded from reports.\n\n");
 
-    md.push_str("---\n");
+    // 11. Scan metadata
+    md.push_str("## 11. Scan Metadata\n\n");
     md.push_str(&format!(
-        "_BRAHM Version: `{}` | Scan Timestamp: `{}`_\n",
-        report.brahm_version, report.scan_metadata.completed_at
+        "- **BRAHM Version:** `{}`\n",
+        report.brahm_version
+    ));
+    md.push_str(&format!(
+        "- **Scan Started At:** `{}`\n",
+        report.scan_metadata.started_at
+    ));
+    md.push_str(&format!(
+        "- **Scan Completed At:** `{}`\n",
+        report.scan_metadata.completed_at
+    ));
+    md.push_str(&format!(
+        "- **Elapsed Scan Time:** `{} ms`\n\n",
+        report.scan_metadata.duration_ms
     ));
 
     if let Some(path) = output_path {
