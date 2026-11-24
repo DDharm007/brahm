@@ -5,4 +5,4 @@
 
 pub mod engine;
 
-pub use engine::Scanner;
+pub use engine::{detect_binary_content, RawScanOutput, Scanner};

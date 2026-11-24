@@ -9,7 +9,6 @@ use std::process::ExitCode;
 use tracing::{error, info};
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 
-
 fn init_logging(verbose: bool) {
     let filter = if verbose {
         EnvFilter::new("brahm=debug,info")

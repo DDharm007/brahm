@@ -7,7 +7,6 @@ use std::fs;
 use std::path::PathBuf;
 use tracing::{debug, info, warn};
 
-
 /// Executes the `init` command, generating a default `brahm.toml` configuration.
 pub fn execute_init(args: &InitArgs) -> Result<PathBuf> {
     let target_dir = &args.path;
