@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0",
+  "brahm_version": "0.1.0",
+  "repository": {
+    "name": "fixture_a_react",
+    "root_path": "//?/D:/Personal Projects/Brahm BLA/fixtures/fixture_a_react",
+    "canonical_path": "//?/D:/Personal Projects/Brahm BLA/fixtures/fixture_a_react"
+  },
+  "scan_metadata": {
+    "brahm_version": "0.1.0",
+    "started_at": "2026-11-24T06:03:43.506113700Z",
+    "completed_at": "2026-11-24T06:03:43.507020500Z",
+    "duration_ms": 0
+  },
+  "statistics": {
+    "total_files": 7,
+    "total_directories": 5,
+    "total_bytes": 854,
+    "formatted_size": "854 B",
+    "language_distribution": [
+      {
+        "language": "JSON",
+        "file_count": 1,
+        "total_bytes": 229,
+        "percentage_files": 14.3,
+        "percentage_bytes": 26.8
+      },
+      {
+        "language": "TypeScript",
+        "file_count": 2,
+        "total_bytes": 227,
+        "percentage_files": 28.6,
+        "percentage_bytes": 26.6
+      },
+      {
+        "language": "Markdown",
+        "file_count": 1,
+        "total_bytes": 102,
+        "percentage_files": 14.3,
+        "percentage_bytes": 11.9
+      },
+      {
+        "language": "JavaScript",
+        "file_count": 1,
+        "total_bytes": 102,
+        "percentage_files": 14.3,
+        "percentage_bytes": 11.9
+      },
+      {
+        "language": "CSS",
+        "file_count": 1,
+        "total_bytes": 78,
+        "percentage_files": 14.3,
+        "percentage_bytes": 9.1
+      }
+    ],
+    "classification_counts": {
+      "Assets": 1,
+      "Build System": 1,
+      "Configuration": 1,
+      "Documentation": 1,
+      "Source Code": 3
+    },
+    "extension_counts": {
+      "css": 1,
+      "json": 1,
+      "jsx": 1,
+      "md": 1,
+      "svg": 1,
+      "ts": 1,
+      "tsx": 1
+    },
+    "configuration_count": 1,
+    "manifest_count": 1,
+    "unknown_file_count": 0,
+    "excluded_paths_count": 0,
+    "warnings_count": 0
+  },
+  "languages": [
+    {
+      "language": "JSON",
+      "file_count": 1,
+      "total_bytes": 229,
+      "percentage_files": 14.3,
+      "percentage_bytes": 26.8
+    },
+    {
+      "language": "TypeScript",
+      "file_count": 2,
+      "total_bytes": 227,
+      "percentage_files": 28.6,
+      "percentage_bytes": 26.6
+    },
+    {
+      "language": "Markdown",
+      "file_count": 1,
+      "total_bytes": 102,
+      "percentage_files": 14.3,
+      "percentage_bytes": 11.9
+    },
+    {
+      "language": "JavaScript",
+      "file_count": 1,
+      "total_bytes": 102,
+      "percentage_files": 14.3,
+      "percentage_bytes": 11.9
+    },
+    {
+      "language": "CSS",
+      "file_count": 1,
+      "total_bytes": 78,
+      "percentage_files": 14.3,
+      "percentage_bytes": 9.1
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Node.js",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "Identified 'package.json' manifest"
+      ]
+    },
+    {
+      "name": "React",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "'package.json' declares 'react' dependency"
+      ]
+    },
+    {
+      "name": "Vite",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "'package.json' declares 'vite' dependency",
+        "Vite configuration file present"
+      ]
+    }
+  ],
+  "configurations": [
+    "README.md",
+    "package.json",
+    "vite.config.ts"
+  ],
+  "files": [
+    {
+      "relative_path": "README.md",
+      "filename": "README.md",
+      "extension": "md",
+      "size_bytes": 102,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:10.701135200Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "adf9abdfa78822d711404d0b8ed171a1edbf3b687f33beac610bcec8bd908a9c"
+    },
+    {
+      "relative_path": "package.json",
+      "filename": "package.json",
+      "extension": "json",
+      "size_bytes": 229,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:49:40.969181800Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "89d0332c6bc51e40a748e0c2c93dbc58828e0f7b2e0cc6667e6b30bb288de31c"
+    },
+    {
+      "relative_path": "public/logo.svg",
+      "filename": "logo.svg",
+      "extension": "svg",
+      "size_bytes": 116,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:06.669280900Z",
+      "language": null,
+      "classification": "assets",
+      "hash_blake3": "b9a8a7498d6bc2b7eb9f8c74d633817ae6abbbdef892c8d34f1eaafea48b9bf8"
+    },
+    {
+      "relative_path": "src/App.tsx",
+      "filename": "App.tsx",
+      "extension": "tsx",
+      "size_bytes": 140,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:49:52.402108200Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "dbac2fcf67671b369d0c19c4219da3bcc119c8f9b17f1a1eb1f51662a58795b1"
+    },
+    {
+      "relative_path": "src/components/Header.jsx",
+      "filename": "Header.jsx",
+      "extension": "jsx",
+      "size_bytes": 102,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:49:56.778921800Z",
+      "language": "JavaScript",
+      "classification": "source_code",
+      "hash_blake3": "e893d95af8becc50dcd4908aa4b8782c6701535422dc8bcc167c8805dbdb11e2"
+    },
+    {
+      "relative_path": "src/styles/app.css",
+      "filename": "app.css",
+      "extension": "css",
+      "size_bytes": 78,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:01.300019500Z",
+      "language": "CSS",
+      "classification": "source_code",
+      "hash_blake3": "25c40fe0b0c6e8879c4dea7a3f6a554a42e971a3766b32650ce5fd111e8df3ef"
+    },
+    {
+      "relative_path": "vite.config.ts",
+      "filename": "vite.config.ts",
+      "extension": "ts",
+      "size_bytes": 87,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:49:46.697778700Z",
+      "language": "TypeScript",
+      "classification": "build_system",
+      "hash_blake3": "59dfd295ba96a0e3ad249bdb9c409733af9309879b157d200ed63de955c7d7d3"
+    }
+  ],
+  "directories": [
+    {
+      "relative_path": ".",
+      "depth": 0,
+      "file_count": 3,
+      "child_dir_count": 2
+    },
+    {
+      "relative_path": "public",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 2
+    },
+    {
+      "relative_path": "src/components",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/styles",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    }
+  ],
+  "excluded_paths": [],
+  "warnings": []
+}

@@ -30,12 +30,41 @@ pub fn detect_frameworks(repo_root: &Path, files: &[FileEntry]) -> Vec<Framework
     detected
 }
 
+fn add_or_merge_framework(
+    detected: &mut Vec<FrameworkIndicator>,
+    name: &str,
+    confidence: ConfidenceLevel,
+    evidence: Vec<String>,
+) {
+    if let Some(existing) = detected.iter_mut().find(|f| f.name == name) {
+        // Upgrade confidence if higher
+        if confidence == ConfidenceLevel::ConfirmedByManifest {
+            existing.confidence = ConfidenceLevel::ConfirmedByManifest;
+        }
+        for ev in evidence {
+            if !existing.evidence.contains(&ev) {
+                existing.evidence.push(ev);
+            }
+        }
+    } else {
+        detected.push(FrameworkIndicator {
+            name: name.to_string(),
+            confidence,
+            evidence,
+        });
+    }
+}
+
 fn detect_node_ecosystem(
     repo_root: &Path,
     files: &[FileEntry],
     detected: &mut Vec<FrameworkIndicator>,
 ) {
-    let package_json_entry = files.iter().find(|f| f.filename == "package.json");
+    let package_json_entries: Vec<&FileEntry> = files
+        .iter()
+        .filter(|f| f.filename == "package.json")
+        .collect();
+
     let has_next_config = files.iter().any(|f| {
         f.filename == "next.config.js"
             || f.filename == "next.config.ts"
@@ -47,116 +76,117 @@ fn detect_node_ecosystem(
             || f.filename == "vite.config.mjs"
     });
 
-    if let Some(entry) = package_json_entry {
-        let manifest_path = repo_root.join(&entry.relative_path);
-        let evidence = vec![format!("Identified '{}' manifest", entry.relative_path)];
+    if !package_json_entries.is_empty() {
+        for entry in package_json_entries {
+            let manifest_path = repo_root.join(&entry.relative_path);
+            let evidence = vec![format!("Identified '{}' manifest", entry.relative_path)];
 
-        let mut has_react = false;
-        let mut has_next = false;
-        let mut has_vite = false;
+            add_or_merge_framework(
+                detected,
+                "Node.js",
+                ConfidenceLevel::ConfirmedByManifest,
+                evidence,
+            );
 
-        if let Ok(content) = fs::read_to_string(&manifest_path) {
-            if let Ok(json) = serde_json::from_str::<Value>(&content) {
-                let check_dep = |dep_name: &str| -> bool {
-                    let in_deps = json
-                        .get("dependencies")
-                        .and_then(|d| d.get(dep_name))
-                        .is_some();
-                    let in_dev = json
-                        .get("devDependencies")
-                        .and_then(|d| d.get(dep_name))
-                        .is_some();
-                    let in_peer = json
-                        .get("peerDependencies")
-                        .and_then(|d| d.get(dep_name))
-                        .is_some();
-                    in_deps || in_dev || in_peer
-                };
+            let mut has_react = false;
+            let mut has_next = false;
+            let mut has_vite = false;
 
-                has_react = check_dep("react");
-                has_next = check_dep("next");
-                has_vite = check_dep("vite");
+            if let Ok(content) = fs::read_to_string(&manifest_path) {
+                if let Ok(json) = serde_json::from_str::<Value>(&content) {
+                    let check_dep = |dep_name: &str| -> bool {
+                        let in_deps = json
+                            .get("dependencies")
+                            .and_then(|d| d.get(dep_name))
+                            .is_some();
+                        let in_dev = json
+                            .get("devDependencies")
+                            .and_then(|d| d.get(dep_name))
+                            .is_some();
+                        let in_peer = json
+                            .get("peerDependencies")
+                            .and_then(|d| d.get(dep_name))
+                            .is_some();
+                        in_deps || in_dev || in_peer
+                    };
+
+                    has_react = check_dep("react");
+                    has_next = check_dep("next");
+                    has_vite = check_dep("vite");
+                }
             }
-        }
 
-        // Node.js
-        detected.push(FrameworkIndicator {
-            name: "Node.js".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
-            evidence: evidence.clone(),
-        });
-
-        // Next.js
-        if has_next {
-            let mut next_ev = vec!["package.json declares 'next' dependency".to_string()];
-            if has_next_config {
-                next_ev.push("Next.js configuration file present".to_string());
-            }
-            detected.push(FrameworkIndicator {
-                name: "Next.js".to_string(),
-                confidence: ConfidenceLevel::ConfirmedByManifest,
-                evidence: next_ev,
-            });
-        } else if has_next_config {
-            detected.push(FrameworkIndicator {
-                name: "Next.js".to_string(),
-                confidence: ConfidenceLevel::StronglyIndicated,
-                evidence: vec![
-                    "Next.js configuration file present without direct manifest dependency"
-                        .to_string(),
-                ],
-            });
-        }
-
-        // React
-        if has_react || has_next {
-            let mut react_ev = vec![];
-            if has_react {
-                react_ev.push("package.json declares 'react' dependency".to_string());
-            }
+            // Next.js
             if has_next {
-                react_ev.push("React implicitly required by Next.js framework".to_string());
+                let mut next_ev = vec![format!(
+                    "'{}' declares 'next' dependency",
+                    entry.relative_path
+                )];
+                if has_next_config {
+                    next_ev.push("Next.js configuration file present".to_string());
+                }
+                add_or_merge_framework(
+                    detected,
+                    "Next.js",
+                    ConfidenceLevel::ConfirmedByManifest,
+                    next_ev,
+                );
             }
-            detected.push(FrameworkIndicator {
-                name: "React".to_string(),
-                confidence: ConfidenceLevel::ConfirmedByManifest,
-                evidence: react_ev,
-            });
-        }
 
-        // Vite
-        if has_vite {
-            let mut vite_ev = vec!["package.json declares 'vite' dependency".to_string()];
-            if has_vite_config {
-                vite_ev.push("Vite configuration file present".to_string());
+            // React
+            if has_react || has_next {
+                let mut react_ev = vec![];
+                if has_react {
+                    react_ev.push(format!(
+                        "'{}' declares 'react' dependency",
+                        entry.relative_path
+                    ));
+                }
+                if has_next {
+                    react_ev.push("React implicitly required by Next.js framework".to_string());
+                }
+                add_or_merge_framework(
+                    detected,
+                    "React",
+                    ConfidenceLevel::ConfirmedByManifest,
+                    react_ev,
+                );
             }
-            detected.push(FrameworkIndicator {
-                name: "Vite".to_string(),
-                confidence: ConfidenceLevel::ConfirmedByManifest,
-                evidence: vite_ev,
-            });
-        } else if has_vite_config {
-            detected.push(FrameworkIndicator {
-                name: "Vite".to_string(),
-                confidence: ConfidenceLevel::StronglyIndicated,
-                evidence: vec!["Vite configuration file present without manifest entry".to_string()],
-            });
+
+            // Vite
+            if has_vite {
+                let mut vite_ev = vec![format!(
+                    "'{}' declares 'vite' dependency",
+                    entry.relative_path
+                )];
+                if has_vite_config {
+                    vite_ev.push("Vite configuration file present".to_string());
+                }
+                add_or_merge_framework(
+                    detected,
+                    "Vite",
+                    ConfidenceLevel::ConfirmedByManifest,
+                    vite_ev,
+                );
+            }
         }
     } else {
         // No package.json, but configs might exist
         if has_next_config {
-            detected.push(FrameworkIndicator {
-                name: "Next.js".to_string(),
-                confidence: ConfidenceLevel::StronglyIndicated,
-                evidence: vec!["next.config.* present in repository".to_string()],
-            });
+            add_or_merge_framework(
+                detected,
+                "Next.js",
+                ConfidenceLevel::StronglyIndicated,
+                vec!["next.config.* present in repository".to_string()],
+            );
         }
         if has_vite_config {
-            detected.push(FrameworkIndicator {
-                name: "Vite".to_string(),
-                confidence: ConfidenceLevel::StronglyIndicated,
-                evidence: vec!["vite.config.* present in repository".to_string()],
-            });
+            add_or_merge_framework(
+                detected,
+                "Vite",
+                ConfidenceLevel::StronglyIndicated,
+                vec!["vite.config.* present in repository".to_string()],
+            );
         }
     }
 }
@@ -179,19 +209,19 @@ fn detect_rust_ecosystem(
             }
         }
 
-        detected.push(FrameworkIndicator {
-            name: "Rust".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
+        add_or_merge_framework(
+            detected,
+            "Rust",
+            ConfidenceLevel::ConfirmedByManifest,
             evidence,
-        });
+        );
     } else if has_rs_files {
-        detected.push(FrameworkIndicator {
-            name: "Rust".to_string(),
-            confidence: ConfidenceLevel::Possible,
-            evidence: vec![
-                "Rust source files (.rs) detected without Cargo.toml manifest".to_string(),
-            ],
-        });
+        add_or_merge_framework(
+            detected,
+            "Rust",
+            ConfidenceLevel::Possible,
+            vec!["Rust source files (.rs) detected without Cargo.toml manifest".to_string()],
+        );
     }
 }
 
@@ -227,26 +257,29 @@ fn detect_python_ecosystem(
         if has_manage_py {
             evidence.push("Found manage.py entrypoint".to_string());
         }
-        detected.push(FrameworkIndicator {
-            name: "Django".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
+        add_or_merge_framework(
+            detected,
+            "Django",
+            ConfidenceLevel::ConfirmedByManifest,
             evidence,
-        });
+        );
     } else if has_manage_py {
-        detected.push(FrameworkIndicator {
-            name: "Django".to_string(),
-            confidence: ConfidenceLevel::StronglyIndicated,
-            evidence: vec!["Found standard Django manage.py entrypoint".to_string()],
-        });
+        add_or_merge_framework(
+            detected,
+            "Django",
+            ConfidenceLevel::StronglyIndicated,
+            vec!["Found standard Django manage.py entrypoint".to_string()],
+        );
     }
 
     // Flask
     if lower_manifest.contains("flask") {
-        detected.push(FrameworkIndicator {
-            name: "Flask".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
-            evidence: vec!["Python manifest declares flask dependency".to_string()],
-        });
+        add_or_merge_framework(
+            detected,
+            "Flask",
+            ConfidenceLevel::ConfirmedByManifest,
+            vec!["Python manifest declares flask dependency".to_string()],
+        );
     }
 }
 
@@ -255,17 +288,19 @@ fn detect_go_ecosystem(files: &[FileEntry], detected: &mut Vec<FrameworkIndicato
     let has_go_files = files.iter().any(|f| f.extension.as_deref() == Some("go"));
 
     if go_mod {
-        detected.push(FrameworkIndicator {
-            name: "Go".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
-            evidence: vec!["go.mod module manifest present in repository".to_string()],
-        });
+        add_or_merge_framework(
+            detected,
+            "Go",
+            ConfidenceLevel::ConfirmedByManifest,
+            vec!["go.mod module manifest present in repository".to_string()],
+        );
     } else if has_go_files {
-        detected.push(FrameworkIndicator {
-            name: "Go".to_string(),
-            confidence: ConfidenceLevel::Possible,
-            evidence: vec!["Go source files (.go) discovered without go.mod".to_string()],
-        });
+        add_or_merge_framework(
+            detected,
+            "Go",
+            ConfidenceLevel::Possible,
+            vec!["Go source files (.go) discovered without go.mod".to_string()],
+        );
     }
 }
 
@@ -277,25 +312,28 @@ fn detect_java_ecosystem(files: &[FileEntry], detected: &mut Vec<FrameworkIndica
     let has_java_files = files.iter().any(|f| f.extension.as_deref() == Some("java"));
 
     if has_pom {
-        detected.push(FrameworkIndicator {
-            name: "Java (Maven)".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
-            evidence: vec!["pom.xml Maven project definition present".to_string()],
-        });
+        add_or_merge_framework(
+            detected,
+            "Java (Maven)",
+            ConfidenceLevel::ConfirmedByManifest,
+            vec!["pom.xml Maven project definition present".to_string()],
+        );
     } else if has_gradle {
-        detected.push(FrameworkIndicator {
-            name: "Java (Gradle)".to_string(),
-            confidence: ConfidenceLevel::ConfirmedByManifest,
-            evidence: vec!["build.gradle Gradle project definition present".to_string()],
-        });
+        add_or_merge_framework(
+            detected,
+            "Java (Gradle)",
+            ConfidenceLevel::ConfirmedByManifest,
+            vec!["build.gradle Gradle project definition present".to_string()],
+        );
     } else if has_java_files {
-        detected.push(FrameworkIndicator {
-            name: "Java".to_string(),
-            confidence: ConfidenceLevel::Possible,
-            evidence: vec![
+        add_or_merge_framework(
+            detected,
+            "Java",
+            ConfidenceLevel::Possible,
+            vec![
                 "Java source files (.java) discovered without Maven/Gradle build manifests"
                     .to_string(),
             ],
-        });
+        );
     }
 }

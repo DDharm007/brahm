@@ -1,0 +1,457 @@
+{
+  "schema_version": "1.0",
+  "brahm_version": "0.1.0",
+  "repository": {
+    "name": "fixture_c_multilingual",
+    "root_path": "//?/D:/Personal Projects/Brahm BLA/fixtures/fixture_c_multilingual",
+    "canonical_path": "//?/D:/Personal Projects/Brahm BLA/fixtures/fixture_c_multilingual"
+  },
+  "scan_metadata": {
+    "brahm_version": "0.1.0",
+    "started_at": "2026-11-24T06:03:43.746805800Z",
+    "completed_at": "2026-11-24T06:03:43.749307800Z",
+    "duration_ms": 2
+  },
+  "statistics": {
+    "total_files": 14,
+    "total_directories": 5,
+    "total_bytes": 1461,
+    "formatted_size": "1.46 kB",
+    "language_distribution": [
+      {
+        "language": "TypeScript",
+        "file_count": 1,
+        "total_bytes": 204,
+        "percentage_files": 7.1,
+        "percentage_bytes": 14.0
+      },
+      {
+        "language": "TOML",
+        "file_count": 2,
+        "total_bytes": 180,
+        "percentage_files": 14.3,
+        "percentage_bytes": 12.3
+      },
+      {
+        "language": "YAML",
+        "file_count": 1,
+        "total_bytes": 173,
+        "percentage_files": 7.1,
+        "percentage_bytes": 11.8
+      },
+      {
+        "language": "Markdown",
+        "file_count": 1,
+        "total_bytes": 167,
+        "percentage_files": 7.1,
+        "percentage_bytes": 11.4
+      },
+      {
+        "language": "SQL",
+        "file_count": 1,
+        "total_bytes": 167,
+        "percentage_files": 7.1,
+        "percentage_bytes": 11.4
+      },
+      {
+        "language": "Python",
+        "file_count": 1,
+        "total_bytes": 152,
+        "percentage_files": 7.1,
+        "percentage_bytes": 10.4
+      },
+      {
+        "language": "Go",
+        "file_count": 2,
+        "total_bytes": 134,
+        "percentage_files": 14.3,
+        "percentage_bytes": 9.2
+      },
+      {
+        "language": "Shell",
+        "file_count": 1,
+        "total_bytes": 81,
+        "percentage_files": 7.1,
+        "percentage_bytes": 5.5
+      },
+      {
+        "language": "JSON",
+        "file_count": 1,
+        "total_bytes": 79,
+        "percentage_files": 7.1,
+        "percentage_bytes": 5.4
+      },
+      {
+        "language": "Rust",
+        "file_count": 1,
+        "total_bytes": 57,
+        "percentage_files": 7.1,
+        "percentage_bytes": 3.9
+      },
+      {
+        "language": "JavaScript",
+        "file_count": 1,
+        "total_bytes": 37,
+        "percentage_files": 7.1,
+        "percentage_bytes": 2.5
+      }
+    ],
+    "classification_counts": {
+      "Build System": 1,
+      "Configuration": 4,
+      "Database": 1,
+      "Deployment": 1,
+      "Documentation": 1,
+      "Scripts": 1,
+      "Source Code": 5
+    },
+    "extension_counts": {
+      "go": 1,
+      "js": 1,
+      "json": 1,
+      "md": 1,
+      "mod": 1,
+      "py": 1,
+      "rs": 1,
+      "sh": 1,
+      "sql": 1,
+      "toml": 2,
+      "ts": 1,
+      "txt": 1,
+      "yml": 1
+    },
+    "configuration_count": 4,
+    "manifest_count": 4,
+    "unknown_file_count": 0,
+    "excluded_paths_count": 0,
+    "warnings_count": 0
+  },
+  "languages": [
+    {
+      "language": "TypeScript",
+      "file_count": 1,
+      "total_bytes": 204,
+      "percentage_files": 7.1,
+      "percentage_bytes": 14.0
+    },
+    {
+      "language": "TOML",
+      "file_count": 2,
+      "total_bytes": 180,
+      "percentage_files": 14.3,
+      "percentage_bytes": 12.3
+    },
+    {
+      "language": "YAML",
+      "file_count": 1,
+      "total_bytes": 173,
+      "percentage_files": 7.1,
+      "percentage_bytes": 11.8
+    },
+    {
+      "language": "Markdown",
+      "file_count": 1,
+      "total_bytes": 167,
+      "percentage_files": 7.1,
+      "percentage_bytes": 11.4
+    },
+    {
+      "language": "SQL",
+      "file_count": 1,
+      "total_bytes": 167,
+      "percentage_files": 7.1,
+      "percentage_bytes": 11.4
+    },
+    {
+      "language": "Python",
+      "file_count": 1,
+      "total_bytes": 152,
+      "percentage_files": 7.1,
+      "percentage_bytes": 10.4
+    },
+    {
+      "language": "Go",
+      "file_count": 2,
+      "total_bytes": 134,
+      "percentage_files": 14.3,
+      "percentage_bytes": 9.2
+    },
+    {
+      "language": "Shell",
+      "file_count": 1,
+      "total_bytes": 81,
+      "percentage_files": 7.1,
+      "percentage_bytes": 5.5
+    },
+    {
+      "language": "JSON",
+      "file_count": 1,
+      "total_bytes": 79,
+      "percentage_files": 7.1,
+      "percentage_bytes": 5.4
+    },
+    {
+      "language": "Rust",
+      "file_count": 1,
+      "total_bytes": 57,
+      "percentage_files": 7.1,
+      "percentage_bytes": 3.9
+    },
+    {
+      "language": "JavaScript",
+      "file_count": 1,
+      "total_bytes": 37,
+      "percentage_files": 7.1,
+      "percentage_bytes": 2.5
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Rust",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "Found 'Cargo.toml' manifest",
+        "Cargo.toml contains valid [package] section"
+      ]
+    },
+    {
+      "name": "Flask",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "Python manifest declares flask dependency"
+      ]
+    },
+    {
+      "name": "Go",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "go.mod module manifest present in repository"
+      ]
+    }
+  ],
+  "configurations": [
+    "Cargo.toml",
+    "README.md",
+    "go.mod",
+    "pyproject.toml",
+    "requirements.txt"
+  ],
+  "files": [
+    {
+      "relative_path": ".github/workflows/ci.yml",
+      "filename": "ci.yml",
+      "extension": "yml",
+      "size_bytes": 173,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:53:12.809776Z",
+      "language": "YAML",
+      "classification": "deployment",
+      "hash_blake3": "78f74f1c852f1c610e31462f3f92a0f9766d90d5a27d38147845bfb5b8ab1672"
+    },
+    {
+      "relative_path": "Cargo.toml",
+      "filename": "Cargo.toml",
+      "extension": "toml",
+      "size_bytes": 88,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:51:30.143501300Z",
+      "language": "TOML",
+      "classification": "build_system",
+      "hash_blake3": "1265bc0570cc719b7a980ad6b8451d8173e74c6da50b2a5c98dda8eb4e5aea90"
+    },
+    {
+      "relative_path": "README.md",
+      "filename": "README.md",
+      "extension": "md",
+      "size_bytes": 167,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:53:35.313377300Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "b2a415ebf2c0e1a7988e4c7a8d2d22e3c56c7aaae1a8c5952c938a186954e6ce"
+    },
+    {
+      "relative_path": "app.py",
+      "filename": "app.py",
+      "extension": "py",
+      "size_bytes": 152,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:20.374115Z",
+      "language": "Python",
+      "classification": "source_code",
+      "hash_blake3": "e1e515a5eee3f4f369fc8bc1b7de634a1cf5a119fc31775be986b5850d90ed84"
+    },
+    {
+      "relative_path": "client.js",
+      "filename": "client.js",
+      "extension": "js",
+      "size_bytes": 37,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:44.481337800Z",
+      "language": "JavaScript",
+      "classification": "source_code",
+      "hash_blake3": "44b112af4b5a683e9e55a06ddfe4a5a1a46eeabb35d0930dd13a7ccc00cec33e"
+    },
+    {
+      "relative_path": "config.json",
+      "filename": "config.json",
+      "extension": "json",
+      "size_bytes": 79,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:53:26.639644600Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "9833631598fc1e873b86eb22082a358dea60c2b5771f3569f1f3b93f18d3f415"
+    },
+    {
+      "relative_path": "go.mod",
+      "filename": "go.mod",
+      "extension": "mod",
+      "size_bytes": 44,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:27.483993800Z",
+      "language": "Go",
+      "classification": "configuration",
+      "hash_blake3": "fe60b64958d308184044c8fad50664694b9cacc08c321f632538c4ed9844d2bd"
+    },
+    {
+      "relative_path": "main.go",
+      "filename": "main.go",
+      "extension": "go",
+      "size_bytes": 90,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:36.760443200Z",
+      "language": "Go",
+      "classification": "source_code",
+      "hash_blake3": "612329eac489b573405e7ad7a9744dbe232a3546ecff5d904c1baed81ec50cc6"
+    },
+    {
+      "relative_path": "pyproject.toml",
+      "filename": "pyproject.toml",
+      "extension": "toml",
+      "size_bytes": 92,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:03.798977800Z",
+      "language": "TOML",
+      "classification": "configuration",
+      "hash_blake3": "b6c2bc79709d2541f09caac59e7d859e0f2fd8f153e87398d86f66460dd61188"
+    },
+    {
+      "relative_path": "requirements.txt",
+      "filename": "requirements.txt",
+      "extension": "txt",
+      "size_bytes": 30,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:09.529139700Z",
+      "language": null,
+      "classification": "configuration",
+      "hash_blake3": "92ef1d626694cc369d2d446279657352b06e8b4484e12b90e0b08f2af3becbeb"
+    },
+    {
+      "relative_path": "schema.sql",
+      "filename": "schema.sql",
+      "extension": "sql",
+      "size_bytes": 167,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:53:00.479243Z",
+      "language": "SQL",
+      "classification": "database",
+      "hash_blake3": "80bd92f888f86cfea92a399d281bac43d7d0e36b5ec115cbee5968552b489b75"
+    },
+    {
+      "relative_path": "scripts/deploy.sh",
+      "filename": "deploy.sh",
+      "extension": "sh",
+      "size_bytes": 81,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:53:05.695258300Z",
+      "language": "Shell",
+      "classification": "scripts",
+      "hash_blake3": "1cc56c4faec49e1ca6f3522b0290947d41004ed469d8c1956b7b8b88caac5830"
+    },
+    {
+      "relative_path": "service.ts",
+      "filename": "service.ts",
+      "extension": "ts",
+      "size_bytes": 204,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:52:53.835238700Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "f82703172c64ca58e3ac8bafde5bb9abeba6cc3045fb9aa18a94b34b49344024"
+    },
+    {
+      "relative_path": "src/main.rs",
+      "filename": "main.rs",
+      "extension": "rs",
+      "size_bytes": 57,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:51:59.069132700Z",
+      "language": "Rust",
+      "classification": "source_code",
+      "hash_blake3": "7ab29bab6e84557a026d1eea57abe65c0196f56e91cc5546a6c751c90ecb57fe"
+    }
+  ],
+  "directories": [
+    {
+      "relative_path": ".",
+      "depth": 0,
+      "file_count": 11,
+      "child_dir_count": 3
+    },
+    {
+      "relative_path": ".github",
+      "depth": 1,
+      "file_count": 0,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": ".github/workflows",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "scripts",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 0
+    }
+  ],
+  "excluded_paths": [],
+  "warnings": []
+}

@@ -1,0 +1,415 @@
+{
+  "schema_version": "1.0",
+  "brahm_version": "0.1.0",
+  "repository": {
+    "name": "fixture_b_fullstack",
+    "root_path": "//?/D:/Personal Projects/Brahm BLA/fixtures/fixture_b_fullstack",
+    "canonical_path": "//?/D:/Personal Projects/Brahm BLA/fixtures/fixture_b_fullstack"
+  },
+  "scan_metadata": {
+    "brahm_version": "0.1.0",
+    "started_at": "2026-11-24T06:03:43.642715Z",
+    "completed_at": "2026-11-24T06:03:43.644459100Z",
+    "duration_ms": 1
+  },
+  "statistics": {
+    "total_files": 13,
+    "total_directories": 10,
+    "total_bytes": 2009,
+    "formatted_size": "2.01 kB",
+    "language_distribution": [
+      {
+        "language": "JavaScript",
+        "file_count": 3,
+        "total_bytes": 529,
+        "percentage_files": 23.1,
+        "percentage_bytes": 26.3
+      },
+      {
+        "language": "JSON",
+        "file_count": 2,
+        "total_bytes": 310,
+        "percentage_files": 15.4,
+        "percentage_bytes": 15.4
+      },
+      {
+        "language": "YAML",
+        "file_count": 1,
+        "total_bytes": 275,
+        "percentage_files": 7.7,
+        "percentage_bytes": 13.7
+      },
+      {
+        "language": "TypeScript",
+        "file_count": 2,
+        "total_bytes": 198,
+        "percentage_files": 15.4,
+        "percentage_bytes": 9.9
+      },
+      {
+        "language": "Markdown",
+        "file_count": 1,
+        "total_bytes": 166,
+        "percentage_files": 7.7,
+        "percentage_bytes": 8.3
+      },
+      {
+        "language": "SQL",
+        "file_count": 1,
+        "total_bytes": 160,
+        "percentage_files": 7.7,
+        "percentage_bytes": 8.0
+      },
+      {
+        "language": "Dockerfile",
+        "file_count": 1,
+        "total_bytes": 143,
+        "percentage_files": 7.7,
+        "percentage_bytes": 7.1
+      }
+    ],
+    "classification_counts": {
+      "Configuration": 5,
+      "Database": 1,
+      "Documentation": 1,
+      "Infrastructure": 2,
+      "Source Code": 4
+    },
+    "extension_counts": {
+      "(no extension)": 2,
+      "example": 1,
+      "js": 3,
+      "json": 2,
+      "md": 1,
+      "sql": 1,
+      "ts": 1,
+      "tsx": 1,
+      "yml": 1
+    },
+    "configuration_count": 5,
+    "manifest_count": 2,
+    "unknown_file_count": 0,
+    "excluded_paths_count": 0,
+    "warnings_count": 0
+  },
+  "languages": [
+    {
+      "language": "JavaScript",
+      "file_count": 3,
+      "total_bytes": 529,
+      "percentage_files": 23.1,
+      "percentage_bytes": 26.3
+    },
+    {
+      "language": "JSON",
+      "file_count": 2,
+      "total_bytes": 310,
+      "percentage_files": 15.4,
+      "percentage_bytes": 15.4
+    },
+    {
+      "language": "YAML",
+      "file_count": 1,
+      "total_bytes": 275,
+      "percentage_files": 7.7,
+      "percentage_bytes": 13.7
+    },
+    {
+      "language": "TypeScript",
+      "file_count": 2,
+      "total_bytes": 198,
+      "percentage_files": 15.4,
+      "percentage_bytes": 9.9
+    },
+    {
+      "language": "Markdown",
+      "file_count": 1,
+      "total_bytes": 166,
+      "percentage_files": 7.7,
+      "percentage_bytes": 8.3
+    },
+    {
+      "language": "SQL",
+      "file_count": 1,
+      "total_bytes": 160,
+      "percentage_files": 7.7,
+      "percentage_bytes": 8.0
+    },
+    {
+      "language": "Dockerfile",
+      "file_count": 1,
+      "total_bytes": 143,
+      "percentage_files": 7.7,
+      "percentage_bytes": 7.1
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Node.js",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "Identified 'backend/package.json' manifest",
+        "Identified 'frontend/package.json' manifest"
+      ]
+    },
+    {
+      "name": "Next.js",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "'frontend/package.json' declares 'next' dependency",
+        "Next.js configuration file present"
+      ]
+    },
+    {
+      "name": "React",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "'frontend/package.json' declares 'react' dependency",
+        "React implicitly required by Next.js framework"
+      ]
+    }
+  ],
+  "configurations": [
+    ".env.example",
+    "Dockerfile",
+    "README.md",
+    "backend/package.json",
+    "docker-compose.yml",
+    "frontend/next.config.js",
+    "frontend/package.json"
+  ],
+  "files": [
+    {
+      "relative_path": ".env",
+      "filename": ".env",
+      "extension": null,
+      "size_bytes": 158,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": true,
+      "modified_at": "2026-11-24T05:51:19.964542500Z",
+      "language": null,
+      "classification": "configuration"
+    },
+    {
+      "relative_path": ".env.example",
+      "filename": ".env.example",
+      "extension": "example",
+      "size_bytes": 70,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": true,
+      "modified_at": "2026-11-24T05:51:14.643870900Z",
+      "language": null,
+      "classification": "configuration",
+      "hash_blake3": "c9316b84a4206c9c9eddaa4994790d10b3fc39b38826b7a948db28ad667bdb20"
+    },
+    {
+      "relative_path": "Dockerfile",
+      "filename": "Dockerfile",
+      "extension": null,
+      "size_bytes": 143,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:58.146120300Z",
+      "language": "Dockerfile",
+      "classification": "infrastructure",
+      "hash_blake3": "da31670551173b43527ce27a6e46f137cc8d32b0d858f548afc6cb89f6507d3c"
+    },
+    {
+      "relative_path": "README.md",
+      "filename": "README.md",
+      "extension": "md",
+      "size_bytes": 166,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:51:25.256728300Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "5f177d8c43e187e896a978df30cd3da0d90841be623d5e76ea090c871ad7e1ab"
+    },
+    {
+      "relative_path": "backend/db/migrations/001_create_users.sql",
+      "filename": "001_create_users.sql",
+      "extension": "sql",
+      "size_bytes": 160,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:52.272936900Z",
+      "language": "SQL",
+      "classification": "database",
+      "hash_blake3": "58b36e37af3b6e7deee4177c6f242e91c2b1ead96a5546c753781ff764fbef9f"
+    },
+    {
+      "relative_path": "backend/package.json",
+      "filename": "package.json",
+      "extension": "json",
+      "size_bytes": 154,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:35.775683200Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "c53c53012e4c3927f8874b9dafec6b410910e45256732ea3c426382e4dfc92bb"
+    },
+    {
+      "relative_path": "backend/src/routes/api.js",
+      "filename": "api.js",
+      "extension": "js",
+      "size_bytes": 177,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:47.765012400Z",
+      "language": "JavaScript",
+      "classification": "source_code",
+      "hash_blake3": "166e72c9ba48fb28ba3b838bbf2c73b12eb70fcfcc1f2bc32274bbf0e81a0cad"
+    },
+    {
+      "relative_path": "backend/src/server.js",
+      "filename": "server.js",
+      "extension": "js",
+      "size_bytes": 232,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:40.049662400Z",
+      "language": "JavaScript",
+      "classification": "source_code",
+      "hash_blake3": "4b7b1240aef23636fede2a3c491b3e85a8147ab07499a37b4d8d87fe0cea6817"
+    },
+    {
+      "relative_path": "docker-compose.yml",
+      "filename": "docker-compose.yml",
+      "extension": "yml",
+      "size_bytes": 275,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:51:09.434562900Z",
+      "language": "YAML",
+      "classification": "infrastructure",
+      "hash_blake3": "3b770183e9baa1bcd29d4a7ac177e0625aa0d20eb9d9acdfde595dac7f572572"
+    },
+    {
+      "relative_path": "frontend/next.config.js",
+      "filename": "next.config.js",
+      "extension": "js",
+      "size_bytes": 120,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:21.300482Z",
+      "language": "JavaScript",
+      "classification": "configuration",
+      "hash_blake3": "da287d1c65e75577b4d07b5ddaebdf0bbe6f71321e37ef35b82c5679f1a010c5"
+    },
+    {
+      "relative_path": "frontend/package.json",
+      "filename": "package.json",
+      "extension": "json",
+      "size_bytes": 156,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:17.232106500Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "d445f5ce0fc8bc9ef17b45f7ec0c81fd617bdc9ad80a8437a98caee6cc1ac7ad"
+    },
+    {
+      "relative_path": "frontend/src/pages/api/health.ts",
+      "filename": "health.ts",
+      "extension": "ts",
+      "size_bytes": 114,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:31.162062900Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "5159c523aa51eb473007e8ba54f7d19df75f19b6cab54a667a794ae6ad96ef55"
+    },
+    {
+      "relative_path": "frontend/src/pages/index.tsx",
+      "filename": "index.tsx",
+      "extension": "tsx",
+      "size_bytes": 84,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-24T05:50:26.158519100Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "a133c05c06afeb05851a6f6f590dccc94612dfea94d340468162e4b4ce259ddf"
+    }
+  ],
+  "directories": [
+    {
+      "relative_path": ".",
+      "depth": 0,
+      "file_count": 5,
+      "child_dir_count": 2
+    },
+    {
+      "relative_path": "backend",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 2
+    },
+    {
+      "relative_path": "backend/db",
+      "depth": 2,
+      "file_count": 0,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": "backend/db/migrations",
+      "depth": 3,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "backend/src",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": "backend/src/routes",
+      "depth": 3,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "frontend",
+      "depth": 1,
+      "file_count": 2,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": "frontend/src",
+      "depth": 2,
+      "file_count": 0,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": "frontend/src/pages",
+      "depth": 3,
+      "file_count": 1,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": "frontend/src/pages/api",
+      "depth": 4,
+      "file_count": 1,
+      "child_dir_count": 0
+    }
+  ],
+  "excluded_paths": [],
+  "warnings": []
+}

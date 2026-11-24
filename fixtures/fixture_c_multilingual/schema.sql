@@ -1,0 +1,6 @@
+CREATE TABLE service_logs (
+    id SERIAL PRIMARY KEY,
+    level VARCHAR(10) NOT NULL,
+    message TEXT NOT NULL,
+    logged_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
