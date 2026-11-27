@@ -1,0 +1,68 @@
+{
+  "project_name": "brahm-commerce-demo",
+  "package_name": "brahm-commerce-api",
+  "architecture_type": "REST API / Backend Service",
+  "runtime": "Node.js + TypeScript + Express + node:sqlite",
+  "services": [
+    "AuthService",
+    "CatalogService",
+    "CartService",
+    "OrderService",
+    "PaymentService",
+    "AdminService",
+    "CommerceDatabase"
+  ],
+  "middleware": [
+    "createAuthMiddleware",
+    "requireAdmin",
+    "createRateLimiter",
+    "validateBody",
+    "errorHandler"
+  ],
+  "database_tables": [
+    "users",
+    "sessions",
+    "categories",
+    "products",
+    "cart_items",
+    "orders",
+    "order_items",
+    "payments",
+    "audit_logs"
+  ],
+  "api_routes": [
+    { "method": "GET", "path": "/health", "handler": "healthHandler", "auth": "public" },
+    { "method": "POST", "path": "/api/auth/register", "handler": "registerHandler", "auth": "public" },
+    { "method": "POST", "path": "/api/auth/login", "handler": "loginHandler", "auth": "public" },
+    { "method": "GET", "path": "/api/auth/me", "handler": "meHandler", "auth": "bearer" },
+    { "method": "GET", "path": "/api/products", "handler": "listProductsHandler", "auth": "public" },
+    { "method": "GET", "path": "/api/products/:slug", "handler": "getProductHandler", "auth": "public" },
+    { "method": "POST", "path": "/api/products", "handler": "createProductHandler", "auth": "admin" },
+    { "method": "PATCH", "path": "/api/products/:id", "handler": "patchProductHandler", "auth": "admin" },
+    { "method": "GET", "path": "/api/cart", "handler": "getCartHandler", "auth": "bearer" },
+    { "method": "POST", "path": "/api/cart/items", "handler": "addCartItemHandler", "auth": "bearer" },
+    { "method": "PATCH", "path": "/api/cart/items/:productId", "handler": "patchCartItemHandler", "auth": "bearer" },
+    { "method": "DELETE", "path": "/api/cart/items/:productId", "handler": "removeCartItemHandler", "auth": "bearer" },
+    { "method": "POST", "path": "/api/orders", "handler": "checkoutOrderHandler", "auth": "bearer" },
+    { "method": "GET", "path": "/api/orders", "handler": "listOrdersHandler", "auth": "bearer" },
+    { "method": "GET", "path": "/api/orders/:id", "handler": "getOrderHandler", "auth": "bearer_owner_or_admin" },
+    { "method": "POST", "path": "/api/orders/:id/cancel", "handler": "cancelOrderHandler", "auth": "bearer_owner_or_admin" },
+    { "method": "POST", "path": "/api/payments/intent", "handler": "createIntentHandler", "auth": "bearer" },
+    { "method": "POST", "path": "/api/payments/webhook", "handler": "webhookHandler", "auth": "hmac_webhook_signature" },
+    { "method": "GET", "path": "/api/admin/metrics", "handler": "getMetricsHandler", "auth": "admin" },
+    { "method": "GET", "path": "/api/admin/audit-logs", "handler": "listAuditLogsHandler", "auth": "admin" }
+  ],
+  "core_security_mechanisms": [
+    "scrypt + timingSafeEqual salted password hashing (src/utils/password.ts)",
+    "HMAC-SHA256 stateless Bearer token signing & timingSafeEqual verification + SHA-256 session digest storage (src/utils/token.ts, src/services/authService.ts)",
+    "HMAC-SHA256 payment webhook verification on x-commerce-signature header (src/services/paymentService.ts)",
+    "BEGIN IMMEDIATE atomic transaction checkout & stock decrement preventing stock races (src/services/orderService.ts)",
+    "Express helmet headers, zod payload validation, sliding-window IP rate limiter, and requireAdmin RBAC guard"
+  ],
+  "absent_fake_components": [
+    "NO telemetry bridge / syntheticTelemetryBridge",
+    "NO admin debug token mint endpoint",
+    "NO YAML service orchestrator (config/service.decoy.yaml)",
+    "NO shadow/legacy billing SQL schema (db/schema.decoy.sql)"
+  ]
+}

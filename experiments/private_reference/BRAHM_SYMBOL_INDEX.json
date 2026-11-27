@@ -1,0 +1,2599 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-11-27T06:30:41.965888500Z",
+  "summary": {
+    "total_symbols": 87,
+    "files_with_symbols": 25,
+    "by_kind": {
+      "type_alias": 3,
+      "interface": 17,
+      "function": 26,
+      "method": 25,
+      "constructor": 8,
+      "class": 8
+    },
+    "by_visibility": {
+      "private": 1,
+      "public": 77,
+      "internal": 9
+    }
+  },
+  "symbols": [
+    {
+      "id": "sym_31288407941ba03c",
+      "name": "AppServices",
+      "qualified_name": "AppServices",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/app.ts",
+      "span": {
+        "start_line": 24,
+        "start_col": 8,
+        "end_line": 32,
+        "end_col": 2,
+        "start_byte": 1178,
+        "end_byte": 1371
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_77f66c93417653a2",
+      "name": "createCommerceApp",
+      "qualified_name": "createCommerceApp",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/app.ts",
+      "span": {
+        "start_line": 34,
+        "start_col": 8,
+        "end_line": 72,
+        "end_col": 2,
+        "start_byte": 1380,
+        "end_byte": 2729
+      },
+      "signature": "(\n  config: AppConfig,\n  projectRootDir: string,\n): { app: Express; services: AppServices }",
+      "return_type": "{ app: Express; services: AppServices }",
+      "parameters": [
+        {
+          "name": "config",
+          "type_annotation": "AppConfig",
+          "default_value": null
+        },
+        {
+          "name": "projectRootDir",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_d2ad8a56d96bb16b",
+      "name": "AppConfig",
+      "qualified_name": "AppConfig",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/config/env.ts",
+      "span": {
+        "start_line": 1,
+        "start_col": 8,
+        "end_line": 11,
+        "end_col": 2,
+        "start_byte": 7,
+        "end_byte": 262
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_202f144e39784cd3",
+      "name": "loadConfig",
+      "qualified_name": "loadConfig",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/config/env.ts",
+      "span": {
+        "start_line": 13,
+        "start_col": 8,
+        "end_line": 27,
+        "end_col": 2,
+        "start_byte": 271,
+        "end_byte": 1005
+      },
+      "signature": "(): AppConfig",
+      "return_type": "AppConfig",
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1e723846ce050d44",
+      "name": "CommerceDatabase",
+      "qualified_name": "CommerceDatabase",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/db/database.ts",
+      "span": {
+        "start_line": 5,
+        "start_col": 8,
+        "end_line": 40,
+        "end_col": 2,
+        "start_byte": 108,
+        "end_byte": 1070
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_304fa78cf1859d99",
+      "name": "constructor",
+      "qualified_name": "CommerceDatabase.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/db/database.ts",
+      "span": {
+        "start_line": 8,
+        "start_col": 3,
+        "end_line": 14,
+        "end_col": 4,
+        "start_byte": 174,
+        "end_byte": 400
+      },
+      "signature": "(dbPath: string)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "dbPath",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_1e723846ce050d44",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_dc3eb24356e23e64",
+      "name": "initializeSchema",
+      "qualified_name": "CommerceDatabase.initializeSchema",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/db/database.ts",
+      "span": {
+        "start_line": 16,
+        "start_col": 3,
+        "end_line": 23,
+        "end_col": 4,
+        "start_byte": 404,
+        "end_byte": 757
+      },
+      "signature": "(schemaSqlPath: string, migrationSqlPath?: string): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "schemaSqlPath",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "migrationSqlPath",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_1e723846ce050d44",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_3e331fcddb4edae1",
+      "name": "runInTransaction",
+      "qualified_name": "CommerceDatabase.runInTransaction",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/db/database.ts",
+      "span": {
+        "start_line": 25,
+        "start_col": 3,
+        "end_line": 35,
+        "end_col": 4,
+        "start_byte": 761,
+        "end_byte": 1015
+      },
+      "signature": "(fn: () => T): T",
+      "return_type": "T",
+      "parameters": [
+        {
+          "name": "fn",
+          "type_annotation": "() => T",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_1e723846ce050d44",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_0a038edae47d1914",
+      "name": "close",
+      "qualified_name": "CommerceDatabase.close",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/db/database.ts",
+      "span": {
+        "start_line": 37,
+        "start_col": 3,
+        "end_line": 39,
+        "end_col": 4,
+        "start_byte": 1019,
+        "end_byte": 1068
+      },
+      "signature": "(): void",
+      "return_type": "void",
+      "parameters": [],
+      "parent_id": "sym_1e723846ce050d44",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_c75055d596cd0bc0",
+      "name": "AuthenticatedRequest",
+      "qualified_name": "AuthenticatedRequest",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/middleware/auth.ts",
+      "span": {
+        "start_line": 6,
+        "start_col": 8,
+        "end_line": 8,
+        "end_col": 2,
+        "start_byte": 228,
+        "end_byte": 304
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_89885fdedc333f27",
+      "name": "createAuthMiddleware",
+      "qualified_name": "createAuthMiddleware",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/middleware/auth.ts",
+      "span": {
+        "start_line": 10,
+        "start_col": 8,
+        "end_line": 28,
+        "end_col": 2,
+        "start_byte": 313,
+        "end_byte": 952
+      },
+      "signature": "(tokenSecret: string)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "tokenSecret",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_895528ef3f1fc1c5",
+      "name": "requireAdmin",
+      "qualified_name": "requireAdmin",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/middleware/auth.ts",
+      "span": {
+        "start_line": 30,
+        "start_col": 8,
+        "end_line": 44,
+        "end_col": 2,
+        "start_byte": 961,
+        "end_byte": 1307
+      },
+      "signature": "(\n  req: AuthenticatedRequest,\n  _res: Response,\n  next: NextFunction,\n): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "req",
+          "type_annotation": "AuthenticatedRequest",
+          "default_value": null
+        },
+        {
+          "name": "_res",
+          "type_annotation": "Response",
+          "default_value": null
+        },
+        {
+          "name": "next",
+          "type_annotation": "NextFunction",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_44f3edb966726e54",
+      "name": "HttpError",
+      "qualified_name": "HttpError",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/middleware/errors.ts",
+      "span": {
+        "start_line": 3,
+        "start_col": 8,
+        "end_line": 12,
+        "end_col": 2,
+        "start_byte": 72,
+        "end_byte": 323
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_7b009641ed2d89e7",
+      "name": "constructor",
+      "qualified_name": "HttpError.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/middleware/errors.ts",
+      "span": {
+        "start_line": 7,
+        "start_col": 3,
+        "end_line": 11,
+        "end_col": 4,
+        "start_byte": 177,
+        "end_byte": 321
+      },
+      "signature": "(statusCode: number, code: string, message: string)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "statusCode",
+          "type_annotation": "number",
+          "default_value": null
+        },
+        {
+          "name": "code",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "message",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_44f3edb966726e54",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_786a61b2107756b9",
+      "name": "errorHandler",
+      "qualified_name": "errorHandler",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/middleware/errors.ts",
+      "span": {
+        "start_line": 14,
+        "start_col": 8,
+        "end_line": 37,
+        "end_col": 2,
+        "start_byte": 332,
+        "end_byte": 790
+      },
+      "signature": "(\n  err: unknown,\n  _req: Request,\n  res: Response,\n  _next: NextFunction,\n): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "err",
+          "type_annotation": "unknown",
+          "default_value": null
+        },
+        {
+          "name": "_req",
+          "type_annotation": "Request",
+          "default_value": null
+        },
+        {
+          "name": "res",
+          "type_annotation": "Response",
+          "default_value": null
+        },
+        {
+          "name": "_next",
+          "type_annotation": "NextFunction",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_f04e0186881af29d",
+      "name": "createRateLimiter",
+      "qualified_name": "createRateLimiter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/middleware/rateLimit.ts",
+      "span": {
+        "start_line": 4,
+        "start_col": 8,
+        "end_line": 20,
+        "end_col": 2,
+        "start_byte": 113,
+        "end_byte": 677
+      },
+      "signature": "(maxRequests: number, windowMs: number)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "maxRequests",
+          "type_annotation": "number",
+          "default_value": null
+        },
+        {
+          "name": "windowMs",
+          "type_annotation": "number",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_f5000f655ec7a014",
+      "name": "validateBody",
+      "qualified_name": "validateBody",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/middleware/validation.ts",
+      "span": {
+        "start_line": 5,
+        "start_col": 8,
+        "end_line": 16,
+        "end_col": 2,
+        "start_byte": 151,
+        "end_byte": 572
+      },
+      "signature": "(schema: ZodSchema<T>)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "schema",
+          "type_annotation": "ZodSchema<T>",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_9a3e1ae68239ff38",
+      "name": "UserRole",
+      "qualified_name": "UserRole",
+      "kind": "type_alias",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 1,
+        "start_col": 8,
+        "end_line": 1,
+        "end_col": 45,
+        "start_byte": 7,
+        "end_byte": 44
+      },
+      "signature": null,
+      "return_type": "'customer' | 'admin'",
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_6501baae4fba11bb",
+      "name": "OrderStatus",
+      "qualified_name": "OrderStatus",
+      "kind": "type_alias",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 3,
+        "start_col": 8,
+        "end_line": 8,
+        "end_col": 16,
+        "start_byte": 53,
+        "end_byte": 152
+      },
+      "signature": null,
+      "return_type": "| 'pending_payment'\n  | 'paid'\n  | 'fulfilled'\n  | 'cancelled'\n  | 'refunded'",
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_b12763ca6bbfab5d",
+      "name": "PaymentStatus",
+      "qualified_name": "PaymentStatus",
+      "kind": "type_alias",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 10,
+        "start_col": 8,
+        "end_line": 14,
+        "end_col": 16,
+        "start_byte": 161,
+        "end_byte": 254
+      },
+      "signature": null,
+      "return_type": "| 'requires_confirmation'\n  | 'succeeded'\n  | 'failed'\n  | 'refunded'",
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_997681c5e83e779d",
+      "name": "UserRecord",
+      "qualified_name": "UserRecord",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 16,
+        "start_col": 8,
+        "end_line": 22,
+        "end_col": 2,
+        "start_byte": 263,
+        "end_byte": 377
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_ec56b3e6af6844eb",
+      "name": "ProductRecord",
+      "qualified_name": "ProductRecord",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 24,
+        "start_col": 8,
+        "end_line": 35,
+        "end_col": 2,
+        "start_byte": 386,
+        "end_byte": 602
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1e487f49dcbed8b9",
+      "name": "CartItemView",
+      "qualified_name": "CartItemView",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 37,
+        "start_col": 8,
+        "end_line": 44,
+        "end_col": 2,
+        "start_byte": 611,
+        "end_byte": 762
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_9a685970dd62052c",
+      "name": "ShippingAddress",
+      "qualified_name": "ShippingAddress",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 46,
+        "start_col": 8,
+        "end_line": 51,
+        "end_col": 2,
+        "start_byte": 771,
+        "end_byte": 874
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_2ce493500dc5e453",
+      "name": "OrderRecord",
+      "qualified_name": "OrderRecord",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 53,
+        "start_col": 8,
+        "end_line": 64,
+        "end_col": 2,
+        "start_byte": 883,
+        "end_byte": 1133
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_161b2dccf2b1595a",
+      "name": "PaymentRecord",
+      "qualified_name": "PaymentRecord",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 66,
+        "start_col": 8,
+        "end_line": 74,
+        "end_col": 2,
+        "start_byte": 1142,
+        "end_byte": 1334
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_8739097eefdd0a70",
+      "name": "AuthTokenClaims",
+      "qualified_name": "AuthTokenClaims",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/models/types.ts",
+      "span": {
+        "start_line": 76,
+        "start_col": 8,
+        "end_line": 82,
+        "end_col": 2,
+        "start_byte": 1343,
+        "end_byte": 1452
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_b7ed62e0c6ad9aee",
+      "name": "createAdminRouter",
+      "qualified_name": "createAdminRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/admin.ts",
+      "span": {
+        "start_line": 5,
+        "start_col": 8,
+        "end_line": 25,
+        "end_col": 2,
+        "start_byte": 211,
+        "end_byte": 934
+      },
+      "signature": "(\n  adminService: AdminService,\n  requireAuth: RequestHandler,\n): Router",
+      "return_type": "Router",
+      "parameters": [
+        {
+          "name": "adminService",
+          "type_annotation": "AdminService",
+          "default_value": null
+        },
+        {
+          "name": "requireAuth",
+          "type_annotation": "RequestHandler",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_e63b8540fd597383",
+      "name": "createAuthRouter",
+      "qualified_name": "createAuthRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/auth.ts",
+      "span": {
+        "start_line": 19,
+        "start_col": 8,
+        "end_line": 61,
+        "end_col": 2,
+        "start_byte": 609,
+        "end_byte": 1903
+      },
+      "signature": "(\n  authService: AuthService,\n  requireAuth: RequestHandler,\n): Router",
+      "return_type": "Router",
+      "parameters": [
+        {
+          "name": "authService",
+          "type_annotation": "AuthService",
+          "default_value": null
+        },
+        {
+          "name": "requireAuth",
+          "type_annotation": "RequestHandler",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_27997eef74581e5f",
+      "name": "createCartRouter",
+      "qualified_name": "createCartRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/cart.ts",
+      "span": {
+        "start_line": 16,
+        "start_col": 8,
+        "end_line": 70,
+        "end_col": 2,
+        "start_byte": 507,
+        "end_byte": 2120
+      },
+      "signature": "(\n  cartService: CartService,\n  requireAuth: RequestHandler,\n): Router",
+      "return_type": "Router",
+      "parameters": [
+        {
+          "name": "cartService",
+          "type_annotation": "CartService",
+          "default_value": null
+        },
+        {
+          "name": "requireAuth",
+          "type_annotation": "RequestHandler",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_baa19fe7a20d4e07",
+      "name": "createHealthRouter",
+      "qualified_name": "createHealthRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/health.ts",
+      "span": {
+        "start_line": 3,
+        "start_col": 8,
+        "end_line": 9,
+        "end_col": 2,
+        "start_byte": 42,
+        "end_byte": 237
+      },
+      "signature": "(): Router",
+      "return_type": "Router",
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_c69874390f10ddc2",
+      "name": "createOrdersRouter",
+      "qualified_name": "createOrdersRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/orders.ts",
+      "span": {
+        "start_line": 16,
+        "start_col": 8,
+        "end_line": 66,
+        "end_col": 2,
+        "start_byte": 521,
+        "end_byte": 2143
+      },
+      "signature": "(\n  orderService: OrderService,\n  requireAuth: RequestHandler,\n): Router",
+      "return_type": "Router",
+      "parameters": [
+        {
+          "name": "orderService",
+          "type_annotation": "OrderService",
+          "default_value": null
+        },
+        {
+          "name": "requireAuth",
+          "type_annotation": "RequestHandler",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_ea3f6d35aba00691",
+      "name": "createPaymentsRouter",
+      "qualified_name": "createPaymentsRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/payments.ts",
+      "span": {
+        "start_line": 13,
+        "start_col": 8,
+        "end_line": 60,
+        "end_col": 2,
+        "start_byte": 504,
+        "end_byte": 1764
+      },
+      "signature": "(\n  paymentService: PaymentService,\n  requireAuth: RequestHandler,\n): Router",
+      "return_type": "Router",
+      "parameters": [
+        {
+          "name": "paymentService",
+          "type_annotation": "PaymentService",
+          "default_value": null
+        },
+        {
+          "name": "requireAuth",
+          "type_annotation": "RequestHandler",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_54bb21545028f12f",
+      "name": "createProductsRouter",
+      "qualified_name": "createProductsRouter",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/routes/products.ts",
+      "span": {
+        "start_line": 23,
+        "start_col": 8,
+        "end_line": 83,
+        "end_col": 2,
+        "start_byte": 826,
+        "end_byte": 2533
+      },
+      "signature": "(\n  catalog: CatalogService,\n  requireAuth: RequestHandler,\n): Router",
+      "return_type": "Router",
+      "parameters": [
+        {
+          "name": "catalog",
+          "type_annotation": "CatalogService",
+          "default_value": null
+        },
+        {
+          "name": "requireAuth",
+          "type_annotation": "RequestHandler",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_9826284828dc45d6",
+      "name": "AdminMetricsSummary",
+      "qualified_name": "AdminMetricsSummary",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/services/adminService.ts",
+      "span": {
+        "start_line": 3,
+        "start_col": 8,
+        "end_line": 8,
+        "end_col": 2,
+        "start_byte": 67,
+        "end_byte": 198
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_ec5f55fbb57b845c",
+      "name": "AdminService",
+      "qualified_name": "AdminService",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/services/adminService.ts",
+      "span": {
+        "start_line": 10,
+        "start_col": 8,
+        "end_line": 62,
+        "end_col": 2,
+        "start_byte": 207,
+        "end_byte": 1797
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_5f91eb7e0f46befe",
+      "name": "constructor",
+      "qualified_name": "AdminService.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/services/adminService.ts",
+      "span": {
+        "start_line": 11,
+        "start_col": 3,
+        "end_line": 11,
+        "end_col": 56,
+        "start_byte": 230,
+        "end_byte": 283
+      },
+      "signature": "(private readonly db: CommerceDatabase)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "db",
+          "type_annotation": "CommerceDatabase",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ec5f55fbb57b845c",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_9d6a1592fa96d2f2",
+      "name": "getMetrics",
+      "qualified_name": "AdminService.getMetrics",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/adminService.ts",
+      "span": {
+        "start_line": 13,
+        "start_col": 3,
+        "end_line": 29,
+        "end_col": 4,
+        "start_byte": 287,
+        "end_byte": 977
+      },
+      "signature": "(): AdminMetricsSummary",
+      "return_type": "AdminMetricsSummary",
+      "parameters": [],
+      "parent_id": "sym_ec5f55fbb57b845c",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_0fdeb68f20f887f6",
+      "name": "listAuditLogs",
+      "qualified_name": "AdminService.listAuditLogs",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/adminService.ts",
+      "span": {
+        "start_line": 31,
+        "start_col": 3,
+        "end_line": 61,
+        "end_col": 4,
+        "start_byte": 981,
+        "end_byte": 1795
+      },
+      "signature": "(limit = 50): Array<{\n    id: string;\n    actorUserId: string | null;\n    action: string;\n    resourceType: string;\n    resourceId: string;\n    metadataJson: string;\n    createdAt: string;\n  }>",
+      "return_type": "Array<{\n    id: string;\n    actorUserId: string | null;\n    action: string;\n    resourceType: string;\n    resourceId: string;\n    metadataJson: string;\n    createdAt: string;\n  }>",
+      "parameters": [
+        {
+          "name": "limit",
+          "type_annotation": null,
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ec5f55fbb57b845c",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_2a6a5373799fd7db",
+      "name": "DbUserRow",
+      "qualified_name": "DbUserRow",
+      "kind": "interface",
+      "visibility": "internal",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 8,
+        "start_col": 1,
+        "end_line": 15,
+        "end_col": 2,
+        "start_byte": 342,
+        "end_byte": 482
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_ef281abc3a476d4a",
+      "name": "AuthService",
+      "qualified_name": "AuthService",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 17,
+        "start_col": 8,
+        "end_line": 113,
+        "end_col": 2,
+        "start_byte": 491,
+        "end_byte": 3585
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_049a57f0c5602ffb",
+      "name": "constructor",
+      "qualified_name": "AuthService.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 18,
+        "start_col": 3,
+        "end_line": 21,
+        "end_col": 7,
+        "start_byte": 513,
+        "end_byte": 617
+      },
+      "signature": "(\n    private readonly db: CommerceDatabase,\n    private readonly tokenSecret: string,\n  )",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "db",
+          "type_annotation": "CommerceDatabase",
+          "default_value": null
+        },
+        {
+          "name": "tokenSecret",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ef281abc3a476d4a",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_2be0152eaefdfc22",
+      "name": "registerUser",
+      "qualified_name": "AuthService.registerUser",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 23,
+        "start_col": 3,
+        "end_line": 55,
+        "end_col": 4,
+        "start_byte": 621,
+        "end_byte": 1826
+      },
+      "signature": "(input: {\n    email: string;\n    fullName: string;\n    password: string;\n    role?: UserRole;\n  }): { user: UserRecord; token: string }",
+      "return_type": "{ user: UserRecord; token: string }",
+      "parameters": [
+        {
+          "name": "input",
+          "type_annotation": "{\n    email: string;\n    fullName: string;\n    password: string;\n    role?: UserRole;\n  }",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ef281abc3a476d4a",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_9d89082c0a304d62",
+      "name": "loginUser",
+      "qualified_name": "AuthService.loginUser",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 57,
+        "start_col": 3,
+        "end_line": 82,
+        "end_col": 4,
+        "start_byte": 1830,
+        "end_byte": 2691
+      },
+      "signature": "(email: string, password: string): { user: UserRecord; token: string }",
+      "return_type": "{ user: UserRecord; token: string }",
+      "parameters": [
+        {
+          "name": "email",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "password",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ef281abc3a476d4a",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_4f668382ce1d059e",
+      "name": "getUserById",
+      "qualified_name": "AuthService.getUserById",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 84,
+        "start_col": 3,
+        "end_line": 98,
+        "end_col": 4,
+        "start_byte": 2695,
+        "end_byte": 3170
+      },
+      "signature": "(userId: string): UserRecord",
+      "return_type": "UserRecord",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ef281abc3a476d4a",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1f5efe31a61b196e",
+      "name": "persistSession",
+      "qualified_name": "AuthService.persistSession",
+      "kind": "method",
+      "visibility": "private",
+      "file_path": "src/services/authService.ts",
+      "span": {
+        "start_line": 100,
+        "start_col": 3,
+        "end_line": 112,
+        "end_col": 4,
+        "start_byte": 3174,
+        "end_byte": 3583
+      },
+      "signature": "(userId: string, tokenHash: string, expEpochSec: number): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "tokenHash",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "expEpochSec",
+          "type_annotation": "number",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_ef281abc3a476d4a",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_d16e2bd4e279e784",
+      "name": "DbCartRow",
+      "qualified_name": "DbCartRow",
+      "kind": "interface",
+      "visibility": "internal",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 6,
+        "start_col": 1,
+        "end_line": 13,
+        "end_col": 2,
+        "start_byte": 211,
+        "end_byte": 352
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_6178906ab6e71104",
+      "name": "CartService",
+      "qualified_name": "CartService",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 15,
+        "start_col": 8,
+        "end_line": 102,
+        "end_col": 2,
+        "start_byte": 361,
+        "end_byte": 3567
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_7cf9040a01ce490b",
+      "name": "constructor",
+      "qualified_name": "CartService.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 16,
+        "start_col": 3,
+        "end_line": 16,
+        "end_col": 56,
+        "start_byte": 383,
+        "end_byte": 436
+      },
+      "signature": "(private readonly db: CommerceDatabase)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "db",
+          "type_annotation": "CommerceDatabase",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_6178906ab6e71104",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_fa9ec874deac4220",
+      "name": "getCart",
+      "qualified_name": "CartService.getCart",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 18,
+        "start_col": 3,
+        "end_line": 39,
+        "end_col": 4,
+        "start_byte": 440,
+        "end_byte": 1247
+      },
+      "signature": "(userId: string): { items: CartItemView[]; subtotalCents: number }",
+      "return_type": "{ items: CartItemView[]; subtotalCents: number }",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_6178906ab6e71104",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_da31191fcb769293",
+      "name": "addItem",
+      "qualified_name": "CartService.addItem",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 41,
+        "start_col": 3,
+        "end_line": 71,
+        "end_col": 4,
+        "start_byte": 1251,
+        "end_byte": 2474
+      },
+      "signature": "(userId: string, productId: string, quantity: number): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "productId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "quantity",
+          "type_annotation": "number",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_6178906ab6e71104",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_7496eef7b043e40c",
+      "name": "setQuantity",
+      "qualified_name": "CartService.setQuantity",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 73,
+        "start_col": 3,
+        "end_line": 91,
+        "end_col": 4,
+        "start_byte": 2478,
+        "end_byte": 3241
+      },
+      "signature": "(userId: string, productId: string, quantity: number): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "productId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "quantity",
+          "type_annotation": "number",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_6178906ab6e71104",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_c311b25fa23590bd",
+      "name": "removeItem",
+      "qualified_name": "CartService.removeItem",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 93,
+        "start_col": 3,
+        "end_line": 97,
+        "end_col": 4,
+        "start_byte": 3245,
+        "end_byte": 3435
+      },
+      "signature": "(userId: string, productId: string): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "productId",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_6178906ab6e71104",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1dacbfb1b91157da",
+      "name": "clearCart",
+      "qualified_name": "CartService.clearCart",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/cartService.ts",
+      "span": {
+        "start_line": 99,
+        "start_col": 3,
+        "end_line": 101,
+        "end_col": 4,
+        "start_byte": 3439,
+        "end_byte": 3565
+      },
+      "signature": "(userId: string): void",
+      "return_type": "void",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_6178906ab6e71104",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_154af90826f57dfd",
+      "name": "DbProductRow",
+      "qualified_name": "DbProductRow",
+      "kind": "interface",
+      "visibility": "internal",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 6,
+        "start_col": 1,
+        "end_line": 17,
+        "end_col": 2,
+        "start_byte": 212,
+        "end_byte": 430
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_474f2944116f9a83",
+      "name": "CatalogService",
+      "qualified_name": "CatalogService",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 19,
+        "start_col": 8,
+        "end_line": 110,
+        "end_col": 2,
+        "start_byte": 439,
+        "end_byte": 3363
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_14a24ca6ec939307",
+      "name": "constructor",
+      "qualified_name": "CatalogService.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 20,
+        "start_col": 3,
+        "end_line": 20,
+        "end_col": 56,
+        "start_byte": 464,
+        "end_byte": 517
+      },
+      "signature": "(private readonly db: CommerceDatabase)",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "db",
+          "type_annotation": "CommerceDatabase",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_474f2944116f9a83",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_ea887e423994fc25",
+      "name": "listProducts",
+      "qualified_name": "CatalogService.listProducts",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 22,
+        "start_col": 3,
+        "end_line": 44,
+        "end_col": 4,
+        "start_byte": 521,
+        "end_byte": 1321
+      },
+      "signature": "(categorySlug?: string, search?: string): ProductRecord[]",
+      "return_type": "ProductRecord[]",
+      "parameters": [
+        {
+          "name": "categorySlug",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "search",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_474f2944116f9a83",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_86d712adff54299b",
+      "name": "getProductBySlug",
+      "qualified_name": "CatalogService.getProductBySlug",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 46,
+        "start_col": 3,
+        "end_line": 54,
+        "end_col": 4,
+        "start_byte": 1325,
+        "end_byte": 1663
+      },
+      "signature": "(slug: string): ProductRecord",
+      "return_type": "ProductRecord",
+      "parameters": [
+        {
+          "name": "slug",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_474f2944116f9a83",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_16248093f881180e",
+      "name": "createProduct",
+      "qualified_name": "CatalogService.createProduct",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 56,
+        "start_col": 3,
+        "end_line": 84,
+        "end_col": 4,
+        "start_byte": 1667,
+        "end_byte": 2421
+      },
+      "signature": "(input: {\n    categoryId: string;\n    sku: string;\n    slug: string;\n    title: string;\n    description: string;\n    priceCents: number;\n    stockQty: number;\n  }): ProductRecord",
+      "return_type": "ProductRecord",
+      "parameters": [
+        {
+          "name": "input",
+          "type_annotation": "{\n    categoryId: string;\n    sku: string;\n    slug: string;\n    title: string;\n    description: string;\n    priceCents: number;\n    stockQty: number;\n  }",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_474f2944116f9a83",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_4e4c2f2d29a01374",
+      "name": "updateInventoryOrPrice",
+      "qualified_name": "CatalogService.updateInventoryOrPrice",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 86,
+        "start_col": 3,
+        "end_line": 99,
+        "end_col": 4,
+        "start_byte": 2425,
+        "end_byte": 3023
+      },
+      "signature": "(\n    productId: string,\n    patch: { priceCents?: number; stockQty?: number; active?: boolean },\n  ): ProductRecord",
+      "return_type": "ProductRecord",
+      "parameters": [
+        {
+          "name": "productId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "patch",
+          "type_annotation": "{ priceCents?: number; stockQty?: number; active?: boolean }",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_474f2944116f9a83",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1160ee553c56c0d8",
+      "name": "getProductById",
+      "qualified_name": "CatalogService.getProductById",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 101,
+        "start_col": 3,
+        "end_line": 109,
+        "end_col": 4,
+        "start_byte": 3027,
+        "end_byte": 3361
+      },
+      "signature": "(productId: string): ProductRecord",
+      "return_type": "ProductRecord",
+      "parameters": [
+        {
+          "name": "productId",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_474f2944116f9a83",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_754a4a71bc055ce1",
+      "name": "mapProduct",
+      "qualified_name": "mapProduct",
+      "kind": "function",
+      "visibility": "internal",
+      "file_path": "src/services/catalogService.ts",
+      "span": {
+        "start_line": 112,
+        "start_col": 1,
+        "end_line": 125,
+        "end_col": 2,
+        "start_byte": 3365,
+        "end_byte": 3682
+      },
+      "signature": "(r: DbProductRow): ProductRecord",
+      "return_type": "ProductRecord",
+      "parameters": [
+        {
+          "name": "r",
+          "type_annotation": "DbProductRow",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_7e605ecfc2876bcc",
+      "name": "DbOrderRow",
+      "qualified_name": "DbOrderRow",
+      "kind": "interface",
+      "visibility": "internal",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 8,
+        "start_col": 1,
+        "end_line": 19,
+        "end_col": 2,
+        "start_byte": 351,
+        "end_byte": 604
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_7576f19ec04213d3",
+      "name": "OrderService",
+      "qualified_name": "OrderService",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 21,
+        "start_col": 8,
+        "end_line": 175,
+        "end_col": 2,
+        "start_byte": 613,
+        "end_byte": 5896
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_5164480a3dae231e",
+      "name": "constructor",
+      "qualified_name": "OrderService.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 22,
+        "start_col": 3,
+        "end_line": 25,
+        "end_col": 7,
+        "start_byte": 636,
+        "end_byte": 738
+      },
+      "signature": "(\n    private readonly db: CommerceDatabase,\n    private readonly config: AppConfig,\n  )",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "db",
+          "type_annotation": "CommerceDatabase",
+          "default_value": null
+        },
+        {
+          "name": "config",
+          "type_annotation": "AppConfig",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_7576f19ec04213d3",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_6507fb3ace984a24",
+      "name": "checkoutFromCart",
+      "qualified_name": "OrderService.checkoutFromCart",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 27,
+        "start_col": 3,
+        "end_line": 121,
+        "end_col": 4,
+        "start_byte": 742,
+        "end_byte": 3849
+      },
+      "signature": "(userId: string, shippingAddress: ShippingAddress): OrderRecord",
+      "return_type": "OrderRecord",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "shippingAddress",
+          "type_annotation": "ShippingAddress",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_7576f19ec04213d3",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_344838745f335f77",
+      "name": "listOrdersForUser",
+      "qualified_name": "OrderService.listOrdersForUser",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 123,
+        "start_col": 3,
+        "end_line": 128,
+        "end_col": 4,
+        "start_byte": 3853,
+        "end_byte": 4104
+      },
+      "signature": "(userId: string): OrderRecord[]",
+      "return_type": "OrderRecord[]",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_7576f19ec04213d3",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_5b2c13dde64ede55",
+      "name": "getOrder",
+      "qualified_name": "OrderService.getOrder",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 130,
+        "start_col": 3,
+        "end_line": 141,
+        "end_col": 4,
+        "start_byte": 4108,
+        "end_byte": 4592
+      },
+      "signature": "(orderId: string, actorUserId: string, isAdmin: boolean): OrderRecord",
+      "return_type": "OrderRecord",
+      "parameters": [
+        {
+          "name": "orderId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "actorUserId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "isAdmin",
+          "type_annotation": "boolean",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_7576f19ec04213d3",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_c254cd7fdb6b70ef",
+      "name": "cancelOrder",
+      "qualified_name": "OrderService.cancelOrder",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 143,
+        "start_col": 3,
+        "end_line": 174,
+        "end_col": 4,
+        "start_byte": 4596,
+        "end_byte": 5894
+      },
+      "signature": "(orderId: string, actorUserId: string, isAdmin: boolean): OrderRecord",
+      "return_type": "OrderRecord",
+      "parameters": [
+        {
+          "name": "orderId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "actorUserId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "isAdmin",
+          "type_annotation": "boolean",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_7576f19ec04213d3",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_9e36d08916b95fd7",
+      "name": "mapOrder",
+      "qualified_name": "mapOrder",
+      "kind": "function",
+      "visibility": "internal",
+      "file_path": "src/services/orderService.ts",
+      "span": {
+        "start_line": 177,
+        "start_col": 1,
+        "end_line": 190,
+        "end_col": 2,
+        "start_byte": 5898,
+        "end_byte": 6289
+      },
+      "signature": "(r: DbOrderRow): OrderRecord",
+      "return_type": "OrderRecord",
+      "parameters": [
+        {
+          "name": "r",
+          "type_annotation": "DbOrderRow",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_c41e85b564bc2a7f",
+      "name": "DbPaymentRow",
+      "qualified_name": "DbPaymentRow",
+      "kind": "interface",
+      "visibility": "internal",
+      "file_path": "src/services/paymentService.ts",
+      "span": {
+        "start_line": 7,
+        "start_col": 1,
+        "end_line": 15,
+        "end_col": 2,
+        "start_byte": 287,
+        "end_byte": 484
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_f2c05ff0a913893e",
+      "name": "PaymentService",
+      "qualified_name": "PaymentService",
+      "kind": "class",
+      "visibility": "public",
+      "file_path": "src/services/paymentService.ts",
+      "span": {
+        "start_line": 17,
+        "start_col": 8,
+        "end_line": 99,
+        "end_col": 2,
+        "start_byte": 493,
+        "end_byte": 3323
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_6270d0503c8cdf20",
+      "name": "constructor",
+      "qualified_name": "PaymentService.constructor",
+      "kind": "constructor",
+      "visibility": "public",
+      "file_path": "src/services/paymentService.ts",
+      "span": {
+        "start_line": 18,
+        "start_col": 3,
+        "end_line": 21,
+        "end_col": 7,
+        "start_byte": 518,
+        "end_byte": 624
+      },
+      "signature": "(\n    private readonly db: CommerceDatabase,\n    private readonly webhookSecret: string,\n  )",
+      "return_type": null,
+      "parameters": [
+        {
+          "name": "db",
+          "type_annotation": "CommerceDatabase",
+          "default_value": null
+        },
+        {
+          "name": "webhookSecret",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_f2c05ff0a913893e",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_96fb6ab12a80fb11",
+      "name": "createPaymentIntent",
+      "qualified_name": "PaymentService.createPaymentIntent",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/paymentService.ts",
+      "span": {
+        "start_line": 23,
+        "start_col": 3,
+        "end_line": 62,
+        "end_col": 4,
+        "start_byte": 628,
+        "end_byte": 2040
+      },
+      "signature": "(\n    orderId: string,\n    userId: string,\n    idempotencyKey: string,\n  ): PaymentRecord",
+      "return_type": "PaymentRecord",
+      "parameters": [
+        {
+          "name": "orderId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "idempotencyKey",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_f2c05ff0a913893e",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_6401fa6052d4a9cf",
+      "name": "processWebhook",
+      "qualified_name": "PaymentService.processWebhook",
+      "kind": "method",
+      "visibility": "public",
+      "file_path": "src/services/paymentService.ts",
+      "span": {
+        "start_line": 64,
+        "start_col": 3,
+        "end_line": 98,
+        "end_col": 4,
+        "start_byte": 2044,
+        "end_byte": 3321
+      },
+      "signature": "(rawBody: string, signatureHex: string): PaymentRecord",
+      "return_type": "PaymentRecord",
+      "parameters": [
+        {
+          "name": "rawBody",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "signatureHex",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": "sym_f2c05ff0a913893e",
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_39c553bb5d44e131",
+      "name": "mapPayment",
+      "qualified_name": "mapPayment",
+      "kind": "function",
+      "visibility": "internal",
+      "file_path": "src/services/paymentService.ts",
+      "span": {
+        "start_line": 101,
+        "start_col": 1,
+        "end_line": 111,
+        "end_col": 2,
+        "start_byte": 3325,
+        "end_byte": 3606
+      },
+      "signature": "(r: DbPaymentRow): PaymentRecord",
+      "return_type": "PaymentRecord",
+      "parameters": [
+        {
+          "name": "r",
+          "type_annotation": "DbPaymentRow",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_c46bf099d5b5bdb3",
+      "name": "hashPassword",
+      "qualified_name": "hashPassword",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/password.ts",
+      "span": {
+        "start_line": 5,
+        "start_col": 8,
+        "end_line": 9,
+        "end_col": 2,
+        "start_byte": 101,
+        "end_byte": 296
+      },
+      "signature": "(plain: string): string",
+      "return_type": "string",
+      "parameters": [
+        {
+          "name": "plain",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_ec5db67960bd8cd2",
+      "name": "verifyPassword",
+      "qualified_name": "verifyPassword",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/password.ts",
+      "span": {
+        "start_line": 11,
+        "start_col": 8,
+        "end_line": 23,
+        "end_col": 2,
+        "start_byte": 305,
+        "end_byte": 707
+      },
+      "signature": "(plain: string, stored: string): boolean",
+      "return_type": "boolean",
+      "parameters": [
+        {
+          "name": "plain",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "stored",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_f9bbe0419ebde721",
+      "name": "TotalsBreakdown",
+      "qualified_name": "TotalsBreakdown",
+      "kind": "interface",
+      "visibility": "public",
+      "file_path": "src/utils/pricing.ts",
+      "span": {
+        "start_line": 3,
+        "start_col": 8,
+        "end_line": 8,
+        "end_col": 2,
+        "start_byte": 59,
+        "end_byte": 180
+      },
+      "signature": null,
+      "return_type": null,
+      "parameters": [],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_e9b14fcc9d7675c1",
+      "name": "calculateOrderTotals",
+      "qualified_name": "calculateOrderTotals",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/pricing.ts",
+      "span": {
+        "start_line": 10,
+        "start_col": 8,
+        "end_line": 19,
+        "end_col": 2,
+        "start_byte": 189,
+        "end_byte": 676
+      },
+      "signature": "(\n  subtotalCents: number,\n  config: Pick<AppConfig, 'taxRateBps' | 'freeShippingThresholdCents' | 'flatShippingCents'>,\n): TotalsBreakdown",
+      "return_type": "TotalsBreakdown",
+      "parameters": [
+        {
+          "name": "subtotalCents",
+          "type_annotation": "number",
+          "default_value": null
+        },
+        {
+          "name": "config",
+          "type_annotation": "Pick<AppConfig, 'taxRateBps' | 'freeShippingThresholdCents' | 'flatShippingCents'>",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_09a306cb020575fb",
+      "name": "signSessionToken",
+      "qualified_name": "signSessionToken",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/token.ts",
+      "span": {
+        "start_line": 4,
+        "start_col": 8,
+        "end_line": 22,
+        "end_col": 2,
+        "start_byte": 160,
+        "end_byte": 761
+      },
+      "signature": "(\n  userId: string,\n  email: string,\n  role: UserRole,\n  secret: string,\n  ttlSeconds = 3600,\n): { token: string; claims: AuthTokenClaims; tokenHash: string }",
+      "return_type": "{ token: string; claims: AuthTokenClaims; tokenHash: string }",
+      "parameters": [
+        {
+          "name": "userId",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "email",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "role",
+          "type_annotation": "UserRole",
+          "default_value": null
+        },
+        {
+          "name": "secret",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "ttlSeconds",
+          "type_annotation": null,
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1252c366c0962a5d",
+      "name": "verifySessionToken",
+      "qualified_name": "verifySessionToken",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/token.ts",
+      "span": {
+        "start_line": 24,
+        "start_col": 8,
+        "end_line": 41,
+        "end_col": 2,
+        "start_byte": 770,
+        "end_byte": 1390
+      },
+      "signature": "(token: string, secret: string): AuthTokenClaims | null",
+      "return_type": "AuthTokenClaims | null",
+      "parameters": [
+        {
+          "name": "token",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "secret",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_1aa196dfbee0cfb0",
+      "name": "hashToken",
+      "qualified_name": "hashToken",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/token.ts",
+      "span": {
+        "start_line": 43,
+        "start_col": 8,
+        "end_line": 45,
+        "end_col": 2,
+        "start_byte": 1399,
+        "end_byte": 1503
+      },
+      "signature": "(token: string): string",
+      "return_type": "string",
+      "parameters": [
+        {
+          "name": "token",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_83104e5698caa8ca",
+      "name": "computeWebhookSignature",
+      "qualified_name": "computeWebhookSignature",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/token.ts",
+      "span": {
+        "start_line": 47,
+        "start_col": 8,
+        "end_line": 49,
+        "end_col": 2,
+        "start_byte": 1512,
+        "end_byte": 1658
+      },
+      "signature": "(payload: string, secret: string): string",
+      "return_type": "string",
+      "parameters": [
+        {
+          "name": "payload",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "secret",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_dbd1a60f8b8131e6",
+      "name": "verifyWebhookSignature",
+      "qualified_name": "verifyWebhookSignature",
+      "kind": "function",
+      "visibility": "public",
+      "file_path": "src/utils/token.ts",
+      "span": {
+        "start_line": 51,
+        "start_col": 8,
+        "end_line": 60,
+        "end_col": 2,
+        "start_byte": 1667,
+        "end_byte": 2001
+      },
+      "signature": "(\n  payload: string,\n  providedHex: string,\n  secret: string,\n): boolean",
+      "return_type": "boolean",
+      "parameters": [
+        {
+          "name": "payload",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "providedHex",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "secret",
+          "type_annotation": "string",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": false,
+      "is_static": false
+    },
+    {
+      "id": "sym_650ed5f491b50542",
+      "name": "apiJson",
+      "qualified_name": "apiJson",
+      "kind": "function",
+      "visibility": "internal",
+      "file_path": "tests/commerce.test.ts",
+      "span": {
+        "start_line": 26,
+        "start_col": 1,
+        "end_line": 45,
+        "end_col": 2,
+        "start_byte": 857,
+        "end_byte": 1540
+      },
+      "signature": "(\n  baseUrl: string,\n  route: string,\n  options: { method?: string; token?: string; headers?: Record<string, string>; body?: unknown } = {},\n): Promise<{ status: number; data: T }>",
+      "return_type": "Promise<{ status: number; data: T }>",
+      "parameters": [
+        {
+          "name": "baseUrl",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "route",
+          "type_annotation": "string",
+          "default_value": null
+        },
+        {
+          "name": "options",
+          "type_annotation": "{ method?: string; token?: string; headers?: Record<string, string>; body?: unknown }",
+          "default_value": null
+        }
+      ],
+      "parent_id": null,
+      "doc_comment": null,
+      "is_async": true,
+      "is_static": false
+    }
+  ]
+}

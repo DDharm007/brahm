@@ -1,0 +1,679 @@
+{
+  "schema_version": "1.0",
+  "brahm_version": "0.1.0",
+  "repository": {
+    "name": "brahm-commerce-demo",
+    "root_path": "//?/D:/Personal Projects/Brahm BLA/demo/brahm-commerce-demo",
+    "canonical_path": "//?/D:/Personal Projects/Brahm BLA/demo/brahm-commerce-demo"
+  },
+  "scan_metadata": {
+    "brahm_version": "0.1.0",
+    "started_at": "2026-11-27T06:30:41.933268200Z",
+    "completed_at": "2026-11-27T06:30:41.936373100Z",
+    "duration_ms": 3
+  },
+  "statistics": {
+    "total_files": 37,
+    "total_directories": 12,
+    "total_bytes": 101044,
+    "formatted_size": "101.04 kB",
+    "language_distribution": [
+      {
+        "language": "TypeScript",
+        "file_count": 26,
+        "total_bytes": 54112,
+        "percentage_files": 70.3,
+        "percentage_bytes": 53.6
+      },
+      {
+        "language": "JSON",
+        "file_count": 3,
+        "total_bytes": 37780,
+        "percentage_files": 8.1,
+        "percentage_bytes": 37.4
+      },
+      {
+        "language": "Markdown",
+        "file_count": 4,
+        "total_bytes": 5210,
+        "percentage_files": 10.8,
+        "percentage_bytes": 5.2
+      },
+      {
+        "language": "SQL",
+        "file_count": 2,
+        "total_bytes": 3610,
+        "percentage_files": 5.4,
+        "percentage_bytes": 3.6
+      }
+    ],
+    "classification_counts": {
+      "Configuration": 5,
+      "Database": 3,
+      "Documentation": 4,
+      "Source Code": 24,
+      "Tests": 1
+    },
+    "extension_counts": {
+      "(no extension)": 1,
+      "example": 1,
+      "json": 3,
+      "md": 4,
+      "sql": 2,
+      "ts": 26
+    },
+    "configuration_count": 5,
+    "manifest_count": 1,
+    "unknown_file_count": 0,
+    "excluded_paths_count": 2,
+    "warnings_count": 0
+  },
+  "languages": [
+    {
+      "language": "TypeScript",
+      "file_count": 26,
+      "total_bytes": 54112,
+      "percentage_files": 70.3,
+      "percentage_bytes": 53.6
+    },
+    {
+      "language": "JSON",
+      "file_count": 3,
+      "total_bytes": 37780,
+      "percentage_files": 8.1,
+      "percentage_bytes": 37.4
+    },
+    {
+      "language": "Markdown",
+      "file_count": 4,
+      "total_bytes": 5210,
+      "percentage_files": 10.8,
+      "percentage_bytes": 5.2
+    },
+    {
+      "language": "SQL",
+      "file_count": 2,
+      "total_bytes": 3610,
+      "percentage_files": 5.4,
+      "percentage_bytes": 3.6
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Node.js",
+      "confidence": "confirmed_by_manifest",
+      "evidence": [
+        "Identified 'package.json' manifest"
+      ]
+    }
+  ],
+  "configurations": [
+    ".env.example",
+    ".gitignore",
+    "README.md",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "files": [
+    {
+      "relative_path": ".env.example",
+      "filename": ".env.example",
+      "extension": "example",
+      "size_bytes": 293,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": true,
+      "modified_at": "2026-11-27T06:26:54.023803800Z",
+      "language": null,
+      "classification": "configuration",
+      "hash_blake3": "15f9d14e796cf18734f945cdbf9fbddad1fb4f6d0dbd8d9f4d6174c029f6809e"
+    },
+    {
+      "relative_path": ".gitignore",
+      "filename": ".gitignore",
+      "extension": null,
+      "size_bytes": 39,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": true,
+      "modified_at": "2026-11-27T06:26:45.473063400Z",
+      "language": null,
+      "classification": "configuration",
+      "hash_blake3": "872a9995a1706ee0318f29cd36cb4b6150e1b4825684ebdef36202bff4619f90"
+    },
+    {
+      "relative_path": "API_DOCUMENTATION.md",
+      "filename": "API_DOCUMENTATION.md",
+      "extension": "md",
+      "size_bytes": 1952,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:40.728878400Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "69f863cfee0b617f0ca405fe9791227b9de3712fd121e4ece2dda8dee6415c56"
+    },
+    {
+      "relative_path": "ARCHITECTURE.md",
+      "filename": "ARCHITECTURE.md",
+      "extension": "md",
+      "size_bytes": 1313,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:38.637470700Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "fc8b45d2491d0c5e645ae8f3e55eb5af082e3bf58c174c76900cd2cbdcf46f75"
+    },
+    {
+      "relative_path": "DATABASE_SCHEMA.md",
+      "filename": "DATABASE_SCHEMA.md",
+      "extension": "md",
+      "size_bytes": 1056,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:42.743122800Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "9b15dc11aeb8b9713d9816c16856aea067d1fcb5c2ada35c40dd7e731f3bd208"
+    },
+    {
+      "relative_path": "README.md",
+      "filename": "README.md",
+      "extension": "md",
+      "size_bytes": 889,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:36.623539200Z",
+      "language": "Markdown",
+      "classification": "documentation",
+      "hash_blake3": "4e1aa6f165b5825aff2fe729071661a59bb31aca5d657ee1502fe8bb3407688f"
+    },
+    {
+      "relative_path": "db/migrations/001_initial_commerce.sql",
+      "filename": "001_initial_commerce.sql",
+      "extension": "sql",
+      "size_bytes": 441,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:26:58.552543Z",
+      "language": "SQL",
+      "classification": "database",
+      "hash_blake3": "32586c4d630a01bd61b51114301965b642983c3c10a2d7a1dc197d1ba175429a"
+    },
+    {
+      "relative_path": "db/schema.sql",
+      "filename": "schema.sql",
+      "extension": "sql",
+      "size_bytes": 3169,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:26:56.255129700Z",
+      "language": "SQL",
+      "classification": "database",
+      "hash_blake3": "3d4362f6ec5f637eaac7f3eed913ae63a01e4129a27de4c7ef4cd007dcef2f76"
+    },
+    {
+      "relative_path": "package-lock.json",
+      "filename": "package-lock.json",
+      "extension": "json",
+      "size_bytes": 36643,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:35.680217800Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "e2d201b1ec6a6d78638221c9f4fb12618af3badd837a73758ef13bf15420fad1"
+    },
+    {
+      "relative_path": "package.json",
+      "filename": "package.json",
+      "extension": "json",
+      "size_bytes": 690,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:26:41.601111800Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "29dc8bc4297f2bb627494fec7cee09bbe96f6e43459627412ce22d93b0d28cf2"
+    },
+    {
+      "relative_path": "src/app.ts",
+      "filename": "app.ts",
+      "extension": "ts",
+      "size_bytes": 2730,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:18.768451Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "8b4ca93e80e569d1fba3a916cc2b9262a8095fcb1487f4e8a75d887294bb880a"
+    },
+    {
+      "relative_path": "src/config/env.ts",
+      "filename": "env.ts",
+      "extension": "ts",
+      "size_bytes": 1006,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:15.819310Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "0fd83f8c2705f9cb0c2ce042295669e7ecd12af072a21555da83bbd2f54515b0"
+    },
+    {
+      "relative_path": "src/db/database.ts",
+      "filename": "database.ts",
+      "extension": "ts",
+      "size_bytes": 1071,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:26.447995300Z",
+      "language": "TypeScript",
+      "classification": "database",
+      "hash_blake3": "f1bd4b8d252848a48408b5fdbfba00dcefd4bbbba99db4f02b2b9b65433bc928"
+    },
+    {
+      "relative_path": "src/middleware/auth.ts",
+      "filename": "auth.ts",
+      "extension": "ts",
+      "size_bytes": 1308,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:18.123921800Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "8b7f76a475875871c0c6e081f0faec2f7e2079f30694c879a03f15b739cd70a4"
+    },
+    {
+      "relative_path": "src/middleware/errors.ts",
+      "filename": "errors.ts",
+      "extension": "ts",
+      "size_bytes": 791,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:16.014031300Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "125f8a1a93108ae1a20204f298dead82b8a0e8b02c6367778ab3fa95f39bbe5f"
+    },
+    {
+      "relative_path": "src/middleware/rateLimit.ts",
+      "filename": "rateLimit.ts",
+      "extension": "ts",
+      "size_bytes": 678,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:20.434297700Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "eaea4f0ed13c4e6782786921c456eab44fe1406c984b30fce12efebf36e2e721"
+    },
+    {
+      "relative_path": "src/middleware/validation.ts",
+      "filename": "validation.ts",
+      "extension": "ts",
+      "size_bytes": 573,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:21.857557800Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "50fbafe194e6af44c75372e5db8c7a2407a686d16fa2dd42912d7c7f0600d4ec"
+    },
+    {
+      "relative_path": "src/models/types.ts",
+      "filename": "types.ts",
+      "extension": "ts",
+      "size_bytes": 1453,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:17.672383200Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "02c0956359d6457952bc4143aaf872236b5e731748c903ce8ad7540d3004e8e8"
+    },
+    {
+      "relative_path": "src/routes/admin.ts",
+      "filename": "admin.ts",
+      "extension": "ts",
+      "size_bytes": 935,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:17.377909900Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "5cf1e1da62d4c44832881bbb31e5ad90386c6a5a14dd8c372ecc5ef0dfb5f007"
+    },
+    {
+      "relative_path": "src/routes/auth.ts",
+      "filename": "auth.ts",
+      "extension": "ts",
+      "size_bytes": 1904,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:06.778141400Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "ff136415615459b7c2f95b258eb615e50bd1a848ea568dfff917423a19f6d957"
+    },
+    {
+      "relative_path": "src/routes/cart.ts",
+      "filename": "cart.ts",
+      "extension": "ts",
+      "size_bytes": 2121,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:10.590707100Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "cc44c1ea58aa940df5a98932996c762a83d41ed69d35dfaa1849ebc951521eee"
+    },
+    {
+      "relative_path": "src/routes/health.ts",
+      "filename": "health.ts",
+      "extension": "ts",
+      "size_bytes": 238,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:05.638110900Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "06039285e253ab60ee7285429a1c436b2deb2bedf28cbc092cbaa07eadf318a7"
+    },
+    {
+      "relative_path": "src/routes/orders.ts",
+      "filename": "orders.ts",
+      "extension": "ts",
+      "size_bytes": 2144,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:13.086350900Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "7e9e67749f3d58168e0b6228c8c4386c71bde848df304de2cde2db6079355404"
+    },
+    {
+      "relative_path": "src/routes/payments.ts",
+      "filename": "payments.ts",
+      "extension": "ts",
+      "size_bytes": 1765,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:15.121091800Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "fe511576f6791fa8ac1d18d2d769adcaf0a0b45b12d0e31e8ad28396dfa26bdc"
+    },
+    {
+      "relative_path": "src/routes/products.ts",
+      "filename": "products.ts",
+      "extension": "ts",
+      "size_bytes": 2534,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:09.160745600Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "85c3c63ebc192f585a1e5bde8c9e6abf2568bc890a288d44b18fd5c6ecf14d08"
+    },
+    {
+      "relative_path": "src/server.ts",
+      "filename": "server.ts",
+      "extension": "ts",
+      "size_bytes": 516,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:21.185100500Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "0713b4d69a33d534b33daa460618bff983ac775f1ae6725b3c9e1b8f0bd33c03"
+    },
+    {
+      "relative_path": "src/services/adminService.ts",
+      "filename": "adminService.ts",
+      "extension": "ts",
+      "size_bytes": 1798,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:34.111592300Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "e9a932866587e28a199834badfefc6a6cbb8013b0eaebb8554e41351fcb1f4ee"
+    },
+    {
+      "relative_path": "src/services/authService.ts",
+      "filename": "authService.ts",
+      "extension": "ts",
+      "size_bytes": 3586,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:23.822059100Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "f15217a425fd81259b6e33667e7f5fbc81642a7afca195f81f29f5eb87ab2101"
+    },
+    {
+      "relative_path": "src/services/cartService.ts",
+      "filename": "cartService.ts",
+      "extension": "ts",
+      "size_bytes": 3568,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:27.497099300Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "96eec4149ae1a2fae32d7743e14329e4cadc9c45b393957319bfb5c7aefd6e09"
+    },
+    {
+      "relative_path": "src/services/catalogService.ts",
+      "filename": "catalogService.ts",
+      "extension": "ts",
+      "size_bytes": 3683,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:26.105884800Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "5cdd1f50d1e186340873c0fd0b1323219a8883ef5cb9ed57ac147222229ecf2d"
+    },
+    {
+      "relative_path": "src/services/orderService.ts",
+      "filename": "orderService.ts",
+      "extension": "ts",
+      "size_bytes": 6290,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:28:29.030571800Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "201972bf1e60e49210f7897ffc28d9ac710ad84a92a0f561eb6f297e03c85ff8"
+    },
+    {
+      "relative_path": "src/services/paymentService.ts",
+      "filename": "paymentService.ts",
+      "extension": "ts",
+      "size_bytes": 3607,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:30:01.192093800Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "e3aec0035a19db19bb43ab6a9d18a36067a96dd57b40f878735f75c294aa47c3"
+    },
+    {
+      "relative_path": "src/utils/password.ts",
+      "filename": "password.ts",
+      "extension": "ts",
+      "size_bytes": 708,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:19.675564900Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "7fa8f33ffe0a57364b0f3012afb568393d8c876164f4f7e42009a477f94d6b03"
+    },
+    {
+      "relative_path": "src/utils/pricing.ts",
+      "filename": "pricing.ts",
+      "extension": "ts",
+      "size_bytes": 677,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:24.198248100Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "530b1221d7e2f6a07fc89cb11a3c16332ccf7a35790faf0572ce43a8730e67f2"
+    },
+    {
+      "relative_path": "src/utils/token.ts",
+      "filename": "token.ts",
+      "extension": "ts",
+      "size_bytes": 2002,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:27:22.002368100Z",
+      "language": "TypeScript",
+      "classification": "source_code",
+      "hash_blake3": "97612e215875a83e3a9b5ce876c391f41b27d3e84d47a43e0dd067f86af32eea"
+    },
+    {
+      "relative_path": "tests/commerce.test.ts",
+      "filename": "commerce.test.ts",
+      "extension": "ts",
+      "size_bytes": 6426,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:29:23.260077900Z",
+      "language": "TypeScript",
+      "classification": "tests",
+      "hash_blake3": "c685128e136d530e00f0fd2d3dcc3d7eb60e4dd609a5141f573ab4a39ee93b5c"
+    },
+    {
+      "relative_path": "tsconfig.json",
+      "filename": "tsconfig.json",
+      "extension": "json",
+      "size_bytes": 447,
+      "file_type": "file",
+      "is_binary": false,
+      "is_hidden": false,
+      "modified_at": "2026-11-27T06:26:43.214734600Z",
+      "language": "JSON",
+      "classification": "configuration",
+      "hash_blake3": "fbce1d68621f0efe820dafbb432e3c6f458a095cc094451ccd8ba5380b47193c"
+    }
+  ],
+  "directories": [
+    {
+      "relative_path": ".",
+      "depth": 0,
+      "file_count": 9,
+      "child_dir_count": 3
+    },
+    {
+      "relative_path": "db",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 1
+    },
+    {
+      "relative_path": "db/migrations",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src",
+      "depth": 1,
+      "file_count": 2,
+      "child_dir_count": 7
+    },
+    {
+      "relative_path": "src/config",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/db",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/middleware",
+      "depth": 2,
+      "file_count": 4,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/models",
+      "depth": 2,
+      "file_count": 1,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/routes",
+      "depth": 2,
+      "file_count": 7,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/services",
+      "depth": 2,
+      "file_count": 6,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "src/utils",
+      "depth": 2,
+      "file_count": 3,
+      "child_dir_count": 0
+    },
+    {
+      "relative_path": "tests",
+      "depth": 1,
+      "file_count": 1,
+      "child_dir_count": 0
+    }
+  ],
+  "excluded_paths": [
+    "dist",
+    "node_modules"
+  ],
+  "warnings": []
+}

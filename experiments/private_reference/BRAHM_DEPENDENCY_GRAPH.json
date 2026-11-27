@@ -1,0 +1,4344 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-11-27T06:30:41.962569500+00:00",
+  "summary": {
+    "total_nodes": 155,
+    "total_edges": 434,
+    "is_dag": false,
+    "density": 0.01818181818181818,
+    "cyclic_components_count": 10,
+    "node_counts_by_kind": {
+      "class": 8,
+      "method": 25,
+      "struct": 11,
+      "function": 26,
+      "api_route": 20,
+      "data_model": 10,
+      "external_package": 12,
+      "file": 26,
+      "interface": 17
+    },
+    "edge_counts_by_kind": {
+      "contains": 140,
+      "imports": 108,
+      "calls": 186
+    },
+    "top_central_nodes": [
+      {
+        "id": "pkg:express",
+        "name": "express",
+        "kind": "external_package",
+        "fan_in": 12,
+        "fan_out": 0
+      },
+      {
+        "id": "file:src/middleware/errors.ts",
+        "name": "errors.ts",
+        "kind": "file",
+        "fan_in": 11,
+        "fan_out": 4
+      },
+      {
+        "id": "sym:sym_3e331fcddb4edae1",
+        "name": "runInTransaction",
+        "kind": "method",
+        "fan_in": 10,
+        "fan_out": 2
+      },
+      {
+        "id": "sym:sym_09a306cb020575fb",
+        "name": "signSessionToken",
+        "kind": "function",
+        "fan_in": 9,
+        "fan_out": 4
+      },
+      {
+        "id": "sym:sym_16248093f881180e",
+        "name": "createProduct",
+        "kind": "method",
+        "fan_in": 8,
+        "fan_out": 5
+      },
+      {
+        "id": "sym:sym_4e4c2f2d29a01374",
+        "name": "updateInventoryOrPrice",
+        "kind": "method",
+        "fan_in": 8,
+        "fan_out": 5
+      },
+      {
+        "id": "sym:sym_86d712adff54299b",
+        "name": "getProductBySlug",
+        "kind": "method",
+        "fan_in": 8,
+        "fan_out": 5
+      },
+      {
+        "id": "sym:sym_dbd1a60f8b8131e6",
+        "name": "verifyWebhookSignature",
+        "kind": "function",
+        "fan_in": 8,
+        "fan_out": 4
+      },
+      {
+        "id": "sym:sym_ea887e423994fc25",
+        "name": "listProducts",
+        "kind": "method",
+        "fan_in": 8,
+        "fan_out": 5
+      },
+      {
+        "id": "file:src/db/database.ts",
+        "name": "database.ts",
+        "kind": "file",
+        "fan_in": 7,
+        "fan_out": 8
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "file:src/app.ts",
+      "name": "app.ts",
+      "kind": "file",
+      "file_path": "src/app.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/config/env.ts",
+      "name": "env.ts",
+      "kind": "file",
+      "file_path": "src/config/env.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/db/database.ts",
+      "name": "database.ts",
+      "kind": "file",
+      "file_path": "src/db/database.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/middleware/auth.ts",
+      "name": "auth.ts",
+      "kind": "file",
+      "file_path": "src/middleware/auth.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/middleware/errors.ts",
+      "name": "errors.ts",
+      "kind": "file",
+      "file_path": "src/middleware/errors.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/middleware/rateLimit.ts",
+      "name": "rateLimit.ts",
+      "kind": "file",
+      "file_path": "src/middleware/rateLimit.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/middleware/validation.ts",
+      "name": "validation.ts",
+      "kind": "file",
+      "file_path": "src/middleware/validation.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/models/types.ts",
+      "name": "types.ts",
+      "kind": "file",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/admin.ts",
+      "name": "admin.ts",
+      "kind": "file",
+      "file_path": "src/routes/admin.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/auth.ts",
+      "name": "auth.ts",
+      "kind": "file",
+      "file_path": "src/routes/auth.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/cart.ts",
+      "name": "cart.ts",
+      "kind": "file",
+      "file_path": "src/routes/cart.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/health.ts",
+      "name": "health.ts",
+      "kind": "file",
+      "file_path": "src/routes/health.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/orders.ts",
+      "name": "orders.ts",
+      "kind": "file",
+      "file_path": "src/routes/orders.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/payments.ts",
+      "name": "payments.ts",
+      "kind": "file",
+      "file_path": "src/routes/payments.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/routes/products.ts",
+      "name": "products.ts",
+      "kind": "file",
+      "file_path": "src/routes/products.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/server.ts",
+      "name": "server.ts",
+      "kind": "file",
+      "file_path": "src/server.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/services/adminService.ts",
+      "name": "adminService.ts",
+      "kind": "file",
+      "file_path": "src/services/adminService.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/services/authService.ts",
+      "name": "authService.ts",
+      "kind": "file",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/services/cartService.ts",
+      "name": "cartService.ts",
+      "kind": "file",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/services/catalogService.ts",
+      "name": "catalogService.ts",
+      "kind": "file",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/services/orderService.ts",
+      "name": "orderService.ts",
+      "kind": "file",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/services/paymentService.ts",
+      "name": "paymentService.ts",
+      "kind": "file",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/utils/password.ts",
+      "name": "password.ts",
+      "kind": "file",
+      "file_path": "src/utils/password.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/utils/pricing.ts",
+      "name": "pricing.ts",
+      "kind": "file",
+      "file_path": "src/utils/pricing.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:src/utils/token.ts",
+      "name": "token.ts",
+      "kind": "file",
+      "file_path": "src/utils/token.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "file:tests/commerce.test.ts",
+      "name": "commerce.test.ts",
+      "kind": "file",
+      "file_path": "tests/commerce.test.ts",
+      "metadata": {
+        "language": "typescript"
+      }
+    },
+    {
+      "id": "pkg:cors",
+      "name": "cors",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "cors"
+      }
+    },
+    {
+      "id": "pkg:helmet",
+      "name": "helmet",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "helmet"
+      }
+    },
+    {
+      "id": "pkg:node:http",
+      "name": "node:http",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:http"
+      }
+    },
+    {
+      "id": "pkg:node:test",
+      "name": "node:test",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:test"
+      }
+    },
+    {
+      "id": "pkg:node:crypto",
+      "name": "node:crypto",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:crypto"
+      }
+    },
+    {
+      "id": "pkg:node:fs",
+      "name": "node:fs",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:fs"
+      }
+    },
+    {
+      "id": "pkg:node:sqlite",
+      "name": "node:sqlite",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:sqlite"
+      }
+    },
+    {
+      "id": "pkg:zod",
+      "name": "zod",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "zod"
+      }
+    },
+    {
+      "id": "pkg:node:url",
+      "name": "node:url",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:url"
+      }
+    },
+    {
+      "id": "pkg:express",
+      "name": "express",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "express"
+      }
+    },
+    {
+      "id": "pkg:node:path",
+      "name": "node:path",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:path"
+      }
+    },
+    {
+      "id": "pkg:node:assert",
+      "name": "node:assert",
+      "kind": "external_package",
+      "metadata": {
+        "package_name": "node:assert"
+      }
+    },
+    {
+      "id": "sym:sym_31288407941ba03c",
+      "name": "AppServices",
+      "kind": "interface",
+      "file_path": "src/app.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_77f66c93417653a2",
+      "name": "createCommerceApp",
+      "kind": "function",
+      "file_path": "src/app.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  config: AppConfig,\n  projectRootDir: string,\n): { app: Express; services: AppServices }"
+      }
+    },
+    {
+      "id": "sym:sym_d2ad8a56d96bb16b",
+      "name": "AppConfig",
+      "kind": "interface",
+      "file_path": "src/config/env.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_202f144e39784cd3",
+      "name": "loadConfig",
+      "kind": "function",
+      "file_path": "src/config/env.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(): AppConfig"
+      }
+    },
+    {
+      "id": "sym:sym_1e723846ce050d44",
+      "name": "CommerceDatabase",
+      "kind": "class",
+      "file_path": "src/db/database.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_304fa78cf1859d99",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/db/database.ts",
+      "metadata": {
+        "signature": "(dbPath: string)",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_dc3eb24356e23e64",
+      "name": "initializeSchema",
+      "kind": "method",
+      "file_path": "src/db/database.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(schemaSqlPath: string, migrationSqlPath?: string): void"
+      }
+    },
+    {
+      "id": "sym:sym_3e331fcddb4edae1",
+      "name": "runInTransaction",
+      "kind": "method",
+      "file_path": "src/db/database.ts",
+      "metadata": {
+        "signature": "(fn: () => T): T",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_0a038edae47d1914",
+      "name": "close",
+      "kind": "method",
+      "file_path": "src/db/database.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(): void"
+      }
+    },
+    {
+      "id": "sym:sym_c75055d596cd0bc0",
+      "name": "AuthenticatedRequest",
+      "kind": "interface",
+      "file_path": "src/middleware/auth.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_89885fdedc333f27",
+      "name": "createAuthMiddleware",
+      "kind": "function",
+      "file_path": "src/middleware/auth.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(tokenSecret: string)"
+      }
+    },
+    {
+      "id": "sym:sym_895528ef3f1fc1c5",
+      "name": "requireAdmin",
+      "kind": "function",
+      "file_path": "src/middleware/auth.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  req: AuthenticatedRequest,\n  _res: Response,\n  next: NextFunction,\n): void"
+      }
+    },
+    {
+      "id": "sym:sym_44f3edb966726e54",
+      "name": "HttpError",
+      "kind": "class",
+      "file_path": "src/middleware/errors.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_7b009641ed2d89e7",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/middleware/errors.ts",
+      "metadata": {
+        "signature": "(statusCode: number, code: string, message: string)",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_786a61b2107756b9",
+      "name": "errorHandler",
+      "kind": "function",
+      "file_path": "src/middleware/errors.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  err: unknown,\n  _req: Request,\n  res: Response,\n  _next: NextFunction,\n): void"
+      }
+    },
+    {
+      "id": "sym:sym_f04e0186881af29d",
+      "name": "createRateLimiter",
+      "kind": "function",
+      "file_path": "src/middleware/rateLimit.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(maxRequests: number, windowMs: number)"
+      }
+    },
+    {
+      "id": "sym:sym_f5000f655ec7a014",
+      "name": "validateBody",
+      "kind": "function",
+      "file_path": "src/middleware/validation.ts",
+      "metadata": {
+        "signature": "(schema: ZodSchema<T>)",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_9a3e1ae68239ff38",
+      "name": "UserRole",
+      "kind": "struct",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_6501baae4fba11bb",
+      "name": "OrderStatus",
+      "kind": "struct",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_b12763ca6bbfab5d",
+      "name": "PaymentStatus",
+      "kind": "struct",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_997681c5e83e779d",
+      "name": "UserRecord",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_ec56b3e6af6844eb",
+      "name": "ProductRecord",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_1e487f49dcbed8b9",
+      "name": "CartItemView",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_9a685970dd62052c",
+      "name": "ShippingAddress",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_2ce493500dc5e453",
+      "name": "OrderRecord",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_161b2dccf2b1595a",
+      "name": "PaymentRecord",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_8739097eefdd0a70",
+      "name": "AuthTokenClaims",
+      "kind": "interface",
+      "file_path": "src/models/types.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_b7ed62e0c6ad9aee",
+      "name": "createAdminRouter",
+      "kind": "function",
+      "file_path": "src/routes/admin.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  adminService: AdminService,\n  requireAuth: RequestHandler,\n): Router"
+      }
+    },
+    {
+      "id": "sym:sym_e63b8540fd597383",
+      "name": "createAuthRouter",
+      "kind": "function",
+      "file_path": "src/routes/auth.ts",
+      "metadata": {
+        "signature": "(\n  authService: AuthService,\n  requireAuth: RequestHandler,\n): Router",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_27997eef74581e5f",
+      "name": "createCartRouter",
+      "kind": "function",
+      "file_path": "src/routes/cart.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  cartService: CartService,\n  requireAuth: RequestHandler,\n): Router"
+      }
+    },
+    {
+      "id": "sym:sym_baa19fe7a20d4e07",
+      "name": "createHealthRouter",
+      "kind": "function",
+      "file_path": "src/routes/health.ts",
+      "metadata": {
+        "signature": "(): Router",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_c69874390f10ddc2",
+      "name": "createOrdersRouter",
+      "kind": "function",
+      "file_path": "src/routes/orders.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  orderService: OrderService,\n  requireAuth: RequestHandler,\n): Router"
+      }
+    },
+    {
+      "id": "sym:sym_ea3f6d35aba00691",
+      "name": "createPaymentsRouter",
+      "kind": "function",
+      "file_path": "src/routes/payments.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  paymentService: PaymentService,\n  requireAuth: RequestHandler,\n): Router"
+      }
+    },
+    {
+      "id": "sym:sym_54bb21545028f12f",
+      "name": "createProductsRouter",
+      "kind": "function",
+      "file_path": "src/routes/products.ts",
+      "metadata": {
+        "signature": "(\n  catalog: CatalogService,\n  requireAuth: RequestHandler,\n): Router",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_9826284828dc45d6",
+      "name": "AdminMetricsSummary",
+      "kind": "interface",
+      "file_path": "src/services/adminService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_ec5f55fbb57b845c",
+      "name": "AdminService",
+      "kind": "class",
+      "file_path": "src/services/adminService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_5f91eb7e0f46befe",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/services/adminService.ts",
+      "metadata": {
+        "signature": "(private readonly db: CommerceDatabase)",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_9d6a1592fa96d2f2",
+      "name": "getMetrics",
+      "kind": "method",
+      "file_path": "src/services/adminService.ts",
+      "metadata": {
+        "signature": "(): AdminMetricsSummary",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_0fdeb68f20f887f6",
+      "name": "listAuditLogs",
+      "kind": "method",
+      "file_path": "src/services/adminService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(limit = 50): Array<{\n    id: string;\n    actorUserId: string | null;\n    action: string;\n    resourceType: string;\n    resourceId: string;\n    metadataJson: string;\n    createdAt: string;\n  }>"
+      }
+    },
+    {
+      "id": "sym:sym_2a6a5373799fd7db",
+      "name": "DbUserRow",
+      "kind": "interface",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "visibility": "Internal"
+      }
+    },
+    {
+      "id": "sym:sym_ef281abc3a476d4a",
+      "name": "AuthService",
+      "kind": "class",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_049a57f0c5602ffb",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "signature": "(\n    private readonly db: CommerceDatabase,\n    private readonly tokenSecret: string,\n  )",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_2be0152eaefdfc22",
+      "name": "registerUser",
+      "kind": "method",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "signature": "(input: {\n    email: string;\n    fullName: string;\n    password: string;\n    role?: UserRole;\n  }): { user: UserRecord; token: string }",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_9d89082c0a304d62",
+      "name": "loginUser",
+      "kind": "method",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "signature": "(email: string, password: string): { user: UserRecord; token: string }",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_4f668382ce1d059e",
+      "name": "getUserById",
+      "kind": "method",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "signature": "(userId: string): UserRecord",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_1f5efe31a61b196e",
+      "name": "persistSession",
+      "kind": "method",
+      "file_path": "src/services/authService.ts",
+      "metadata": {
+        "signature": "(userId: string, tokenHash: string, expEpochSec: number): void",
+        "visibility": "Private"
+      }
+    },
+    {
+      "id": "sym:sym_d16e2bd4e279e784",
+      "name": "DbCartRow",
+      "kind": "interface",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "visibility": "Internal"
+      }
+    },
+    {
+      "id": "sym:sym_6178906ab6e71104",
+      "name": "CartService",
+      "kind": "class",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_7cf9040a01ce490b",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(private readonly db: CommerceDatabase)"
+      }
+    },
+    {
+      "id": "sym:sym_fa9ec874deac4220",
+      "name": "getCart",
+      "kind": "method",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "signature": "(userId: string): { items: CartItemView[]; subtotalCents: number }",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_da31191fcb769293",
+      "name": "addItem",
+      "kind": "method",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(userId: string, productId: string, quantity: number): void"
+      }
+    },
+    {
+      "id": "sym:sym_7496eef7b043e40c",
+      "name": "setQuantity",
+      "kind": "method",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(userId: string, productId: string, quantity: number): void"
+      }
+    },
+    {
+      "id": "sym:sym_c311b25fa23590bd",
+      "name": "removeItem",
+      "kind": "method",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "signature": "(userId: string, productId: string): void",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_1dacbfb1b91157da",
+      "name": "clearCart",
+      "kind": "method",
+      "file_path": "src/services/cartService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(userId: string): void"
+      }
+    },
+    {
+      "id": "sym:sym_154af90826f57dfd",
+      "name": "DbProductRow",
+      "kind": "interface",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Internal"
+      }
+    },
+    {
+      "id": "sym:sym_474f2944116f9a83",
+      "name": "CatalogService",
+      "kind": "class",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_14a24ca6ec939307",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "signature": "(private readonly db: CommerceDatabase)",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_ea887e423994fc25",
+      "name": "listProducts",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(categorySlug?: string, search?: string): ProductRecord[]"
+      }
+    },
+    {
+      "id": "sym:sym_86d712adff54299b",
+      "name": "getProductBySlug",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "signature": "(slug: string): ProductRecord",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_16248093f881180e",
+      "name": "createProduct",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(input: {\n    categoryId: string;\n    sku: string;\n    slug: string;\n    title: string;\n    description: string;\n    priceCents: number;\n    stockQty: number;\n  }): ProductRecord"
+      }
+    },
+    {
+      "id": "sym:sym_4e4c2f2d29a01374",
+      "name": "updateInventoryOrPrice",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n    productId: string,\n    patch: { priceCents?: number; stockQty?: number; active?: boolean },\n  ): ProductRecord"
+      }
+    },
+    {
+      "id": "sym:sym_1160ee553c56c0d8",
+      "name": "getProductById",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(productId: string): ProductRecord"
+      }
+    },
+    {
+      "id": "sym:sym_754a4a71bc055ce1",
+      "name": "mapProduct",
+      "kind": "function",
+      "file_path": "src/services/catalogService.ts",
+      "metadata": {
+        "visibility": "Internal",
+        "signature": "(r: DbProductRow): ProductRecord"
+      }
+    },
+    {
+      "id": "sym:sym_7e605ecfc2876bcc",
+      "name": "DbOrderRow",
+      "kind": "interface",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "visibility": "Internal"
+      }
+    },
+    {
+      "id": "sym:sym_7576f19ec04213d3",
+      "name": "OrderService",
+      "kind": "class",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_5164480a3dae231e",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n    private readonly db: CommerceDatabase,\n    private readonly config: AppConfig,\n  )"
+      }
+    },
+    {
+      "id": "sym:sym_6507fb3ace984a24",
+      "name": "checkoutFromCart",
+      "kind": "method",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(userId: string, shippingAddress: ShippingAddress): OrderRecord"
+      }
+    },
+    {
+      "id": "sym:sym_344838745f335f77",
+      "name": "listOrdersForUser",
+      "kind": "method",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "signature": "(userId: string): OrderRecord[]",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_5b2c13dde64ede55",
+      "name": "getOrder",
+      "kind": "method",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "signature": "(orderId: string, actorUserId: string, isAdmin: boolean): OrderRecord",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_c254cd7fdb6b70ef",
+      "name": "cancelOrder",
+      "kind": "method",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "signature": "(orderId: string, actorUserId: string, isAdmin: boolean): OrderRecord",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_9e36d08916b95fd7",
+      "name": "mapOrder",
+      "kind": "function",
+      "file_path": "src/services/orderService.ts",
+      "metadata": {
+        "visibility": "Internal",
+        "signature": "(r: DbOrderRow): OrderRecord"
+      }
+    },
+    {
+      "id": "sym:sym_c41e85b564bc2a7f",
+      "name": "DbPaymentRow",
+      "kind": "interface",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "visibility": "Internal"
+      }
+    },
+    {
+      "id": "sym:sym_f2c05ff0a913893e",
+      "name": "PaymentService",
+      "kind": "class",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_6270d0503c8cdf20",
+      "name": "constructor",
+      "kind": "struct",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n    private readonly db: CommerceDatabase,\n    private readonly webhookSecret: string,\n  )"
+      }
+    },
+    {
+      "id": "sym:sym_96fb6ab12a80fb11",
+      "name": "createPaymentIntent",
+      "kind": "method",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "signature": "(\n    orderId: string,\n    userId: string,\n    idempotencyKey: string,\n  ): PaymentRecord",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_6401fa6052d4a9cf",
+      "name": "processWebhook",
+      "kind": "method",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "signature": "(rawBody: string, signatureHex: string): PaymentRecord",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_39c553bb5d44e131",
+      "name": "mapPayment",
+      "kind": "function",
+      "file_path": "src/services/paymentService.ts",
+      "metadata": {
+        "signature": "(r: DbPaymentRow): PaymentRecord",
+        "visibility": "Internal"
+      }
+    },
+    {
+      "id": "sym:sym_c46bf099d5b5bdb3",
+      "name": "hashPassword",
+      "kind": "function",
+      "file_path": "src/utils/password.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(plain: string): string"
+      }
+    },
+    {
+      "id": "sym:sym_ec5db67960bd8cd2",
+      "name": "verifyPassword",
+      "kind": "function",
+      "file_path": "src/utils/password.ts",
+      "metadata": {
+        "signature": "(plain: string, stored: string): boolean",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_f9bbe0419ebde721",
+      "name": "TotalsBreakdown",
+      "kind": "interface",
+      "file_path": "src/utils/pricing.ts",
+      "metadata": {
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_e9b14fcc9d7675c1",
+      "name": "calculateOrderTotals",
+      "kind": "function",
+      "file_path": "src/utils/pricing.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(\n  subtotalCents: number,\n  config: Pick<AppConfig, 'taxRateBps' | 'freeShippingThresholdCents' | 'flatShippingCents'>,\n): TotalsBreakdown"
+      }
+    },
+    {
+      "id": "sym:sym_09a306cb020575fb",
+      "name": "signSessionToken",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "metadata": {
+        "signature": "(\n  userId: string,\n  email: string,\n  role: UserRole,\n  secret: string,\n  ttlSeconds = 3600,\n): { token: string; claims: AuthTokenClaims; tokenHash: string }",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_1252c366c0962a5d",
+      "name": "verifySessionToken",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "metadata": {
+        "signature": "(token: string, secret: string): AuthTokenClaims | null",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_1aa196dfbee0cfb0",
+      "name": "hashToken",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(token: string): string"
+      }
+    },
+    {
+      "id": "sym:sym_83104e5698caa8ca",
+      "name": "computeWebhookSignature",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "metadata": {
+        "visibility": "Public",
+        "signature": "(payload: string, secret: string): string"
+      }
+    },
+    {
+      "id": "sym:sym_dbd1a60f8b8131e6",
+      "name": "verifyWebhookSignature",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "metadata": {
+        "signature": "(\n  payload: string,\n  providedHex: string,\n  secret: string,\n): boolean",
+        "visibility": "Public"
+      }
+    },
+    {
+      "id": "sym:sym_650ed5f491b50542",
+      "name": "apiJson",
+      "kind": "function",
+      "file_path": "tests/commerce.test.ts",
+      "metadata": {
+        "visibility": "Internal",
+        "signature": "(\n  baseUrl: string,\n  route: string,\n  options: { method?: string; token?: string; headers?: Record<string, string>; body?: unknown } = {},\n): Promise<{ status: number; data: T }>"
+      }
+    },
+    {
+      "id": "route:GET:/api/admin/metrics",
+      "name": "GET /api/admin/metrics",
+      "kind": "api_route",
+      "file_path": "src/routes/admin.ts",
+      "metadata": {
+        "path_pattern": "/api/admin/metrics",
+        "method": "Get",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:GET:/api/admin/audit-logs",
+      "name": "GET /api/admin/audit-logs",
+      "kind": "api_route",
+      "file_path": "src/routes/admin.ts",
+      "metadata": {
+        "path_pattern": "/api/admin/audit-logs",
+        "framework": "Express/Fastify",
+        "method": "Get"
+      }
+    },
+    {
+      "id": "route:POST:/api/auth/register",
+      "name": "POST /api/auth/register",
+      "kind": "api_route",
+      "file_path": "src/routes/auth.ts",
+      "metadata": {
+        "method": "Post",
+        "path_pattern": "/api/auth/register",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:POST:/api/auth/login",
+      "name": "POST /api/auth/login",
+      "kind": "api_route",
+      "file_path": "src/routes/auth.ts",
+      "metadata": {
+        "path_pattern": "/api/auth/login",
+        "method": "Post",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:GET:/api/auth/me",
+      "name": "GET /api/auth/me",
+      "kind": "api_route",
+      "file_path": "src/routes/auth.ts",
+      "metadata": {
+        "path_pattern": "/api/auth/me",
+        "framework": "Express/Fastify",
+        "method": "Get"
+      }
+    },
+    {
+      "id": "route:GET:/api/cart",
+      "name": "GET /api/cart",
+      "kind": "api_route",
+      "file_path": "src/routes/cart.ts",
+      "metadata": {
+        "framework": "Express/Fastify",
+        "method": "Get",
+        "path_pattern": "/api/cart"
+      }
+    },
+    {
+      "id": "route:POST:/api/cart/items",
+      "name": "POST /api/cart/items",
+      "kind": "api_route",
+      "file_path": "src/routes/cart.ts",
+      "metadata": {
+        "path_pattern": "/api/cart/items",
+        "framework": "Express/Fastify",
+        "method": "Post"
+      }
+    },
+    {
+      "id": "route:PATCH:/api/cart/items/:productId",
+      "name": "PATCH /api/cart/items/:productId",
+      "kind": "api_route",
+      "file_path": "src/routes/cart.ts",
+      "metadata": {
+        "path_pattern": "/api/cart/items/:productId",
+        "framework": "Express/Fastify",
+        "method": "Patch"
+      }
+    },
+    {
+      "id": "route:DELETE:/api/cart/items/:productId",
+      "name": "DELETE /api/cart/items/:productId",
+      "kind": "api_route",
+      "file_path": "src/routes/cart.ts",
+      "metadata": {
+        "path_pattern": "/api/cart/items/:productId",
+        "method": "Delete",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:GET:/health",
+      "name": "GET /health",
+      "kind": "api_route",
+      "file_path": "src/routes/health.ts",
+      "metadata": {
+        "method": "Get",
+        "path_pattern": "/health",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:POST:/api/orders",
+      "name": "POST /api/orders",
+      "kind": "api_route",
+      "file_path": "src/routes/orders.ts",
+      "metadata": {
+        "method": "Post",
+        "path_pattern": "/api/orders",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:GET:/api/orders",
+      "name": "GET /api/orders",
+      "kind": "api_route",
+      "file_path": "src/routes/orders.ts",
+      "metadata": {
+        "method": "Get",
+        "path_pattern": "/api/orders",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:GET:/api/orders/:id",
+      "name": "GET /api/orders/:id",
+      "kind": "api_route",
+      "file_path": "src/routes/orders.ts",
+      "metadata": {
+        "method": "Get",
+        "path_pattern": "/api/orders/:id",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:POST:/api/orders/:id/cancel",
+      "name": "POST /api/orders/:id/cancel",
+      "kind": "api_route",
+      "file_path": "src/routes/orders.ts",
+      "metadata": {
+        "method": "Post",
+        "path_pattern": "/api/orders/:id/cancel",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:POST:/api/payments/intent",
+      "name": "POST /api/payments/intent",
+      "kind": "api_route",
+      "file_path": "src/routes/payments.ts",
+      "metadata": {
+        "framework": "Express/Fastify",
+        "method": "Post",
+        "path_pattern": "/api/payments/intent"
+      }
+    },
+    {
+      "id": "route:POST:/api/payments/webhook",
+      "name": "POST /api/payments/webhook",
+      "kind": "api_route",
+      "file_path": "src/routes/payments.ts",
+      "metadata": {
+        "path_pattern": "/api/payments/webhook",
+        "method": "Post",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "route:GET:/api/products",
+      "name": "GET /api/products",
+      "kind": "api_route",
+      "file_path": "src/routes/products.ts",
+      "metadata": {
+        "framework": "Express/Fastify",
+        "method": "Get",
+        "path_pattern": "/api/products"
+      }
+    },
+    {
+      "id": "route:GET:/api/products/:slug",
+      "name": "GET /api/products/:slug",
+      "kind": "api_route",
+      "file_path": "src/routes/products.ts",
+      "metadata": {
+        "path_pattern": "/api/products/:slug",
+        "framework": "Express/Fastify",
+        "method": "Get"
+      }
+    },
+    {
+      "id": "route:POST:/api/products",
+      "name": "POST /api/products",
+      "kind": "api_route",
+      "file_path": "src/routes/products.ts",
+      "metadata": {
+        "framework": "Express/Fastify",
+        "path_pattern": "/api/products",
+        "method": "Post"
+      }
+    },
+    {
+      "id": "route:PATCH:/api/products/:id",
+      "name": "PATCH /api/products/:id",
+      "kind": "api_route",
+      "file_path": "src/routes/products.ts",
+      "metadata": {
+        "method": "Patch",
+        "path_pattern": "/api/products/:id",
+        "framework": "Express/Fastify"
+      }
+    },
+    {
+      "id": "model:001_initial_commerce.sql",
+      "name": "001_initial_commerce.sql",
+      "kind": "data_model",
+      "file_path": "db/migrations/001_initial_commerce.sql",
+      "metadata": {
+        "kind": "SqlMigration",
+        "framework": "SQL Migration"
+      }
+    },
+    {
+      "id": "model:users",
+      "name": "users",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "framework": "SQL DDL",
+        "kind": "SchemaDefinition"
+      }
+    },
+    {
+      "id": "model:sessions",
+      "name": "sessions",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "framework": "SQL DDL",
+        "kind": "SchemaDefinition"
+      }
+    },
+    {
+      "id": "model:categories",
+      "name": "categories",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "kind": "SchemaDefinition",
+        "framework": "SQL DDL"
+      }
+    },
+    {
+      "id": "model:products",
+      "name": "products",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "framework": "SQL DDL",
+        "kind": "SchemaDefinition"
+      }
+    },
+    {
+      "id": "model:cart_items",
+      "name": "cart_items",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "kind": "SchemaDefinition",
+        "framework": "SQL DDL"
+      }
+    },
+    {
+      "id": "model:orders",
+      "name": "orders",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "kind": "SchemaDefinition",
+        "framework": "SQL DDL"
+      }
+    },
+    {
+      "id": "model:order_items",
+      "name": "order_items",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "framework": "SQL DDL",
+        "kind": "SchemaDefinition"
+      }
+    },
+    {
+      "id": "model:payments",
+      "name": "payments",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "kind": "SchemaDefinition",
+        "framework": "SQL DDL"
+      }
+    },
+    {
+      "id": "model:audit_logs",
+      "name": "audit_logs",
+      "kind": "data_model",
+      "file_path": "db/schema.sql",
+      "metadata": {
+        "kind": "SchemaDefinition",
+        "framework": "SQL DDL"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "file:src/utils/token.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/config/env.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/middleware/rateLimit.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/admin.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/cart.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/health.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/orders.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/payments.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/products.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/services/adminService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/services/authService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/services/cartService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/services/catalogService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/services/orderService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/services/paymentService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/validation.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/server.ts",
+      "target": "file:src/app.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/server.ts",
+      "target": "file:src/config/env.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "file:src/utils/token.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "file:src/middleware/validation.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "file:src/services/orderService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "file:src/middleware/validation.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "file:src/services/catalogService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/admin.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/admin.ts",
+      "target": "file:src/services/adminService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "file:src/config/env.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "file:src/utils/pricing.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "file:src/app.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "file:src/config/env.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "file:src/utils/token.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/adminService.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "file:src/db/database.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "file:src/utils/password.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "file:src/utils/token.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/rateLimit.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "file:src/middleware/validation.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "file:src/services/cartService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/pricing.ts",
+      "target": "file:src/config/env.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "file:src/middleware/validation.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "file:src/services/paymentService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "file:src/middleware/auth.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "file:src/middleware/errors.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "file:src/middleware/validation.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "file:src/services/authService.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "file:src/models/types.ts",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/validation.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/validation.ts",
+      "target": "pkg:zod",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/errors.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "pkg:zod",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/server.ts",
+      "target": "pkg:node:path",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/server.ts",
+      "target": "pkg:node:url",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/admin.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "pkg:zod",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "pkg:node:assert",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "pkg:node:http",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "pkg:node:path",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "pkg:node:test",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "pkg:node:url",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "pkg:zod",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/health.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "pkg:zod",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/password.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "pkg:zod",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "pkg:cors",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "pkg:helmet",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "pkg:node:path",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "pkg:node:fs",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "pkg:node:path",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "pkg:node:sqlite",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/rateLimit.ts",
+      "target": "pkg:express",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "pkg:node:crypto",
+      "kind": "imports",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "sym:sym_31288407941ba03c",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "sym:sym_77f66c93417653a2",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/config/env.ts",
+      "target": "sym:sym_d2ad8a56d96bb16b",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/config/env.ts",
+      "target": "sym:sym_202f144e39784cd3",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "sym:sym_1e723846ce050d44",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "sym:sym_304fa78cf1859d99",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1e723846ce050d44",
+      "target": "sym:sym_304fa78cf1859d99",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "sym:sym_dc3eb24356e23e64",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1e723846ce050d44",
+      "target": "sym:sym_dc3eb24356e23e64",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1e723846ce050d44",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/db/database.ts",
+      "target": "sym:sym_0a038edae47d1914",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1e723846ce050d44",
+      "target": "sym:sym_0a038edae47d1914",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "sym:sym_c75055d596cd0bc0",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "sym:sym_89885fdedc333f27",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/auth.ts",
+      "target": "sym:sym_895528ef3f1fc1c5",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/errors.ts",
+      "target": "sym:sym_44f3edb966726e54",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/errors.ts",
+      "target": "sym:sym_7b009641ed2d89e7",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_44f3edb966726e54",
+      "target": "sym:sym_7b009641ed2d89e7",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/errors.ts",
+      "target": "sym:sym_786a61b2107756b9",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/rateLimit.ts",
+      "target": "sym:sym_f04e0186881af29d",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/middleware/validation.ts",
+      "target": "sym:sym_f5000f655ec7a014",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_9a3e1ae68239ff38",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_6501baae4fba11bb",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_b12763ca6bbfab5d",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_997681c5e83e779d",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_ec56b3e6af6844eb",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_1e487f49dcbed8b9",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_9a685970dd62052c",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_2ce493500dc5e453",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_161b2dccf2b1595a",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/models/types.ts",
+      "target": "sym:sym_8739097eefdd0a70",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/admin.ts",
+      "target": "sym:sym_b7ed62e0c6ad9aee",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "sym:sym_e63b8540fd597383",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "sym:sym_27997eef74581e5f",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/health.ts",
+      "target": "sym:sym_baa19fe7a20d4e07",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "sym:sym_c69874390f10ddc2",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "sym:sym_ea3f6d35aba00691",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "sym:sym_54bb21545028f12f",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/adminService.ts",
+      "target": "sym:sym_9826284828dc45d6",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/adminService.ts",
+      "target": "sym:sym_ec5f55fbb57b845c",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/adminService.ts",
+      "target": "sym:sym_5f91eb7e0f46befe",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ec5f55fbb57b845c",
+      "target": "sym:sym_5f91eb7e0f46befe",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/adminService.ts",
+      "target": "sym:sym_9d6a1592fa96d2f2",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ec5f55fbb57b845c",
+      "target": "sym:sym_9d6a1592fa96d2f2",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/adminService.ts",
+      "target": "sym:sym_0fdeb68f20f887f6",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ec5f55fbb57b845c",
+      "target": "sym:sym_0fdeb68f20f887f6",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_2a6a5373799fd7db",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_ef281abc3a476d4a",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_049a57f0c5602ffb",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ef281abc3a476d4a",
+      "target": "sym:sym_049a57f0c5602ffb",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ef281abc3a476d4a",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_9d89082c0a304d62",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ef281abc3a476d4a",
+      "target": "sym:sym_9d89082c0a304d62",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_4f668382ce1d059e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ef281abc3a476d4a",
+      "target": "sym:sym_4f668382ce1d059e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/authService.ts",
+      "target": "sym:sym_1f5efe31a61b196e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ef281abc3a476d4a",
+      "target": "sym:sym_1f5efe31a61b196e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_d16e2bd4e279e784",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_6178906ab6e71104",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_7cf9040a01ce490b",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6178906ab6e71104",
+      "target": "sym:sym_7cf9040a01ce490b",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6178906ab6e71104",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6178906ab6e71104",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6178906ab6e71104",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6178906ab6e71104",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/cartService.ts",
+      "target": "sym:sym_1dacbfb1b91157da",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6178906ab6e71104",
+      "target": "sym:sym_1dacbfb1b91157da",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_154af90826f57dfd",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_474f2944116f9a83",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_14a24ca6ec939307",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_474f2944116f9a83",
+      "target": "sym:sym_14a24ca6ec939307",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_474f2944116f9a83",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_474f2944116f9a83",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_474f2944116f9a83",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_474f2944116f9a83",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_474f2944116f9a83",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/catalogService.ts",
+      "target": "sym:sym_754a4a71bc055ce1",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_7e605ecfc2876bcc",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_7576f19ec04213d3",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_5164480a3dae231e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7576f19ec04213d3",
+      "target": "sym:sym_5164480a3dae231e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7576f19ec04213d3",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7576f19ec04213d3",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7576f19ec04213d3",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7576f19ec04213d3",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/orderService.ts",
+      "target": "sym:sym_9e36d08916b95fd7",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "sym:sym_c41e85b564bc2a7f",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "sym:sym_f2c05ff0a913893e",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "sym:sym_6270d0503c8cdf20",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_f2c05ff0a913893e",
+      "target": "sym:sym_6270d0503c8cdf20",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "sym:sym_96fb6ab12a80fb11",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_f2c05ff0a913893e",
+      "target": "sym:sym_96fb6ab12a80fb11",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "sym:sym_6401fa6052d4a9cf",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_f2c05ff0a913893e",
+      "target": "sym:sym_6401fa6052d4a9cf",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/services/paymentService.ts",
+      "target": "sym:sym_39c553bb5d44e131",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/password.ts",
+      "target": "sym:sym_c46bf099d5b5bdb3",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/password.ts",
+      "target": "sym:sym_ec5db67960bd8cd2",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/pricing.ts",
+      "target": "sym:sym_f9bbe0419ebde721",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/pricing.ts",
+      "target": "sym:sym_e9b14fcc9d7675c1",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "sym:sym_1aa196dfbee0cfb0",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "sym:sym_83104e5698caa8ca",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/token.ts",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/commerce.test.ts",
+      "target": "sym:sym_650ed5f491b50542",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/admin.ts",
+      "target": "route:GET:/api/admin/metrics",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/admin.ts",
+      "target": "route:GET:/api/admin/audit-logs",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "route:POST:/api/auth/register",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "route:POST:/api/auth/login",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/auth.ts",
+      "target": "route:GET:/api/auth/me",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "route:GET:/api/cart",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "route:POST:/api/cart/items",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "route:PATCH:/api/cart/items/:productId",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/cart.ts",
+      "target": "route:DELETE:/api/cart/items/:productId",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/health.ts",
+      "target": "route:GET:/health",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "route:POST:/api/orders",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "route:GET:/api/orders",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "route:GET:/api/orders/:id",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/orders.ts",
+      "target": "route:POST:/api/orders/:id/cancel",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "route:POST:/api/payments/intent",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/payments.ts",
+      "target": "route:POST:/api/payments/webhook",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "route:GET:/api/products",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "route:GET:/api/products/:slug",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "route:POST:/api/products",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/routes/products.ts",
+      "target": "route:PATCH:/api/products/:id",
+      "kind": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_dc3eb24356e23e64",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_89885fdedc333f27",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_f04e0186881af29d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_b7ed62e0c6ad9aee",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_e63b8540fd597383",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_27997eef74581e5f",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_baa19fe7a20d4e07",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_c69874390f10ddc2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_ea3f6d35aba00691",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_77f66c93417653a2",
+      "target": "sym:sym_54bb21545028f12f",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_dc3eb24356e23e64",
+      "target": "sym:sym_0a038edae47d1914",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_3e331fcddb4edae1",
+      "target": "sym:sym_dc3eb24356e23e64",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_3e331fcddb4edae1",
+      "target": "sym:sym_0a038edae47d1914",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_0a038edae47d1914",
+      "target": "sym:sym_dc3eb24356e23e64",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_89885fdedc333f27",
+      "target": "sym:sym_895528ef3f1fc1c5",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_89885fdedc333f27",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_895528ef3f1fc1c5",
+      "target": "sym:sym_89885fdedc333f27",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_895528ef3f1fc1c5",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_b7ed62e0c6ad9aee",
+      "target": "sym:sym_9d6a1592fa96d2f2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_b7ed62e0c6ad9aee",
+      "target": "sym:sym_0fdeb68f20f887f6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_e63b8540fd597383",
+      "target": "sym:sym_f5000f655ec7a014",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_e63b8540fd597383",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_e63b8540fd597383",
+      "target": "sym:sym_9d89082c0a304d62",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_e63b8540fd597383",
+      "target": "sym:sym_4f668382ce1d059e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_27997eef74581e5f",
+      "target": "sym:sym_f5000f655ec7a014",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_27997eef74581e5f",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_27997eef74581e5f",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_27997eef74581e5f",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_27997eef74581e5f",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c69874390f10ddc2",
+      "target": "sym:sym_f5000f655ec7a014",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c69874390f10ddc2",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c69874390f10ddc2",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c69874390f10ddc2",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c69874390f10ddc2",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea3f6d35aba00691",
+      "target": "sym:sym_f5000f655ec7a014",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea3f6d35aba00691",
+      "target": "sym:sym_96fb6ab12a80fb11",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea3f6d35aba00691",
+      "target": "sym:sym_6401fa6052d4a9cf",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_54bb21545028f12f",
+      "target": "sym:sym_f5000f655ec7a014",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_54bb21545028f12f",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_54bb21545028f12f",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_54bb21545028f12f",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_54bb21545028f12f",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d6a1592fa96d2f2",
+      "target": "sym:sym_0fdeb68f20f887f6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_0fdeb68f20f887f6",
+      "target": "sym:sym_9d6a1592fa96d2f2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_2be0152eaefdfc22",
+      "target": "sym:sym_9d89082c0a304d62",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_2be0152eaefdfc22",
+      "target": "sym:sym_4f668382ce1d059e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_2be0152eaefdfc22",
+      "target": "sym:sym_1f5efe31a61b196e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_2be0152eaefdfc22",
+      "target": "sym:sym_c46bf099d5b5bdb3",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_2be0152eaefdfc22",
+      "target": "sym:sym_ec5db67960bd8cd2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_2be0152eaefdfc22",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d89082c0a304d62",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d89082c0a304d62",
+      "target": "sym:sym_4f668382ce1d059e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d89082c0a304d62",
+      "target": "sym:sym_1f5efe31a61b196e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d89082c0a304d62",
+      "target": "sym:sym_c46bf099d5b5bdb3",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d89082c0a304d62",
+      "target": "sym:sym_ec5db67960bd8cd2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9d89082c0a304d62",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4f668382ce1d059e",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4f668382ce1d059e",
+      "target": "sym:sym_9d89082c0a304d62",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4f668382ce1d059e",
+      "target": "sym:sym_1f5efe31a61b196e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4f668382ce1d059e",
+      "target": "sym:sym_c46bf099d5b5bdb3",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4f668382ce1d059e",
+      "target": "sym:sym_ec5db67960bd8cd2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4f668382ce1d059e",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1f5efe31a61b196e",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1f5efe31a61b196e",
+      "target": "sym:sym_9d89082c0a304d62",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1f5efe31a61b196e",
+      "target": "sym:sym_4f668382ce1d059e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1f5efe31a61b196e",
+      "target": "sym:sym_c46bf099d5b5bdb3",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1f5efe31a61b196e",
+      "target": "sym:sym_ec5db67960bd8cd2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1f5efe31a61b196e",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_fa9ec874deac4220",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_fa9ec874deac4220",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_fa9ec874deac4220",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_fa9ec874deac4220",
+      "target": "sym:sym_1dacbfb1b91157da",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_da31191fcb769293",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_da31191fcb769293",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_da31191fcb769293",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_da31191fcb769293",
+      "target": "sym:sym_1dacbfb1b91157da",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7496eef7b043e40c",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7496eef7b043e40c",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7496eef7b043e40c",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_7496eef7b043e40c",
+      "target": "sym:sym_1dacbfb1b91157da",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c311b25fa23590bd",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c311b25fa23590bd",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c311b25fa23590bd",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c311b25fa23590bd",
+      "target": "sym:sym_1dacbfb1b91157da",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1dacbfb1b91157da",
+      "target": "sym:sym_fa9ec874deac4220",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1dacbfb1b91157da",
+      "target": "sym:sym_da31191fcb769293",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1dacbfb1b91157da",
+      "target": "sym:sym_7496eef7b043e40c",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1dacbfb1b91157da",
+      "target": "sym:sym_c311b25fa23590bd",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea887e423994fc25",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea887e423994fc25",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea887e423994fc25",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea887e423994fc25",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ea887e423994fc25",
+      "target": "sym:sym_754a4a71bc055ce1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_86d712adff54299b",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_86d712adff54299b",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_86d712adff54299b",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_86d712adff54299b",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_86d712adff54299b",
+      "target": "sym:sym_754a4a71bc055ce1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_16248093f881180e",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_16248093f881180e",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_16248093f881180e",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_16248093f881180e",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_16248093f881180e",
+      "target": "sym:sym_754a4a71bc055ce1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4e4c2f2d29a01374",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4e4c2f2d29a01374",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4e4c2f2d29a01374",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4e4c2f2d29a01374",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_4e4c2f2d29a01374",
+      "target": "sym:sym_754a4a71bc055ce1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1160ee553c56c0d8",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1160ee553c56c0d8",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1160ee553c56c0d8",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1160ee553c56c0d8",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1160ee553c56c0d8",
+      "target": "sym:sym_754a4a71bc055ce1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_754a4a71bc055ce1",
+      "target": "sym:sym_ea887e423994fc25",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_754a4a71bc055ce1",
+      "target": "sym:sym_86d712adff54299b",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_754a4a71bc055ce1",
+      "target": "sym:sym_16248093f881180e",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_754a4a71bc055ce1",
+      "target": "sym:sym_4e4c2f2d29a01374",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_754a4a71bc055ce1",
+      "target": "sym:sym_1160ee553c56c0d8",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6507fb3ace984a24",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6507fb3ace984a24",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6507fb3ace984a24",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6507fb3ace984a24",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6507fb3ace984a24",
+      "target": "sym:sym_9e36d08916b95fd7",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6507fb3ace984a24",
+      "target": "sym:sym_e9b14fcc9d7675c1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_344838745f335f77",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_344838745f335f77",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_344838745f335f77",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_344838745f335f77",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_344838745f335f77",
+      "target": "sym:sym_9e36d08916b95fd7",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_344838745f335f77",
+      "target": "sym:sym_e9b14fcc9d7675c1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_5b2c13dde64ede55",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_5b2c13dde64ede55",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_5b2c13dde64ede55",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_5b2c13dde64ede55",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_5b2c13dde64ede55",
+      "target": "sym:sym_9e36d08916b95fd7",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_5b2c13dde64ede55",
+      "target": "sym:sym_e9b14fcc9d7675c1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c254cd7fdb6b70ef",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c254cd7fdb6b70ef",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c254cd7fdb6b70ef",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c254cd7fdb6b70ef",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c254cd7fdb6b70ef",
+      "target": "sym:sym_9e36d08916b95fd7",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c254cd7fdb6b70ef",
+      "target": "sym:sym_e9b14fcc9d7675c1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9e36d08916b95fd7",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9e36d08916b95fd7",
+      "target": "sym:sym_6507fb3ace984a24",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9e36d08916b95fd7",
+      "target": "sym:sym_344838745f335f77",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9e36d08916b95fd7",
+      "target": "sym:sym_5b2c13dde64ede55",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9e36d08916b95fd7",
+      "target": "sym:sym_c254cd7fdb6b70ef",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_9e36d08916b95fd7",
+      "target": "sym:sym_e9b14fcc9d7675c1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_96fb6ab12a80fb11",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_96fb6ab12a80fb11",
+      "target": "sym:sym_6401fa6052d4a9cf",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_96fb6ab12a80fb11",
+      "target": "sym:sym_39c553bb5d44e131",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_96fb6ab12a80fb11",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6401fa6052d4a9cf",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6401fa6052d4a9cf",
+      "target": "sym:sym_96fb6ab12a80fb11",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6401fa6052d4a9cf",
+      "target": "sym:sym_39c553bb5d44e131",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_6401fa6052d4a9cf",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_39c553bb5d44e131",
+      "target": "sym:sym_3e331fcddb4edae1",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_39c553bb5d44e131",
+      "target": "sym:sym_96fb6ab12a80fb11",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_39c553bb5d44e131",
+      "target": "sym:sym_6401fa6052d4a9cf",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_39c553bb5d44e131",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_c46bf099d5b5bdb3",
+      "target": "sym:sym_ec5db67960bd8cd2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_ec5db67960bd8cd2",
+      "target": "sym:sym_c46bf099d5b5bdb3",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_09a306cb020575fb",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_09a306cb020575fb",
+      "target": "sym:sym_1aa196dfbee0cfb0",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_09a306cb020575fb",
+      "target": "sym:sym_83104e5698caa8ca",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_09a306cb020575fb",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1252c366c0962a5d",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1252c366c0962a5d",
+      "target": "sym:sym_1aa196dfbee0cfb0",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1252c366c0962a5d",
+      "target": "sym:sym_83104e5698caa8ca",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1252c366c0962a5d",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1aa196dfbee0cfb0",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1aa196dfbee0cfb0",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1aa196dfbee0cfb0",
+      "target": "sym:sym_83104e5698caa8ca",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_1aa196dfbee0cfb0",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_83104e5698caa8ca",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_83104e5698caa8ca",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_83104e5698caa8ca",
+      "target": "sym:sym_1aa196dfbee0cfb0",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_83104e5698caa8ca",
+      "target": "sym:sym_dbd1a60f8b8131e6",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_dbd1a60f8b8131e6",
+      "target": "sym:sym_09a306cb020575fb",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_dbd1a60f8b8131e6",
+      "target": "sym:sym_1252c366c0962a5d",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_dbd1a60f8b8131e6",
+      "target": "sym:sym_1aa196dfbee0cfb0",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_dbd1a60f8b8131e6",
+      "target": "sym:sym_83104e5698caa8ca",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_650ed5f491b50542",
+      "target": "sym:sym_77f66c93417653a2",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_650ed5f491b50542",
+      "target": "sym:sym_0a038edae47d1914",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_650ed5f491b50542",
+      "target": "sym:sym_2be0152eaefdfc22",
+      "kind": "calls",
+      "weight": 1.0
+    },
+    {
+      "source": "sym:sym_650ed5f491b50542",
+      "target": "sym:sym_83104e5698caa8ca",
+      "kind": "calls",
+      "weight": 1.0
+    }
+  ],
+  "blast_radius_index": {
+    "sym:sym_54bb21545028f12f": 6,
+    "file:src/middleware/auth.ts": 9,
+    "sym:sym_c41e85b564bc2a7f": 5,
+    "file:src/services/catalogService.ts": 4,
+    "pkg:node:assert": 1,
+    "sym:sym_1dacbfb1b91157da": 12,
+    "sym:sym_5164480a3dae231e": 6,
+    "sym:sym_2be0152eaefdfc22": 12,
+    "sym:sym_baa19fe7a20d4e07": 6,
+    "sym:sym_7cf9040a01ce490b": 6,
+    "pkg:helmet": 3,
+    "sym:sym_7576f19ec04213d3": 5,
+    "sym:sym_89885fdedc333f27": 13,
+    "sym:sym_f2c05ff0a913893e": 5,
+    "sym:sym_b12763ca6bbfab5d": 16,
+    "sym:sym_e63b8540fd597383": 6,
+    "file:src/routes/products.ts": 3,
+    "sym:sym_27997eef74581e5f": 6,
+    "sym:sym_154af90826f57dfd": 5,
+    "sym:sym_83104e5698caa8ca": 31,
+    "route:GET:/api/admin/metrics": 4,
+    "route:POST:/api/auth/register": 4,
+    "file:src/middleware/validation.ts": 8,
+    "file:src/services/orderService.ts": 4,
+    "sym:sym_dc3eb24356e23e64": 33,
+    "sym:sym_9a685970dd62052c": 16,
+    "sym:sym_9d89082c0a304d62": 12,
+    "sym:sym_474f2944116f9a83": 5,
+    "route:GET:/api/cart": 4,
+    "route:GET:/api/orders": 4,
+    "route:GET:/api/products": 4,
+    "pkg:zod": 9,
+    "sym:sym_c69874390f10ddc2": 6,
+    "sym:sym_f5000f655ec7a014": 14,
+    "file:src/utils/password.ts": 5,
+    "sym:sym_1e487f49dcbed8b9": 16,
+    "sym:sym_1aa196dfbee0cfb0": 31,
+    "route:PATCH:/api/products/:id": 4,
+    "sym:sym_786a61b2107756b9": 18,
+    "sym:sym_4f668382ce1d059e": 12,
+    "file:src/utils/pricing.ts": 5,
+    "file:src/services/authService.ts": 4,
+    "sym:sym_161b2dccf2b1595a": 16,
+    "sym:sym_650ed5f491b50542": 1,
+    "sym:sym_c46bf099d5b5bdb3": 14,
+    "sym:sym_ec5db67960bd8cd2": 14,
+    "file:src/routes/admin.ts": 3,
+    "sym:sym_09a306cb020575fb": 31,
+    "sym:sym_5f91eb7e0f46befe": 6,
+    "route:GET:/api/auth/me": 4,
+    "route:POST:/api/orders": 4,
+    "file:src/routes/health.ts": 3,
+    "sym:sym_ec5f55fbb57b845c": 5,
+    "route:GET:/api/orders/:id": 4,
+    "sym:sym_dbd1a60f8b8131e6": 31,
+    "sym:sym_e9b14fcc9d7675c1": 12,
+    "file:src/config/env.ts": 6,
+    "route:GET:/health": 4,
+    "sym:sym_1e723846ce050d44": 16,
+    "sym:sym_344838745f335f77": 13,
+    "file:src/middleware/rateLimit.ts": 3,
+    "sym:sym_da31191fcb769293": 13,
+    "sym:sym_2a6a5373799fd7db": 5,
+    "pkg:node:path": 16,
+    "sym:sym_1f5efe31a61b196e": 12,
+    "sym:sym_895528ef3f1fc1c5": 13,
+    "sym:sym_6270d0503c8cdf20": 6,
+    "sym:sym_4e4c2f2d29a01374": 14,
+    "pkg:express": 19,
+    "pkg:node:test": 1,
+    "sym:sym_fa9ec874deac4220": 13,
+    "sym:sym_39c553bb5d44e131": 10,
+    "sym:sym_d16e2bd4e279e784": 5,
+    "sym:sym_16248093f881180e": 14,
+    "sym:sym_754a4a71bc055ce1": 13,
+    "sym:sym_7b009641ed2d89e7": 19,
+    "sym:sym_f04e0186881af29d": 6,
+    "sym:sym_3e331fcddb4edae1": 30,
+    "sym:sym_6501baae4fba11bb": 16,
+    "file:src/services/adminService.ts": 4,
+    "file:src/routes/auth.ts": 3,
+    "pkg:cors": 3,
+    "route:POST:/api/orders/:id/cancel": 4,
+    "file:src/middleware/errors.ts": 17,
+    "file:src/utils/token.ts": 12,
+    "sym:sym_997681c5e83e779d": 16,
+    "sym:sym_31288407941ba03c": 3,
+    "sym:sym_c254cd7fdb6b70ef": 13,
+    "sym:sym_c75055d596cd0bc0": 10,
+    "route:DELETE:/api/cart/items/:productId": 4,
+    "pkg:node:http": 1,
+    "sym:sym_9d6a1592fa96d2f2": 10,
+    "file:src/app.ts": 2,
+    "sym:sym_96fb6ab12a80fb11": 11,
+    "file:src/services/paymentService.ts": 4,
+    "sym:sym_ea3f6d35aba00691": 6,
+    "file:src/routes/payments.ts": 3,
+    "file:src/routes/cart.ts": 3,
+    "pkg:node:sqlite": 16,
+    "route:GET:/api/admin/audit-logs": 4,
+    "sym:sym_f9bbe0419ebde721": 4,
+    "file:src/routes/orders.ts": 3,
+    "sym:sym_202f144e39784cd3": 7,
+    "sym:sym_9a3e1ae68239ff38": 16,
+    "sym:sym_7496eef7b043e40c": 13,
+    "route:POST:/api/auth/login": 4,
+    "pkg:node:crypto": 17,
+    "sym:sym_6507fb3ace984a24": 13,
+    "sym:sym_1252c366c0962a5d": 31,
+    "file:src/models/types.ts": 16,
+    "sym:sym_6401fa6052d4a9cf": 11,
+    "sym:sym_b7ed62e0c6ad9aee": 6,
+    "route:POST:/api/payments/intent": 4,
+    "file:src/services/cartService.ts": 4,
+    "route:POST:/api/cart/items": 4,
+    "route:POST:/api/products": 4,
+    "sym:sym_0a038edae47d1914": 33,
+    "sym:sym_5b2c13dde64ede55": 13,
+    "pkg:node:fs": 16,
+    "sym:sym_c311b25fa23590bd": 13,
+    "route:GET:/api/products/:slug": 4,
+    "sym:sym_44f3edb966726e54": 18,
+    "sym:sym_8739097eefdd0a70": 16,
+    "sym:sym_14a24ca6ec939307": 6,
+    "sym:sym_0fdeb68f20f887f6": 10,
+    "sym:sym_7e605ecfc2876bcc": 5,
+    "file:src/db/database.ts": 15,
+    "pkg:node:url": 2,
+    "sym:sym_ec56b3e6af6844eb": 16,
+    "sym:sym_ea887e423994fc25": 14,
+    "sym:sym_9e36d08916b95fd7": 12,
+    "sym:sym_2ce493500dc5e453": 16,
+    "sym:sym_ef281abc3a476d4a": 5,
+    "sym:sym_77f66c93417653a2": 4,
+    "sym:sym_1160ee553c56c0d8": 13,
+    "route:POST:/api/payments/webhook": 4,
+    "sym:sym_304fa78cf1859d99": 17,
+    "sym:sym_9826284828dc45d6": 5,
+    "sym:sym_049a57f0c5602ffb": 6,
+    "sym:sym_86d712adff54299b": 14,
+    "sym:sym_d2ad8a56d96bb16b": 7,
+    "route:PATCH:/api/cart/items/:productId": 4,
+    "sym:sym_6178906ab6e71104": 5
+  }
+}
