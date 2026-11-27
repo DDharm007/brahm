@@ -36,7 +36,23 @@ fn handle_scan(args: ScanArgs) -> Result<()> {
     let (config, canonical_repo) = brahm::cli::prepare_scan_config(&args)?;
     let report = brahm::analysis::run_repository_analysis(&canonical_repo, config)?;
     brahm::reporting::dispatch_reports(&report, args.format, args.output.as_deref())?;
+
+    if args.arch {
+        let engine = brahm::architecture::ArchitectureEngine::new();
+        let bundle = engine.analyze(&canonical_repo, &report)?;
+        brahm::reporting::dispatch_architecture_reports(
+            &bundle,
+            args.format,
+            args.output.as_deref(),
+        )?;
+    }
+
     Ok(())
+}
+
+fn handle_arch(mut args: ScanArgs) -> Result<()> {
+    args.arch = true;
+    handle_scan(args)
 }
 
 fn run() -> Result<()> {
@@ -46,6 +62,7 @@ fn run() -> Result<()> {
     match cli.command {
         Commands::Init(args) => handle_init(args)?,
         Commands::Scan(args) => handle_scan(args)?,
+        Commands::Arch(args) => handle_arch(args)?,
     }
 
     Ok(())

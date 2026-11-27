@@ -122,6 +122,7 @@ fn test_scan_rejects_invalid_path() {
         config: None,
         no_hash: false,
         follow_symlinks: false,
+        arch: false,
     };
 
     let result = prepare_scan_config(&args);
@@ -144,6 +145,7 @@ fn test_scan_rejects_file_target() {
         config: None,
         no_hash: false,
         follow_symlinks: false,
+        arch: false,
     };
 
     let result = prepare_scan_config(&args);

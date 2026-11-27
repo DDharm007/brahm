@@ -99,3 +99,59 @@ pub fn print_report(report: &RepositoryReport) {
     }
     println!("================================================================================");
 }
+
+/// Prints Stage 02 Code Intelligence & Architecture summary to stdout.
+pub fn print_architecture_report(report: &crate::architecture::ArchitectureReport) {
+    println!();
+    println!("================================================================================");
+    println!("  BRAHM — Stage 02: Code Intelligence & Architecture Mapping");
+    println!("================================================================================");
+    println!(
+        "  Architecture:     {} (Confidence: {})",
+        report.pattern.primary_pattern, report.pattern.confidence
+    );
+    println!("  Analysis Time:    {} ms", report.analysis_duration_ms);
+    println!(
+        "  AST Parsed:       {} / {} files",
+        report.metrics.files_parsed_ast, report.metrics.total_files_scanned
+    );
+    println!("  Total Symbols:    {}", report.metrics.total_symbols);
+    println!("  Entry Points:     {}", report.metrics.entry_point_count);
+    println!("  API Routes:       {}", report.metrics.api_route_count);
+    println!("  Data Models:      {}", report.metrics.data_model_count);
+    println!(
+        "  Import Edges:     {} ({} internal, {} external)",
+        report.metrics.total_imports,
+        report.metrics.internal_imports,
+        report.metrics.external_imports
+    );
+    println!(
+        "  Dep Cycles:       {}",
+        report.metrics.circular_dependency_count
+    );
+    println!(
+        "  Graph Size:       {} nodes, {} edges (DAG: {})",
+        report.metrics.graph_nodes, report.metrics.graph_edges, report.metrics.graph_is_dag
+    );
+    if !report.api_routes.is_empty() {
+        println!();
+        println!("API SURFACE (first 10):");
+        for route in report.api_routes.iter().take(10) {
+            println!(
+                "  - {:<7} {:<30} [{}]",
+                route.method, route.path_pattern, route.framework
+            );
+        }
+    }
+    if !report.hotspots.is_empty() {
+        println!();
+        println!("TOP ARCHITECTURE HOTSPOTS:");
+        for hs in report.hotspots.iter().take(5) {
+            println!(
+                "  - {:<28} fan-in: {:<3} blast-radius: {}",
+                hs.name, hs.fan_in, hs.blast_radius_count
+            );
+        }
+    }
+    println!("================================================================================");
+}

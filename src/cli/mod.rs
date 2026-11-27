@@ -37,6 +37,9 @@ pub enum Commands {
 
     /// Scan a repository and generate structured intelligence reports
     Scan(ScanArgs),
+
+    /// Run Stage 01 + Stage 02 deep code intelligence and architecture mapping
+    Arch(ScanArgs),
 }
 
 /// Output report format options
@@ -88,4 +91,8 @@ pub struct ScanArgs {
     /// Follow symbolic links during scan (default: false for security)
     #[arg(long)]
     pub follow_symlinks: bool,
+
+    /// Run Stage 02 deep code intelligence and architecture mapping (AST, Symbols, Graph)
+    #[arg(long, alias = "deep")]
+    pub arch: bool,
 }

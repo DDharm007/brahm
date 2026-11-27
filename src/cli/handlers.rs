@@ -166,6 +166,7 @@ mod tests {
             config: None,
             no_hash: false,
             follow_symlinks: false,
+            arch: false,
         };
         assert!(prepare_scan_config(&args).is_err());
     }
@@ -181,6 +182,7 @@ mod tests {
             config: None,
             no_hash: true,
             follow_symlinks: true,
+            arch: false,
         };
         let (config, canonical) = prepare_scan_config(&args).expect("Prepare should succeed");
         assert!(canonical.exists());

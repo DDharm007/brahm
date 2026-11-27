@@ -2,10 +2,13 @@
 //!
 //! Generates terminal, JSON, and Markdown formatted intelligence reports.
 
+pub mod architecture_json;
+pub mod architecture_md;
 pub mod json;
 pub mod markdown;
 pub mod terminal;
 
+use crate::architecture::ArchitectureAnalysisBundle;
 use crate::cli::OutputFormat;
 use crate::errors::Result;
 use crate::models::RepositoryReport;
@@ -71,6 +74,59 @@ pub fn dispatch_reports(
             println!("Markdown report generated: {}", md_path.display());
         }
     }
+
+    Ok(())
+}
+
+/// Dispatches Stage 02 architectural intelligence report generation (`BRAHM_ARCHITECTURE.*`,
+/// `BRAHM_DEPENDENCY_GRAPH.json`, and `BRAHM_SYMBOL_INDEX.json`).
+pub fn dispatch_architecture_reports(
+    bundle: &ArchitectureAnalysisBundle,
+    format: OutputFormat,
+    output_dir: Option<&Path>,
+) -> Result<()> {
+    let out_dir: PathBuf = output_dir
+        .map(|p| p.to_path_buf())
+        .unwrap_or_else(|| PathBuf::from("."));
+
+    match format {
+        OutputFormat::Terminal => {
+            terminal::print_architecture_report(&bundle.report);
+        }
+        OutputFormat::Json => {
+            write_stage02_json_artifacts(bundle, &out_dir)?;
+        }
+        OutputFormat::Markdown => {
+            let md_path = out_dir.join("BRAHM_ARCHITECTURE.md");
+            architecture_md::generate_architecture_markdown(&bundle.report, Some(&md_path))?;
+            info!("Architecture Markdown written to: {}", md_path.display());
+            println!("Architecture Markdown generated: {}", md_path.display());
+        }
+        OutputFormat::All => {
+            terminal::print_architecture_report(&bundle.report);
+            write_stage02_json_artifacts(bundle, &out_dir)?;
+
+            let md_path = out_dir.join("BRAHM_ARCHITECTURE.md");
+            architecture_md::generate_architecture_markdown(&bundle.report, Some(&md_path))?;
+            println!("Architecture Markdown generated: {}", md_path.display());
+        }
+    }
+
+    Ok(())
+}
+
+fn write_stage02_json_artifacts(bundle: &ArchitectureAnalysisBundle, out_dir: &Path) -> Result<()> {
+    let arch_path = out_dir.join("BRAHM_ARCHITECTURE.json");
+    architecture_json::generate_architecture_json(&bundle.report, Some(&arch_path))?;
+    println!("Architecture JSON generated: {}", arch_path.display());
+
+    let graph_path = out_dir.join("BRAHM_DEPENDENCY_GRAPH.json");
+    architecture_json::generate_dependency_graph_json(&bundle.graph_export, Some(&graph_path))?;
+    println!("Dependency Graph JSON generated: {}", graph_path.display());
+
+    let sym_path = out_dir.join("BRAHM_SYMBOL_INDEX.json");
+    architecture_json::generate_symbol_index_json(&bundle.symbol_index, Some(&sym_path))?;
+    println!("Symbol Index JSON generated: {}", sym_path.display());
 
     Ok(())
 }

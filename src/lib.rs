@@ -9,6 +9,7 @@
 //! dependency analysis, and architecture graph generation without AI runtime dependencies.
 
 pub mod analysis;
+pub mod architecture;
 pub mod classification;
 pub mod cli;
 pub mod config;
