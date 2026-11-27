@@ -66,7 +66,11 @@ fn test_02_fixture_b_fullstack_project() {
         .any(|f| f.classification == FileClassification::Database && f.filename.ends_with(".sql")));
 
     // Secret protection: .env must NEVER have a hash
-    let env_entry = report.files.iter().find(|f| f.filename == ".env").unwrap();
+    let env_entry = report
+        .files
+        .iter()
+        .find(|f| f.filename == ".env")
+        .expect("fixture_b_fullstack/.env must be present in report.files; check that the file is committed (not gitignored) so CI can find it");
     assert_eq!(env_entry.hash_blake3, None);
     assert!(is_sensitive_credential_file(&env_entry.filename));
 }

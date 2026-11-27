@@ -1,0 +1,4 @@
+# Override root .gitignore: track fixture .env files for test purposes.
+# These files contain only clearly fake, labelled test credentials — no real secrets.
+!.env
+!.env.*
