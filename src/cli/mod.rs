@@ -52,6 +52,107 @@ pub enum Commands {
         #[command(subcommand)]
         action: DecoyCommands,
     },
+
+    /// Repository deception mirror, policy, and inspection session management (Stage 04)
+    Deception {
+        #[command(subcommand)]
+        action: DeceptionCommands,
+    },
+}
+
+#[derive(ValueEnum, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DeceptionPolicyProfileArg {
+    Conservative,
+    Standard,
+    Research,
+}
+
+impl From<DeceptionPolicyProfileArg> for crate::deception::policy::DeceptionPolicyProfile {
+    fn from(arg: DeceptionPolicyProfileArg) -> Self {
+        match arg {
+            DeceptionPolicyProfileArg::Conservative => Self::Conservative,
+            DeceptionPolicyProfileArg::Standard => Self::Standard,
+            DeceptionPolicyProfileArg::Research => Self::Research,
+        }
+    }
+}
+
+#[derive(Subcommand, Debug)]
+pub enum DeceptionCommands {
+    /// Prepare isolated inspection workspace & mirror for an authorized repository
+    Prepare {
+        /// Target genuine repository path
+        repository: PathBuf,
+        /// Directory containing generated decoys & BRAHM_DECOY_REGISTRY.json
+        #[arg(short, long, default_value = ".brahm_decoys")]
+        decoy_dir: PathBuf,
+        /// Root directory where isolated inspection sessions will be created
+        #[arg(short, long, default_value = ".brahm_sessions")]
+        output: PathBuf,
+        /// Deception policy profile (conservative, standard, research)
+        #[arg(short, long, value_enum, default_value = "standard")]
+        profile: DeceptionPolicyProfileArg,
+        /// Session expiration TTL in seconds
+        #[arg(long, default_value_t = 3600)]
+        ttl: i64,
+    },
+    /// Deception policy listing and validation
+    Policy {
+        #[command(subcommand)]
+        action: PolicyCommands,
+    },
+    /// Manage isolated inspection sessions
+    Session {
+        #[command(subcommand)]
+        action: SessionCommands,
+    },
+    /// Safely clean up an inspection session workspace
+    Cleanup {
+        /// Session identifier (e.g., sess_...)
+        session_id: String,
+        /// Sessions root directory
+        #[arg(long, default_value = ".brahm_sessions")]
+        sessions_dir: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum PolicyCommands {
+    /// List available deterministic policy presets
+    List,
+    /// Validate a policy JSON file against safety constraints
+    Validate {
+        /// Path to policy JSON file
+        policy_file: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum SessionCommands {
+    /// Create and prepare a new isolated inspection session
+    Create {
+        repository: PathBuf,
+        #[arg(short, long, default_value = ".brahm_decoys")]
+        decoy_dir: PathBuf,
+        #[arg(short, long, default_value = ".brahm_sessions")]
+        output: PathBuf,
+        #[arg(short, long, value_enum, default_value = "standard")]
+        profile: DeceptionPolicyProfileArg,
+        #[arg(long, default_value_t = 3600)]
+        ttl: i64,
+    },
+    /// Inspect status and deliverables for an inspection session
+    Inspect {
+        session_id: String,
+        #[arg(long, default_value = ".brahm_sessions")]
+        sessions_dir: PathBuf,
+    },
+    /// Stop/complete an active inspection session
+    Stop {
+        session_id: String,
+        #[arg(long, default_value = ".brahm_sessions")]
+        sessions_dir: PathBuf,
+    },
 }
 
 #[derive(Subcommand, Debug)]

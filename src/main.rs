@@ -2,12 +2,19 @@
 //!
 //! Provides CLI execution, structured logging initialization, and exit code management.
 
-use brahm::cli::{ArchitectureCommands, Cli, Commands, DecoyCommands, InitArgs, ScanArgs};
+use brahm::cli::{
+    ArchitectureCommands, Cli, Commands, DeceptionCommands, DecoyCommands, InitArgs,
+    PolicyCommands, ScanArgs, SessionCommands,
+};
 use brahm::config::BrahmConfig;
 use brahm::deception::decoy::{DecoyEngine, DecoyGenerationProfile, DecoyRegistry};
+use brahm::deception::{
+    DeceptionPolicy, DeceptionPolicyEngine, DeceptionPolicyProfile, InspectionSessionManager,
+};
 use brahm::errors::{BrahmError, Result};
 use clap::Parser;
-use std::path::PathBuf;
+use std::fs;
+use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 use tracing::error;
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
@@ -151,6 +158,127 @@ fn handle_decoy(action: DecoyCommands) -> Result<()> {
     Ok(())
 }
 
+fn prepare_deception_session_cli(
+    repository: &Path,
+    decoy_dir: &Path,
+    output: &Path,
+    profile: DeceptionPolicyProfile,
+    ttl: i64,
+) -> Result<()> {
+    let reg_path = decoy_dir.join("BRAHM_DECOY_REGISTRY.json");
+    let (registry, decoy_root) = if reg_path.is_file() {
+        let reg = DecoyRegistry::load_from_path(&reg_path)?;
+        let root = PathBuf::from(&reg.data().decoy_layer_root);
+        (reg, root)
+    } else {
+        // Generate decoys seamlessly into decoy_dir if not generated yet
+        let stage1 = brahm::analysis::run_repository_analysis(repository, BrahmConfig::default())?;
+        let arch = brahm::architecture::ArchitectureEngine::new().analyze(repository, &stage1)?;
+        let gen_res = DecoyEngine::new().generate_and_stage(
+            repository,
+            &arch.report,
+            DecoyGenerationProfile::Standard,
+            decoy_dir,
+        )?;
+        (gen_res.registry, gen_res.decoy_layer_root)
+    };
+
+    let policy = DeceptionPolicy::for_profile(profile);
+    let mgr = InspectionSessionManager::new(output);
+    let outcome = mgr.create_and_prepare(repository, &registry, &decoy_root, &policy, ttl)?;
+
+    println!(
+        "Prepared isolated inspection session: {}",
+        outcome.session.session_id
+    );
+    println!("  Workspace: {}", outcome.session.workspace_path.display());
+    println!("  Baseline:  {}", outcome.session.baseline_fingerprint);
+    println!(
+        "  Injected:  {} synthetic artifact(s)",
+        outcome.session.registered_artifacts.len()
+    );
+    Ok(())
+}
+
+fn handle_deception(action: DeceptionCommands) -> Result<()> {
+    match action {
+        DeceptionCommands::Prepare {
+            repository,
+            decoy_dir,
+            output,
+            profile,
+            ttl,
+        } => {
+            prepare_deception_session_cli(&repository, &decoy_dir, &output, profile.into(), ttl)?;
+        }
+        DeceptionCommands::Policy { action } => match action {
+            PolicyCommands::List => {
+                let engine = DeceptionPolicyEngine::new();
+                for pol in engine.list_presets() {
+                    println!(
+                        "{} (v{}, profile={}, priority={})",
+                        pol.policy_id, pol.version, pol.profile, pol.priority
+                    );
+                }
+            }
+            PolicyCommands::Validate { policy_file } => {
+                let raw = fs::read_to_string(&policy_file)?;
+                let pol: DeceptionPolicy = serde_json::from_str(&raw)?;
+                pol.validate()?;
+                println!("Policy '{}' validated successfully.", pol.policy_id);
+            }
+        },
+        DeceptionCommands::Session { action } => match action {
+            SessionCommands::Create {
+                repository,
+                decoy_dir,
+                output,
+                profile,
+                ttl,
+            } => {
+                prepare_deception_session_cli(
+                    &repository,
+                    &decoy_dir,
+                    &output,
+                    profile.into(),
+                    ttl,
+                )?;
+            }
+            SessionCommands::Inspect {
+                session_id,
+                sessions_dir,
+            } => {
+                let mgr = InspectionSessionManager::new(&sessions_dir);
+                let sess = mgr.load_session(&session_id)?;
+                println!("{}", serde_json::to_string_pretty(&sess)?);
+            }
+            SessionCommands::Stop {
+                session_id,
+                sessions_dir,
+            } => {
+                let mgr = InspectionSessionManager::new(&sessions_dir);
+                let sess = mgr.stop_session(&session_id)?;
+                println!(
+                    "Session '{}' status updated to {:?}",
+                    sess.session_id, sess.status
+                );
+            }
+        },
+        DeceptionCommands::Cleanup {
+            session_id,
+            sessions_dir,
+        } => {
+            let mgr = InspectionSessionManager::new(&sessions_dir);
+            let sess = mgr.cleanup_session(&session_id)?;
+            println!(
+                "Session '{}' workspace cleaned ({:?})",
+                sess.session_id, sess.status
+            );
+        }
+    }
+    Ok(())
+}
+
 fn run() -> Result<()> {
     let cli = Cli::parse();
     init_logging(cli.verbose);
@@ -163,6 +291,7 @@ fn run() -> Result<()> {
             ArchitectureCommands::Analyze(args) => handle_arch(args)?,
         },
         Commands::Decoy { action } => handle_decoy(action)?,
+        Commands::Deception { action } => handle_deception(action)?,
     }
 
     Ok(())

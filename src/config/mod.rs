@@ -3,6 +3,7 @@
 //! Handles `brahm.toml` loading, validation, and serialization.
 
 use crate::deception::decoy::DecoyGenerationProfile;
+use crate::deception::policy::DeceptionPolicyProfile;
 use crate::errors::{BrahmError, Result};
 use serde::{Deserialize, Serialize};
 use std::fs;
@@ -17,6 +18,8 @@ pub struct BrahmConfig {
     pub scanner: ScannerConfig,
     #[serde(default)]
     pub decoy: DecoyConfig,
+    #[serde(default)]
+    pub deception: DeceptionConfig,
 }
 
 impl Default for BrahmConfig {
@@ -25,6 +28,36 @@ impl Default for BrahmConfig {
             schema_version: default_config_schema_version(),
             scanner: ScannerConfig::default(),
             decoy: DecoyConfig::default(),
+            deception: DeceptionConfig::default(),
+        }
+    }
+}
+
+/// Stage 04 Repository Deception Engine configuration.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct DeceptionConfig {
+    #[serde(default)]
+    pub default_policy_profile: DeceptionPolicyProfile,
+    #[serde(default = "default_deception_workspace_root")]
+    pub workspace_root: String,
+    #[serde(default = "default_session_ttl_seconds")]
+    pub session_ttl_seconds: i64,
+}
+
+fn default_deception_workspace_root() -> String {
+    ".brahm_sessions".to_string()
+}
+
+fn default_session_ttl_seconds() -> i64 {
+    3600
+}
+
+impl Default for DeceptionConfig {
+    fn default() -> Self {
+        Self {
+            default_policy_profile: DeceptionPolicyProfile::Standard,
+            workspace_root: default_deception_workspace_root(),
+            session_ttl_seconds: default_session_ttl_seconds(),
         }
     }
 }
