@@ -12,7 +12,7 @@
 ![Verified Score](https://img.shields.io/badge/BRAHM%20Rating-82.0%20%2F%20100%20(Strong)-EF4444?style=for-the-badge)
 ![Tests Passing](https://img.shields.io/badge/Verified%20Tests-134%20%2F%20134%20Pass-16A34A?style=for-the-badge)
 
-> **Dedicated AI Agent Guide:** See [`AGENT_README.md`](AGENT_README.md) for step-by-step setup with **Google Antigravity, OpenAI Codex CLI, Claude Code, Cursor, and custom agents** · [`LICENSE`](LICENSE) (MIT)
+> **Quick Navigation:** [**Quick Start**](#7-quick-start-load-any-project--apply-brahm-protection) · [**Using BRAHM with AI Agents (Antigravity / Codex / Claude Code / Cursor)**](#ai-coding-agent-quickstart-antigravity--codex--claude-code--any-agent) · [**Full Agent Guide (`AGENT_README.md`)**](AGENT_README.md) · [**Benchmark Score (`82.0 / 100`)**](#11-evidence-based-brahm-rating-820--100-strong) · [**MIT License (`LICENSE`)**](LICENSE)
 
 </div>
 
@@ -23,6 +23,26 @@
 **BRAHM** is a pure-Rust, deterministic cybersecurity CLI and software-protection engine that loads any user software repository, extracts its structural and cryptographic baseline read-only, generates non-secret synthetic decoy overlays and canary anchors, provisions an isolated inspection workspace for external reviewers or AI coding assistants, and records high-signal access and integrity telemetry into SQLite.
 
 Per owner design directives, BRAHM is built strictly as a **pure CLI / Rust anti-reverse-engineering engine** with no web frontend GUI (`dashboard/` omitted) and **zero runtime AI/LLM dependencies**. Every analysis pass, AST parse, decoy check, sandbox guard, integrity verification, and classifier rule executes deterministically on your local machine.
+
+---
+
+## AI Coding Agent Quickstart (Antigravity · Codex · Claude Code · Any Agent)
+
+> **Full Reference Guide:** [`AGENT_README.md`](AGENT_README.md)
+
+Load any project directory once with `brahm apply` to strip `.env`/key files, seal your real repo baseline (`BRAHM_BASELINE.json`), stage canaries/decoys, and hand your AI agent **only** the returned `inspection_workspace`:
+
+```powershell
+$applied = (./target/release/brahm.exe apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --profile controlled-inspection --json) | ConvertFrom-Json
+# Hand $applied.inspection_workspace to your coding agent — never your raw production repo
+```
+
+| Tool | Copy-Paste Setup |
+| :--- | :--- |
+| **Google Antigravity** | Open `$applied.inspection_workspace` directly as your Antigravity folder, OR add the workspace rule in [`AGENT_README.md`](AGENT_README.md#1-google-antigravity) restricting reads strictly to `inspection_workspace`. |
+| **OpenAI Codex CLI** | Launch sandboxed directly inside the mirror: `codex --cd $applied.inspection_workspace "Analyze architecture and APIs."` ([details](AGENT_README.md#2-openai-codex-cli)) |
+| **Claude Code** | Run strictly inside the mirror: `(cd "$WORKSPACE" && claude)` without `--add-dir` pointing at the genuine source repo ([details](AGENT_README.md#3-claude-code)). |
+| **Cursor / Any Agent** | Open `inspection_workspace`, copy `.cursorrules` boundary rules from [`AGENT_README.md`](AGENT_README.md#4-cursor-windsurf--any-other-ai-agent-or-script), and run `brahm agent run` + `brahm integrity check` afterward. |
 
 ---
 
