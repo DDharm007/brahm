@@ -142,6 +142,18 @@ impl ProtectionInstaller {
                     "Verify zero genuine file contamination".to_string(),
                 ],
             ),
+            ProtectionProfile::BlindShield => (
+                true,
+                true,
+                vec![
+                    "Run Stage 01 & Stage 02 baseline analysis".to_string(),
+                    "Generate Research-tier synthetic decoys & canary anchors in isolated staging"
+                        .to_string(),
+                    "Assemble isolated inspection workspace with deterministic AST body, SQL, and doc redaction"
+                        .to_string(),
+                    "Validate production repository remains 100% unmodified".to_string(),
+                ],
+            ),
         };
 
         // Always validate baseline isolation before approving plan
@@ -226,7 +238,9 @@ impl ProtectionInstaller {
 
         if plan.will_generate_decoys {
             let decoy_prof = match target_profile {
-                ProtectionProfile::ResearchMode => DecoyGenerationProfile::Research,
+                ProtectionProfile::ResearchMode | ProtectionProfile::BlindShield => {
+                    DecoyGenerationProfile::Research
+                }
                 _ => DecoyGenerationProfile::Standard,
             };
             let decoy_res = self.decoy_engine.generate_and_stage(
@@ -261,6 +275,7 @@ impl ProtectionInstaller {
             if plan.will_create_mirror {
                 let pol_prof = match target_profile {
                     ProtectionProfile::ResearchMode => DeceptionPolicyProfile::Research,
+                    ProtectionProfile::BlindShield => DeceptionPolicyProfile::BlindShield,
                     _ => DeceptionPolicyProfile::Standard,
                 };
                 let policy = DeceptionPolicy::for_profile(pol_prof);

@@ -612,10 +612,15 @@ fn handle_agent(action: AgentCommands) -> Result<()> {
 }
 
 fn handle_apply(args: ApplyArgs) -> Result<()> {
+    let target_profile = if args.shield {
+        brahm::integration::ProtectionProfile::BlindShield
+    } else {
+        args.profile.into()
+    };
     let out = ProtectionInstaller::new().apply(
         &args.repository,
         &args.state_dir,
-        args.profile.into(),
+        target_profile,
         args.dry_run,
         args.verify,
     )?;

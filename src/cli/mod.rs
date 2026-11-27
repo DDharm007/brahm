@@ -207,6 +207,7 @@ pub enum ProtectionProfileArg {
     ResearchMode,
     ControlledInspection,
     MonitoringMode,
+    BlindShield,
 }
 
 impl From<ProtectionProfileArg> for crate::integration::ProtectionProfile {
@@ -216,6 +217,7 @@ impl From<ProtectionProfileArg> for crate::integration::ProtectionProfile {
             ProtectionProfileArg::ResearchMode => Self::ResearchMode,
             ProtectionProfileArg::ControlledInspection => Self::ControlledInspection,
             ProtectionProfileArg::MonitoringMode => Self::MonitoringMode,
+            ProtectionProfileArg::BlindShield => Self::BlindShield,
         }
     }
 }
@@ -284,6 +286,7 @@ pub enum DeceptionPolicyProfileArg {
     Conservative,
     Standard,
     Research,
+    BlindShield,
 }
 
 impl From<DeceptionPolicyProfileArg> for crate::deception::policy::DeceptionPolicyProfile {
@@ -292,6 +295,7 @@ impl From<DeceptionPolicyProfileArg> for crate::deception::policy::DeceptionPoli
             DeceptionPolicyProfileArg::Conservative => Self::Conservative,
             DeceptionPolicyProfileArg::Standard => Self::Standard,
             DeceptionPolicyProfileArg::Research => Self::Research,
+            DeceptionPolicyProfileArg::BlindShield => Self::BlindShield,
         }
     }
 }
@@ -523,4 +527,8 @@ pub struct ApplyArgs {
     /// Output structured result as JSON
     #[arg(long)]
     pub json: bool,
+
+    /// Enforce strict anti-reverse-engineering AST body, SQL, and internal doc redaction inside the mirror
+    #[arg(long)]
+    pub shield: bool,
 }

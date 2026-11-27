@@ -131,9 +131,16 @@ See raw experiment outputs in [experiments/results/unprotected/](../experiments/
 3. Un-instrumented direct OS file reads outside BRAHM's controlled workspace or `brahm agent run` adapter are not automatically intercepted without external audit log forwarding.
 
 ### Concrete Path to `90+` in Next Releases
-1. Support opt-in **plausible AST-integrated decoys** (referenced across barrel exports/config registries inside `research_mode` mirrors) and selective **policy-governed source redaction** (replacing implementation bodies with typed stubs in external inspection workspaces).
+1. Add opt-in **plausible AST-integrated decoys** (referenced across barrel exports/config registries inside `research_mode` mirrors).
 2. Add multi-file Express/Fastify subrouter mount prefix stitching (`app.use('/v1', router)`) in Stage 02 route extraction.
 3. Add optional file-access watcher / audit ingestion bridge on localhost API (`POST /api/v1/ingest`) alongside `brahm agent run`.
+
+### 9.4 Implemented Follow-Up Verification: `BlindShield` (`--shield`) Mode
+
+In direct response to the `research-mode` white-box finding in Section 9 above, **BRAHM** now includes deterministic Tree-sitter AST implementation redaction ([`src/deception/redactor.rs`](../src/deception/redactor.rs)) activated via `brahm apply <PROJECT> --shield` (`ProtectionProfile::BlindShield` / `pol_blind_shield_v1`):
+- **Mirror-Only Shielding:** Redacted **31 / 37** genuine files inside `sess_392a31df9fce/workspace` (replacing JS/TS/Rust/Python/Go/Java/C/C++ function/method/arrow bodies with sealed `BRAHM_SEALED` stubs, redacting SQL DDL in `.sql`, redacting internal architecture/API/DB specs, and masking `.env*` defaults) while leaving production `demo/brahm-commerce-demo/` **100% unmodified** (`baseline_matches: true`).
+- **Blind Agent Verification (`fd914047`):** Across all `48` mirror files, the blind inspecting agent recovered **0 / 20 genuine API routes**, **0 / 9 genuine SQL table names**, **`0` real secrets**, and was blocked from recovering pricing/tax formulas, scrypt salt/cost/delimiter encoding, and HMAC serialization/webhook logic (only exported signatures, high-level `README` text, and `Db*Row` TS type projections remained visible).
+- **Updated Test Verification:** Rust test suite expanded from `134 / 134` to **`137 / 137`** passing tests cleanly (`0` clippy warnings).
 
 ---
 

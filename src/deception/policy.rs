@@ -20,6 +20,8 @@ pub enum DeceptionPolicyProfile {
     Standard,
     /// Full research suite of all validated synthetic artifacts.
     Research,
+    /// Strict anti-reverse-engineering shield: full decoys plus AST implementation redaction inside the mirror.
+    BlindShield,
 }
 
 impl std::fmt::Display for DeceptionPolicyProfile {
@@ -28,6 +30,7 @@ impl std::fmt::Display for DeceptionPolicyProfile {
             Self::Conservative => write!(f, "conservative"),
             Self::Standard => write!(f, "standard"),
             Self::Research => write!(f, "research"),
+            Self::BlindShield => write!(f, "blind_shield"),
         }
     }
 }
@@ -52,6 +55,9 @@ pub struct DeceptionPolicy {
     pub allow_production_deployment: bool,
     /// Optional cap on maximum artifacts injected into a single mirror session.
     pub max_artifacts: Option<usize>,
+    /// When true, redact function bodies, SQL DDL, and internal architecture docs strictly inside the mirror.
+    #[serde(default)]
+    pub redact_implementation: bool,
 }
 
 impl DeceptionPolicy {
@@ -83,6 +89,7 @@ impl DeceptionPolicy {
                     allow_secret_exposure: false,
                     allow_production_deployment: false,
                     max_artifacts: Some(4),
+                    redact_implementation: false,
                 }
             }
             DeceptionPolicyProfile::Standard => {
@@ -110,6 +117,7 @@ impl DeceptionPolicy {
                     allow_secret_exposure: false,
                     allow_production_deployment: false,
                     max_artifacts: Some(16),
+                    redact_implementation: false,
                 }
             }
             DeceptionPolicyProfile::Research => {
@@ -135,6 +143,33 @@ impl DeceptionPolicy {
                     allow_secret_exposure: false,
                     allow_production_deployment: false,
                     max_artifacts: None,
+                    redact_implementation: false,
+                }
+            }
+            DeceptionPolicyProfile::BlindShield => {
+                let mut include_categories = BTreeSet::new();
+                include_categories.insert(DecoyCategory::SyntheticDocumentation);
+                include_categories.insert(DecoyCategory::SyntheticSource);
+                include_categories.insert(DecoyCategory::SyntheticConfiguration);
+                include_categories.insert(DecoyCategory::CanaryArtifact);
+                include_categories.insert(DecoyCategory::SyntheticDependency);
+
+                Self {
+                    policy_id: "pol_blind_shield_v1".to_string(),
+                    version: "1.0.0".to_string(),
+                    profile,
+                    priority: 400,
+                    include_categories,
+                    exclude_categories: BTreeSet::new(),
+                    include_artifact_ids: BTreeSet::new(),
+                    exclude_artifact_ids: BTreeSet::new(),
+                    include_docs_projection: true,
+                    include_synthetic_configs: true,
+                    register_canaries: true,
+                    allow_secret_exposure: false,
+                    allow_production_deployment: false,
+                    max_artifacts: None,
+                    redact_implementation: true,
                 }
             }
         }
@@ -198,6 +233,7 @@ impl DeceptionPolicyEngine {
             DeceptionPolicy::for_profile(DeceptionPolicyProfile::Conservative),
             DeceptionPolicy::for_profile(DeceptionPolicyProfile::Standard),
             DeceptionPolicy::for_profile(DeceptionPolicyProfile::Research),
+            DeceptionPolicy::for_profile(DeceptionPolicyProfile::BlindShield),
         ]
     }
 

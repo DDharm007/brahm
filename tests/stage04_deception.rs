@@ -19,7 +19,10 @@ use tempfile::tempdir;
 fn test_01_deception_policy_engine_and_security_enforcement() {
     let engine = DeceptionPolicyEngine::new();
     let presets = engine.list_presets();
-    assert_eq!(presets.len(), 3);
+    assert_eq!(presets.len(), 4);
+    assert!(presets
+        .iter()
+        .any(|p| p.profile == DeceptionPolicyProfile::BlindShield && p.redact_implementation));
 
     // Unsafe policy overrides must fail validation immediately
     let mut bad_secret_pol = DeceptionPolicy::for_profile(DeceptionPolicyProfile::Standard);

@@ -366,3 +366,59 @@ fn test_apply_one_command_workflow_and_dry_run() {
     assert!(real_state.join("BRAHM_BASELINE.json").is_file());
     assert!(real_state.join("BRAHM_INTEGRITY_REPORT.json").is_file());
 }
+
+#[test]
+fn test_blind_shield_redacts_mirror_without_mutating_genuine_repo() {
+    use brahm::cli::{Cli, Commands};
+    use clap::Parser;
+
+    assert!(matches!(
+        Cli::try_parse_from(["brahm", "apply", "./app", "--shield"])
+            .unwrap()
+            .command,
+        Commands::Apply(a) if a.shield
+    ));
+
+    let repo_dir = tempdir().unwrap();
+    let ts_path = repo_dir.path().join("pricing.ts");
+    let ts_orig = r#"
+export interface PriceResult { total: number; }
+export function computeSecretDiscount(amount: number): number {
+  const hiddenFactor = 17;
+  return amount - hiddenFactor;
+}
+"#;
+    fs::write(&ts_path, ts_orig).unwrap();
+    fs::write(
+        repo_dir.path().join("schema.sql"),
+        "CREATE TABLE secrets_cfg (id TEXT PRIMARY KEY, internal_key TEXT);\n",
+    )
+    .unwrap();
+
+    let state_dir = tempdir().unwrap();
+    let out = ProtectionInstaller::new()
+        .apply(
+            repo_dir.path(),
+            state_dir.path(),
+            ProtectionProfile::BlindShield,
+            false,
+            true,
+        )
+        .unwrap();
+
+    assert_eq!(out.integrity_verified, Some(true));
+    let ws = out.inspection_workspace.unwrap();
+
+    // Isolated mirror has implementation bodies & SQL DDL redacted
+    let ws_ts = fs::read_to_string(ws.join("pricing.ts")).unwrap();
+    assert!(ws_ts.contains("export interface PriceResult"));
+    assert!(ws_ts.contains("BRAHM_SEALED"));
+    assert!(!ws_ts.contains("hiddenFactor"));
+
+    let ws_sql = fs::read_to_string(ws.join("schema.sql")).unwrap();
+    assert!(ws_sql.contains("BRAHM_SHIELD"));
+    assert!(!ws_sql.contains("internal_key"));
+
+    // Genuine repo files remain 100% unmodified
+    assert_eq!(fs::read_to_string(&ts_path).unwrap(), ts_orig);
+}

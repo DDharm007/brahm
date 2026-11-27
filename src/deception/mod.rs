@@ -4,6 +4,7 @@ pub mod decoy;
 pub mod layers;
 pub mod mirror;
 pub mod policy;
+pub mod redactor;
 pub mod sandbox;
 pub mod session;
 

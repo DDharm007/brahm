@@ -16,26 +16,24 @@ When delegating repository analysis, code review, or third-party audits to AI co
 
 ---
 
-## Step 0: Build BRAHM Once & Load Your Project
+## Step 0: Install BRAHM (No Rust Required) & Load Your Project
 
-Clone and build the release CLI binary (Windows: `brahm.exe`, Linux/macOS: `brahm`):
+### Without Rust Installed (Recommended for End Users)
+- **Windows:** `irm https://raw.githubusercontent.com/DDharm007/brahm/main/scripts/install.ps1 | iex` (or pass `-LocalBinary .\brahm-windows-x86_64.exe` from [Releases](https://github.com/DDharm007/brahm/releases))
+- **Linux / macOS:** `curl -fsSL https://raw.githubusercontent.com/DDharm007/brahm/main/scripts/install.sh | bash`
+- **Docker:** `docker build -t brahm https://github.com/DDharm007/brahm.git`
+- **From Source (if Rust >= 1.80 is present):** `git clone https://github.com/DDharm007/brahm.git && cd brahm && cargo build --release`
 
-```powershell
-git clone https://github.com/DDharm007/brahm.git
-cd brahm
-cargo build --release
-```
-
-Now apply BRAHM to **any project directory** you want an agent to inspect (leaving the original folder untouched):
+Now choose how much code visibility to allow inside the isolated inspection workspace (your original folder stays 100% untouched):
 
 ```powershell
-./target/release/brahm.exe apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --profile controlled-inspection --json
-```
+# Recommended Anti-Reverse-Engineering Mode (`--shield` / `--profile blind-shield`):
+# Strips secrets AND deterministically redacts function/method bodies, SQL DDL schemas,
+# and internal architecture docs strictly inside the isolated inspection mirror
+brahm apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --shield --json
 
-For research benchmarking or heavier canary overlays (`11` synthetic/canary artifacts on Node/TS targets), use `--profile research-mode`:
-
-```powershell
-./target/release/brahm.exe apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --profile research-mode --json
+# Full-source audit mode (plain source copy + secret stripping + canary telemetry):
+brahm apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --profile controlled-inspection --json
 ```
 
 Inspect the JSON output on `stdout` (diagnostic logs emit on `stderr`):

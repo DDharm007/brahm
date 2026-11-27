@@ -10,7 +10,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-B91C1C?style=for-the-badge)
 ![Deterministic Engine](https://img.shields.io/badge/AI%20Runtime%20Deps-0%20(100%25%20Deterministic)-111827?style=for-the-badge)
 ![Verified Score](https://img.shields.io/badge/BRAHM%20Rating-82.0%20%2F%20100%20(Strong)-EF4444?style=for-the-badge)
-![Tests Passing](https://img.shields.io/badge/Verified%20Tests-134%20%2F%20134%20Pass-16A34A?style=for-the-badge)
+![Tests Passing](https://img.shields.io/badge/Verified%20Tests-137%20%2F%20137%20Pass-16A34A?style=for-the-badge)
 
 > **Quick Navigation:** [**Quick Start**](#7-quick-start-load-any-project--apply-brahm-protection) · [**Using BRAHM with AI Agents (Antigravity / Codex / Claude Code / Cursor)**](#ai-coding-agent-quickstart-antigravity--codex--claude-code--any-agent) · [**Full Agent Guide (`AGENT_README.md`)**](AGENT_README.md) · [**Benchmark Score (`82.0 / 100`)**](#11-evidence-based-brahm-rating-820--100-strong) · [**MIT License (`LICENSE`)**](LICENSE)
 
@@ -33,8 +33,9 @@ Per owner design directives, BRAHM is built strictly as a **pure CLI / Rust anti
 Load any project directory once with `brahm apply` to strip `.env`/key files, seal your real repo baseline (`BRAHM_BASELINE.json`), stage canaries/decoys, and hand your AI agent **only** the returned `inspection_workspace`:
 
 ```powershell
-$applied = (./target/release/brahm.exe apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --profile controlled-inspection --json) | ConvertFrom-Json
-# Hand $applied.inspection_workspace to your coding agent — never your raw production repo
+$applied = (brahm apply C:\path\to\your-project --state-dir C:\path\to\.brahm_state --shield --json) | ConvertFrom-Json
+# `--shield` redacts function bodies, SQL schemas, and internal docs strictly inside $applied.inspection_workspace
+# Use `--profile controlled-inspection` if the agent needs full readable source with canary monitoring only
 ```
 
 | Tool | Copy-Paste Setup |
@@ -80,7 +81,7 @@ flowchart LR
 | **Stage 01** | Repository Analyzer | Recursive filesystem scanner, 25+ language detection, framework/manifest checks, sensitive file protection (`.env`, `.pem`, `id_rsa`), BLAKE3 hashing, JSON/MD/terminal reports. |
 | **Stage 02** | Code Intelligence | Tree-sitter `0.25` AST parsing (Rust, TypeScript/JavaScript, Python, Go, Java, C/C++), BLAKE3 symbol indexing, dependency/cycle detection, REST routes (`Express` incl. middleware, Next.js, FastAPI/Flask, Axum, Actix, Gin, Spring), SQL DDL schemas, `petgraph` DAG + blast radius. |
 | **Stage 03** | Decoy Generation Engine | Architecture-matched non-executing synthetic docs/configs/schemas/TS bridges/canary tokens (`BRAHM-CANARY-*`), validator blocking real secrets & manifest overwrites, ownership-verified cleanup. |
-| **Stage 04** | Repository Deception Engine | `GenuineLayer` / `SyntheticLayer` / `InspectionLayer` separation, automatic `.env`/secret stripping during workspace mirroring, deterministic deception policies (`Conservative`, `Standard`, `Research`), sandbox path-traversal defense. |
+| **Stage 04** | Repository Deception Engine | `GenuineLayer` / `SyntheticLayer` / `InspectionLayer` separation, automatic `.env`/secret stripping, deterministic deception policies (`Conservative`, `Standard`, `Research`, `BlindShield` AST/SQL redaction), sandbox path-traversal defense. |
 | **Stage 05** | Integration & Apply CLI | **One-command `brahm apply <path>`** (`brahm protect`), local & credential-safe GitHub cloning, `ProtectionInstaller` with preview plans (`--dry-run`) and explicit approval gates, safe rollback. |
 | **Stage 06** | Monitoring & Intelligence | Embedded SQLite telemetry (`brahm_monitoring.db`), 5s deduplicating `CanaryDetector`, chronological `TimelineCorrelator`, deterministic `RuleBasedClassifier` with explicit attribution uncertainty disclaimers, baseline diff `IntegrityMonitor`, optional authenticated localhost Axum API. |
 | **Stage 07** | Validation & Benchmark Suite | Full codebase audit (`ISSUE-001`–`009`), 20-step E2E CLI validation, 13 security failure gates, controlled A/B experiment on `demo/brahm-commerce-demo`, evidence-based 100-point rating engine. |
@@ -96,13 +97,28 @@ flowchart LR
 
 ---
 
-## 6. Installation & Build Guide
+## 6. Installation & Build Guide (No Rust Required Option)
 
-### Prerequisites
-- **Rust toolchain** (`>= 1.80`, `cargo` and `rustc`)
-- **Node.js `>= 22.5` + npm** *(only required if re-running the external demo target test suite in `demo/brahm-commerce-demo`)*
+### Option A — Run Without Rust Installed (Pre-built Release Binary or Docker)
 
-### Build & Verify from Source
+Users protecting projects do **not** need Rust (`rustc` / `cargo`) installed on their PC:
+
+- **Windows (`PowerShell` one-line installer using published GitHub Releases):**
+  ```powershell
+  irm https://raw.githubusercontent.com/DDharm007/brahm/main/scripts/install.ps1 | iex
+  ```
+  *(Or run `.\scripts\install.ps1 -LocalBinary .\brahm-windows-x86_64.exe` with any standalone binary from [GitHub Releases](https://github.com/DDharm007/brahm/releases); release workflow defined in [`.github/workflows/release.yml`](.github/workflows/release.yml)).*
+- **Linux / macOS (Bash one-line installer):**
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/DDharm007/brahm/main/scripts/install.sh | bash
+  ```
+- **Docker (Any OS without Rust):**
+  ```bash
+  docker build -t brahm https://github.com/DDharm007/brahm.git
+  docker run --rm -v "$(pwd):/work" brahm apply /work --state-dir /work/.brahm_state --shield
+  ```
+
+### Option B — Build & Verify from Source (Requires Rust >= 1.80)
 
 ```powershell
 git clone https://github.com/DDharm007/brahm.git
@@ -114,7 +130,7 @@ cargo test
 cargo build --release
 ```
 
-Compiled CLI binary output: `target/release/brahm.exe` (Windows) or `target/release/brahm` (Linux/macOS).
+Compiled standalone CLI output: `target/release/brahm.exe` (Windows, zero non-system DLLs) or `target/release/brahm` (Linux/macOS).
 
 ---
 
@@ -124,23 +140,24 @@ Point `brahm apply` (alias `brahm protect`) directly at any local software repos
 
 ```powershell
 # 1. Preview protection actions without modifying disk
-./target/release/brahm.exe apply C:\path\to\your-project --dry-run
+brahm apply C:\path\to\your-project --dry-run
 
-# 2. Load the project and apply controlled anti-RE protection in one command
-./target/release/brahm.exe apply C:\path\to\your-project --state-dir .\.brahm_state --profile controlled-inspection --json
+# 2. Maximum Anti-Reverse-Engineering Shield (`--shield` / `--profile blind-shield`):
+#    Strips .env secrets + Tree-sitter redacts function/method bodies, SQL DDL, & internal docs inside mirror only
+brahm apply C:\path\to\your-project --state-dir .\.brahm_state --shield --json
 
-#    For maximum research telemetry overlays (11 synthetic/canary artifacts):
-./target/release/brahm.exe apply C:\path\to\your-project --state-dir .\.brahm_state --profile research-mode
+# 3. Full-source review mode with canary telemetry (`controlled-inspection` or `research-mode`):
+brahm apply C:\path\to\your-project --state-dir .\.brahm_state --profile controlled-inspection --json
 
-# 3. Verify original project & staged decoys against sealed BLAKE3 digests
-./target/release/brahm.exe integrity check --state-dir .\.brahm_state
+# 4. Verify original project & staged decoys against sealed BLAKE3 digests
+brahm integrity check --state-dir .\.brahm_state
 
-# 4. Run sandboxed inspection telemetry & generate intelligence reports
-./target/release/brahm.exe agent run <SESSION_ID> --state-dir .\.brahm_state --paths canary/BRAHM_CANARY_ANCHOR.md package.json
-./target/release/brahm.exe reports generate --state-dir .\.brahm_state
+# 5. Run sandboxed inspection telemetry & generate intelligence reports
+brahm agent run <SESSION_ID> --state-dir .\.brahm_state --paths canary/BRAHM_CANARY_ANCHOR.md package.json
+brahm reports generate --state-dir .\.brahm_state
 
-# 5. Cleanly roll back all BRAHM-owned decoys & inspection workspaces when done
-./target/release/brahm.exe protection rollback --state-dir .\.brahm_state
+# 6. Cleanly roll back all BRAHM-owned decoys & inspection workspaces when done
+brahm protection rollback --state-dir .\.brahm_state
 ```
 
 ---
@@ -190,6 +207,8 @@ Two isolated read-only inspecting agents received identical blind reverse-engine
 | **SQLite Monitoring Events Logged** | 0 | **23** (`High` rule `R01_REPEATED_CANARY_ACCESS`) | Complete forensic session timeline |
 | **Genuine Repo Contamination** | N/A | **0** (`baseline_matches: true`) | Zero production mutation |
 | Token Usage | Not exposed by runtime | Not exposed by runtime | Unreported rather than estimated |
+
+> **Verified `--shield` (`BlindShield`) Follow-Up Experiment (`fd914047`, 31 / 37 genuine files AST/SQL/doc redacted in mirror):** When the same `demo/brahm-commerce-demo` codebase was protected with `brahm apply ... --shield` (`sess_392a31df9fce`), an isolated blind reverse-engineering agent recovered **0 / 20 genuine API routes**, **0 / 9 SQL table names**, and had all tax/shipping formulas, crypto serialization details, and unit test logic **blocked** (`0` secrets exposed), while keeping exported interfaces readable and leaving `demo/brahm-commerce-demo/` 100% unmodified.
 
 See full comparative analysis and Mermaid diagrams in [`reports/BRAHM_FINAL_EXPERIMENT_REPORT.md`](reports/BRAHM_FINAL_EXPERIMENT_REPORT.md).
 
@@ -274,7 +293,7 @@ brahm/
 
 ## 16. Testing, Verification & Reproducibility
 
-- **Rust Unit & Integration Suite:** `134 / 134` passed (`cargo test`, 0 ignored, 0 failed)
+- **Rust Unit & Integration Suite:** `137 / 137` passed (`cargo test`, 0 ignored, 0 failed)
 - **Lint & Format:** `cargo fmt --check` clean · `cargo clippy --all-targets --all-features -- -D warnings` (0 warnings)
 - **CLI End-to-End & Security Gates:** `20 / 20` E2E + `13 / 13` failure paths verified ([`reports/BRAHM_END_TO_END_VALIDATION.md`](reports/BRAHM_END_TO_END_VALIDATION.md))
 - **Clean Reproduction Script:**

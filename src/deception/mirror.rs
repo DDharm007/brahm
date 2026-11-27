@@ -11,9 +11,11 @@ use tracing::info;
 
 use super::layers::{is_ignored_repo_dir, GenuineLayer, InspectionLayer, ProductionIntegrityGuard};
 use super::policy::{DeceptionPolicy, DeceptionPolicyEngine, PolicyEvaluationResult};
+use super::redactor::redact_mirror_file;
 use crate::deception::decoy::{compute_content_fingerprint, DecoyRegistry};
 use crate::detection::is_sensitive_credential_file;
 use crate::errors::{BrahmError, Result};
+use crate::parser::ParserRegistry;
 
 /// Entry inside `BRAHM_INSPECTION_MANIFEST.json`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -38,6 +40,8 @@ pub struct InspectionManifest {
     pub stripped_secret_count: usize,
     pub genuine_file_count: usize,
     pub synthetic_file_count: usize,
+    #[serde(default)]
+    pub shielded_file_count: usize,
     pub entries: Vec<InspectionManifestEntry>,
 }
 
@@ -110,6 +114,8 @@ impl ControlledMirrorManager {
         let mut entries = Vec::new();
         let mut genuine_copied = Vec::new();
         let mut stripped_secrets = Vec::new();
+        let mut shielded_count: usize = 0;
+        let parser_registry = policy.redact_implementation.then(ParserRegistry::new);
 
         // 3. Copy safe genuine files (strictly non-secret, non-excluded, non-escaping)
         for walk_entry in walkdir::WalkDir::new(&canon_genuine)
@@ -146,13 +152,23 @@ impl ControlledMirrorManager {
             if let Some(parent) = dest.parent() {
                 fs::create_dir_all(parent)?;
             }
-            fs::copy(abs_src, &dest)?;
 
-            let hash = genuine_layer
-                .file_hashes
-                .get(&rel_str)
-                .cloned()
-                .unwrap_or_else(|| "unknown".to_string());
+            let hash = if let Some(ref reg) = parser_registry {
+                let raw = fs::read(abs_src)?;
+                let (out_bytes, redacted) = redact_mirror_file(&rel_str, &raw, reg);
+                if redacted {
+                    shielded_count += 1;
+                }
+                fs::write(&dest, &out_bytes)?;
+                blake3::hash(&out_bytes).to_hex().to_string()
+            } else {
+                fs::copy(abs_src, &dest)?;
+                genuine_layer
+                    .file_hashes
+                    .get(&rel_str)
+                    .cloned()
+                    .unwrap_or_else(|| "unknown".to_string())
+            };
 
             genuine_copied.push(rel_str.clone());
             entries.push(InspectionManifestEntry {
@@ -247,6 +263,7 @@ impl ControlledMirrorManager {
             stripped_secret_count: stripped_secrets.len(),
             genuine_file_count: genuine_copied.len(),
             synthetic_file_count: injected_decoy_ids.len(),
+            shielded_file_count: shielded_count,
             entries,
         };
 

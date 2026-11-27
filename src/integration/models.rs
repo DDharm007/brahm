@@ -17,6 +17,8 @@ pub enum ProtectionProfile {
     ControlledInspection,
     /// Existing decoy registry + canary events + integrity monitoring + reports.
     MonitoringMode,
+    /// Full research decoys plus deterministic AST body & SQL redaction strictly inside the mirror.
+    BlindShield,
 }
 
 impl std::fmt::Display for ProtectionProfile {
@@ -26,6 +28,7 @@ impl std::fmt::Display for ProtectionProfile {
             Self::ResearchMode => write!(f, "research_mode"),
             Self::ControlledInspection => write!(f, "controlled_inspection"),
             Self::MonitoringMode => write!(f, "monitoring_mode"),
+            Self::BlindShield => write!(f, "blind_shield"),
         }
     }
 }
