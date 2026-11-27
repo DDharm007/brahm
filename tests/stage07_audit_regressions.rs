@@ -299,3 +299,70 @@ async fn test_issue_006_monitoring_api_endpoints_and_localhost_cors() {
 
     server.abort();
 }
+
+#[test]
+fn test_apply_one_command_workflow_and_dry_run() {
+    use brahm::cli::{Cli, Commands};
+    use clap::Parser;
+
+    // Verify CLI aliases `apply` and `protect` parse cleanly
+    assert!(matches!(
+        Cli::try_parse_from(["brahm", "apply", "./my-app"])
+            .unwrap()
+            .command,
+        Commands::Apply(_)
+    ));
+    assert!(matches!(
+        Cli::try_parse_from(["brahm", "protect", "./my-app", "--dry-run"])
+            .unwrap()
+            .command,
+        Commands::Apply(_)
+    ));
+
+    let repo_dir = tempdir().unwrap();
+    fs::write(
+        repo_dir.path().join("server.ts"),
+        "import express from 'express';\nconst app = express();\napp.get('/health', healthCheck);\nfunction healthCheck() {}\n",
+    )
+    .unwrap();
+    let state_dir = tempdir().unwrap();
+    let dry_state = state_dir.path().join("dry");
+    let real_state = state_dir.path().join("applied");
+
+    let installer = ProtectionInstaller::new();
+
+    // 1. Dry-run preview must not create persistent state directory artifacts
+    let dry = installer
+        .apply(
+            repo_dir.path(),
+            &dry_state,
+            ProtectionProfile::ControlledInspection,
+            true,
+            true,
+        )
+        .unwrap();
+    assert!(dry.dry_run);
+    assert!(!dry_state.exists());
+
+    // 2. Full apply generates architecture, decoys, active workspace mirror, and verifies integrity
+    let applied = installer
+        .apply(
+            repo_dir.path(),
+            &real_state,
+            ProtectionProfile::ControlledInspection,
+            false,
+            true,
+        )
+        .unwrap();
+    assert!(!applied.dry_run);
+    assert!(applied.decoy_count > 0);
+    assert!(applied.canary_count > 0);
+    assert_eq!(applied.integrity_verified, Some(true));
+    assert!(applied.session_id.is_some());
+    assert!(applied
+        .inspection_workspace
+        .as_ref()
+        .is_some_and(|w| w.is_dir()));
+    assert!(real_state.join("BRAHM_BASELINE.json").is_file());
+    assert!(real_state.join("BRAHM_INTEGRITY_REPORT.json").is_file());
+}

@@ -3,20 +3,21 @@
 //! Provides CLI execution, structured logging initialization, and exit code management.
 
 use brahm::cli::{
-    AgentCommands, ArchitectureCommands, Cli, Commands, ConnectCommands, DeceptionCommands,
-    DecoyCommands, EventsCommands, InitArgs, IntegrityCommands, MonitorCommands, PolicyCommands,
-    ProtectionCommands, ReportsCommands, ScanArgs, SessionCommands, SessionsTimelineCommands,
+    AgentCommands, ApplyArgs, ArchitectureCommands, Cli, Commands, ConnectCommands,
+    DeceptionCommands, DecoyCommands, EventsCommands, InitArgs, IntegrityCommands, MonitorCommands,
+    PolicyCommands, ProtectionCommands, ReportsCommands, ScanArgs, SessionCommands,
+    SessionsTimelineCommands,
 };
 use brahm::config::BrahmConfig;
 use brahm::deception::decoy::{DecoyEngine, DecoyGenerationProfile, DecoyRegistry};
 use brahm::deception::{
     ControlledInspectionEnvironment, DeceptionPolicy, DeceptionPolicyEngine,
-    DeceptionPolicyProfile, GenuineLayer, InspectionSessionManager,
+    DeceptionPolicyProfile, InspectionSessionManager,
 };
 use brahm::errors::{BrahmError, Result};
 use brahm::integration::{
-    InspectionAgent, LocalTestAgentAdapter, ProtectionInstaller, RepositoryInputManager,
-    RepositoryRecord,
+    load_stored_baseline, InspectionAgent, LocalTestAgentAdapter, ProtectionInstaller,
+    RepositoryInputManager, RepositoryRecord,
 };
 use brahm::monitoring::{
     generate_all_monitoring_reports, serve_monitoring_api, CanaryDetector, EventSeverity,
@@ -504,52 +505,10 @@ fn record_session_lifecycle_if_db(
     }
 }
 
-fn load_stored_baseline(state_dir: &Path) -> Result<GenuineLayer> {
-    let baseline_path = state_dir.join("BRAHM_BASELINE.json");
-    if !baseline_path.is_file() {
-        return Err(BrahmError::Integration(format!(
-            "Stored genuine baseline '{}' not found. Connect or install protection before running integrity verification.",
-            baseline_path.display()
-        )));
-    }
-    let raw = fs::read_to_string(&baseline_path)?;
-    let baseline: GenuineLayer = serde_json::from_str(&raw)?;
-    Ok(baseline)
-}
-
 fn handle_integrity_check(action: IntegrityCommands) -> Result<()> {
     match action {
         IntegrityCommands::Check { state_dir } => {
-            let cfg_path = state_dir.join("BRAHM_REPOSITORY_CONFIG.json");
-            let rec: RepositoryRecord = serde_json::from_str(&fs::read_to_string(&cfg_path)?)?;
-            let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
-
-            // ISSUE-001 FIX: Compare live repository strictly against persisted original baseline snapshot
-            let baseline = load_stored_baseline(&state_dir)?;
-
-            let reg_and_root = rec
-                .decoy_registry_path
-                .as_ref()
-                .filter(|p| p.is_file())
-                .and_then(|p| DecoyRegistry::load_from_path(p).ok())
-                .map(|r| {
-                    let root = PathBuf::from(&r.data().decoy_layer_root);
-                    (r, root)
-                });
-
-            let monitor = IntegrityMonitor::new();
-            let corr_id = format!("corr_{}", chrono::Utc::now().timestamp());
-            let expected_paths = std::collections::HashSet::new();
-            let (record, evts) = monitor.check_integrity(
-                &rec.repository_id,
-                &rec.local_path,
-                &baseline,
-                reg_and_root.as_ref().map(|(r, p)| (r, p.as_path())),
-                &expected_paths,
-                &corr_id,
-            )?;
-            store.record_integrity(&record)?;
-            store.record_events_batch(&evts)?;
+            let record = ProtectionInstaller::new().verify_state(&state_dir, "corr")?;
             println!("{}", serde_json::to_string_pretty(&record)?);
         }
     }
@@ -647,6 +606,61 @@ fn handle_agent(action: AgentCommands) -> Result<()> {
     Ok(())
 }
 
+fn handle_apply(args: ApplyArgs) -> Result<()> {
+    let out = ProtectionInstaller::new().apply(
+        &args.repository,
+        &args.state_dir,
+        args.profile.into(),
+        args.dry_run,
+        args.verify,
+    )?;
+
+    if args.json {
+        println!("{}", serde_json::to_string_pretty(&out)?);
+        return Ok(());
+    }
+
+    if out.dry_run {
+        println!(
+            "[DRY-RUN] Protection plan for '{}' ({})",
+            out.repository_name, out.repository_id
+        );
+        println!("  Profile:          {}", out.profile);
+        println!("  Target State Dir: {}", out.state_dir.display());
+        println!(
+            "  Will Generate Decoys: {} | Create Isolated Workspace: {}",
+            out.plan.will_generate_decoys, out.plan.will_create_mirror
+        );
+        return Ok(());
+    }
+
+    println!(
+        "BRAHM protection applied for '{}' ({})",
+        out.repository_name, out.repository_id
+    );
+    println!("  Profile:              {}", out.profile);
+    println!("  Genuine Repo (clean): {}", out.repository_path.display());
+    println!("  Baseline Digest:      {}", out.baseline_fingerprint);
+    println!(
+        "  Staged Decoys:        {} ({} canaries)",
+        out.decoy_count, out.canary_count
+    );
+    if let Some(ref sid) = out.session_id {
+        println!("  Active Session ID:    {}", sid);
+    }
+    if let Some(ref ws) = out.inspection_workspace {
+        println!("  Inspection Workspace: {}", ws.display());
+    }
+    if let Some(ok) = out.integrity_verified {
+        println!(
+            "  Integrity Verified:   {}",
+            if ok { "PASS" } else { "FAILED" }
+        );
+    }
+    println!("  State Directory:      {}", out.state_dir.display());
+    Ok(())
+}
+
 fn run() -> Result<()> {
     let cli = Cli::parse();
     init_logging(cli.verbose);
@@ -661,6 +675,7 @@ fn run() -> Result<()> {
         Commands::Decoy { action } => handle_decoy(action)?,
         Commands::Deception { action } => handle_deception(action)?,
         Commands::Connect { action } => handle_connect(action)?,
+        Commands::Apply(args) => handle_apply(args)?,
         Commands::Protection { action } => handle_protection(action)?,
         Commands::Monitor { action } => handle_monitor(action)?,
         Commands::Events { action } => handle_events(action)?,

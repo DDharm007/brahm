@@ -19,12 +19,13 @@ use super::models::{
 use crate::config::BrahmConfig;
 use crate::deception::decoy::{DecoyEngine, DecoyGenerationProfile, DecoyManifest, DecoyRegistry};
 use crate::deception::{
-    DeceptionPolicy, DeceptionPolicyProfile, InspectionSession, InspectionSessionManager,
-    ProductionIntegrityGuard,
+    DeceptionPolicy, DeceptionPolicyProfile, GenuineLayer, InspectionSession,
+    InspectionSessionManager, ProductionIntegrityGuard,
 };
 use crate::errors::{BrahmError, Result};
 use crate::monitoring::{
-    EventSeverity, EventSource, EventStore, EventType, MonitoringEvent, SqliteEventStore,
+    EventSeverity, EventSource, EventStore, EventType, IntegrityMonitor, IntegrityRecord,
+    MonitoringEvent, SqliteEventStore,
 };
 use crate::reporting::architecture_md::generate_architecture_markdown;
 
@@ -36,6 +37,40 @@ pub struct ProtectionInstallOutcome {
     pub agent_manifest: AgentManifest,
     pub install_report_path: PathBuf,
     pub config_backup_path: Option<PathBuf>,
+}
+
+/// Summary returned by the one-command `brahm apply` / `ProtectionInstaller::apply` workflow.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct ApplyOutcome {
+    pub dry_run: bool,
+    pub repository_id: String,
+    pub repository_name: String,
+    pub repository_path: PathBuf,
+    pub state_dir: PathBuf,
+    pub profile: ProtectionProfile,
+    pub baseline_fingerprint: String,
+    pub session_id: Option<String>,
+    pub inspection_workspace: Option<PathBuf>,
+    pub decoy_count: usize,
+    pub canary_count: usize,
+    pub integrity_verified: Option<bool>,
+    pub architecture_report_path: Option<PathBuf>,
+    pub install_report_path: Option<PathBuf>,
+    pub plan: ProtectionPlan,
+}
+
+/// Load the stored genuine repository BLAKE3 baseline sealed at connect/install time.
+pub fn load_stored_baseline(state_dir: &Path) -> Result<GenuineLayer> {
+    let baseline_path = state_dir.join("BRAHM_BASELINE.json");
+    if !baseline_path.is_file() {
+        return Err(BrahmError::Integration(format!(
+            "Stored genuine baseline '{}' not found. Connect or install protection before running integrity verification.",
+            baseline_path.display()
+        )));
+    }
+    let raw = fs::read_to_string(&baseline_path)?;
+    let baseline: GenuineLayer = serde_json::from_str(&raw)?;
+    Ok(baseline)
 }
 
 /// Manages safe installation, configuration, and rollback of BRAHM protections.
@@ -391,6 +426,140 @@ impl ProtectionInstaller {
         };
 
         Ok((record, ok, msg))
+    }
+
+    /// Compare live repository & staged decoys against persisted baseline digests,
+    /// recording telemetry and saving `BRAHM_INTEGRITY_REPORT.json` inside `state_dir`.
+    pub fn verify_state(
+        &self,
+        state_dir: &Path,
+        correlation_prefix: &str,
+    ) -> Result<IntegrityRecord> {
+        let cfg_path = state_dir.join("BRAHM_REPOSITORY_CONFIG.json");
+        let rec: RepositoryRecord = serde_json::from_str(&fs::read_to_string(&cfg_path)?)?;
+        let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
+        let baseline = load_stored_baseline(state_dir)?;
+
+        let reg_and_root = rec
+            .decoy_registry_path
+            .as_ref()
+            .filter(|p| p.is_file())
+            .and_then(|p| DecoyRegistry::load_from_path(p).ok())
+            .map(|r| {
+                let root = PathBuf::from(&r.data().decoy_layer_root);
+                (r, root)
+            });
+
+        let monitor = IntegrityMonitor::new();
+        let corr_id = format!("{}_{}", correlation_prefix, Utc::now().timestamp());
+        let expected_paths = std::collections::HashSet::new();
+        let (record, evts) = monitor.check_integrity(
+            &rec.repository_id,
+            &rec.local_path,
+            &baseline,
+            reg_and_root.as_ref().map(|(r, p)| (r, p.as_path())),
+            &expected_paths,
+            &corr_id,
+        )?;
+        store.record_integrity(&record)?;
+        store.record_events_batch(&evts)?;
+        fs::write(
+            state_dir.join("BRAHM_INTEGRITY_REPORT.json"),
+            serde_json::to_string_pretty(&record)?,
+        )?;
+        Ok(record)
+    }
+
+    /// One-command anti-reverse-engineering workflow: loads a user's project directory,
+    /// performs deterministic Stage 01 + Stage 02 architecture mapping, stages decoys,
+    /// provisions an isolated inspection workspace, and optionally verifies baseline integrity.
+    pub fn apply(
+        &self,
+        repo_path: &Path,
+        state_dir: &Path,
+        profile: ProtectionProfile,
+        dry_run: bool,
+        verify: bool,
+    ) -> Result<ApplyOutcome> {
+        if dry_run {
+            let preview_dir =
+                std::env::temp_dir().join(format!("brahm_dry_run_{}", Uuid::new_v4().simple()));
+            let plan_res = self.plan(repo_path, &preview_dir, profile);
+            let cfg_data = fs::read_to_string(preview_dir.join("BRAHM_REPOSITORY_CONFIG.json"))
+                .ok()
+                .and_then(|s| serde_json::from_str::<RepositoryRecord>(&s).ok());
+            let _ = fs::remove_dir_all(&preview_dir);
+            let plan = plan_res?;
+            return Ok(ApplyOutcome {
+                dry_run: true,
+                repository_id: plan.repository_id.clone(),
+                repository_name: cfg_data
+                    .as_ref()
+                    .map(|r| r.name.clone())
+                    .unwrap_or_else(|| plan.repository_id.clone()),
+                repository_path: cfg_data
+                    .as_ref()
+                    .map(|r| r.local_path.clone())
+                    .unwrap_or_else(|| repo_path.to_path_buf()),
+                state_dir: state_dir.to_path_buf(),
+                profile,
+                baseline_fingerprint: cfg_data.map(|r| r.baseline_fingerprint).unwrap_or_default(),
+                session_id: None,
+                inspection_workspace: None,
+                decoy_count: 0,
+                canary_count: 0,
+                integrity_verified: None,
+                architecture_report_path: None,
+                install_report_path: None,
+                plan,
+            });
+        }
+
+        let outcome = self.install(repo_path, state_dir, profile, true)?;
+        let (decoy_count, canary_count) = match outcome
+            .record
+            .decoy_registry_path
+            .as_ref()
+            .filter(|p| p.is_file())
+            .and_then(|p| DecoyRegistry::load_from_path(p).ok())
+        {
+            Some(reg) => {
+                let total = reg.artifacts().len();
+                let canaries = reg
+                    .artifacts()
+                    .iter()
+                    .filter(|a| a.canary_token.is_some())
+                    .count();
+                (total, canaries)
+            }
+            None => (0, 0),
+        };
+
+        let integrity_verified = if verify {
+            let rec = self.verify_state(state_dir, "apply_verify")?;
+            Some(rec.baseline_matches && rec.decoy_integrity_valid)
+        } else {
+            None
+        };
+
+        let arch_path = state_dir.join("BRAHM_ARCHITECTURE.json");
+        Ok(ApplyOutcome {
+            dry_run: false,
+            repository_id: outcome.record.repository_id,
+            repository_name: outcome.record.name,
+            repository_path: outcome.record.local_path,
+            state_dir: state_dir.to_path_buf(),
+            profile,
+            baseline_fingerprint: outcome.record.baseline_fingerprint,
+            session_id: outcome.session.as_ref().map(|s| s.session_id.clone()),
+            inspection_workspace: outcome.session.map(|s| s.workspace_path),
+            decoy_count,
+            canary_count,
+            integrity_verified,
+            architecture_report_path: arch_path.is_file().then_some(arch_path),
+            install_report_path: Some(outcome.install_report_path),
+            plan: outcome.plan,
+        })
     }
 
     /// Safe ownership-verified rollback removing ONLY BRAHM-owned decoys & sessions inside `state_dir`.

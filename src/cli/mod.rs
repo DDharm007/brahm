@@ -65,6 +65,10 @@ pub enum Commands {
         action: ConnectCommands,
     },
 
+    /// Load a user project directory and apply BRAHM anti-reverse-engineering protection in one command
+    #[command(alias = "protect")]
+    Apply(ApplyArgs),
+
     /// Repository protection profile, installation, and rollback workflow (Stage 05)
     Protection {
         #[command(subcommand)]
@@ -492,4 +496,31 @@ pub struct ScanArgs {
     /// Run Stage 02 deep code intelligence and architecture mapping (AST, Symbols, Graph)
     #[arg(long, alias = "deep")]
     pub arch: bool,
+}
+
+#[derive(Args, Debug)]
+pub struct ApplyArgs {
+    /// Target user project directory to load and protect
+    #[arg(required = true)]
+    pub repository: PathBuf,
+
+    /// Directory where BRAHM protection workspace, decoys, baseline, and telemetry are stored
+    #[arg(short, long, alias = "output", default_value = ".brahm_state")]
+    pub state_dir: PathBuf,
+
+    /// Protection profile to apply
+    #[arg(short, long, value_enum, default_value = "controlled-inspection")]
+    pub profile: ProtectionProfileArg,
+
+    /// Preview protection actions without modifying disk state
+    #[arg(long)]
+    pub dry_run: bool,
+
+    /// Verify genuine baseline and decoy integrity immediately after applying protection
+    #[arg(long, default_value_t = true, action = clap::ArgAction::Set)]
+    pub verify: bool,
+
+    /// Output structured result as JSON
+    #[arg(long)]
+    pub json: bool,
 }

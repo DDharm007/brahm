@@ -94,13 +94,13 @@
     {
       "issue_id": "ISSUE-008",
       "severity": "Low",
-      "subsystem": "Documentation & Dashboard UI",
-      "affected_file": "README.md, dashboard/",
-      "root_cause": "Root `README.md` needed full Stage 07 documentation, BRAHM branding badge, rating integration, and Coding Agent rules; the React + TypeScript monitoring dashboard (`dashboard/`) was not yet built.",
-      "impact": "Public presentation and visual telemetry inspection required Phase 9 and Phase 10 deliverables.",
-      "fix_applied": "Scheduled in Phase 9 (`README.md`) and Phase 10 (`dashboard/`).",
-      "verification_method": "Vite TypeScript production build check and README audit in Phases 9-11",
-      "status": "Scheduled for Phases 9-10"
+      "subsystem": "Documentation & Streamlined CLI Entry",
+      "affected_file": "README.md, src/cli/mod.rs, src/integration/installer.rs",
+      "root_cause": "Root `README.md` needed full Stage 07 documentation, BRAHM branding badge, rating integration, and Coding Agent rules; operators also benefited from a single `brahm apply <path>` workflow in place of chaining multi-stage commands (React dashboard UI intentionally omitted per owner directive keeping BRAHM pure CLI/Rust).",
+      "impact": "Public documentation required Phase 9 overhaul; streamlined CLI apply workflow added for single-command protection.",
+      "fix_applied": "Added `brahm apply` (`brahm protect`) single-command protection workflow + `verify_state`; `README.md` overhaul scheduled in Phase 9.",
+      "verification_method": "cargo test --test stage07_audit_regressions test_apply_one_command_workflow_and_dry_run",
+      "status": "CLI workflow implemented; README scheduled for Phase 9"
     },
     {
       "issue_id": "ISSUE-009",
