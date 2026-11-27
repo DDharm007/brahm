@@ -58,6 +58,96 @@ pub enum Commands {
         #[command(subcommand)]
         action: DeceptionCommands,
     },
+
+    /// Connect local or authorized GitHub repositories (Stage 05)
+    Connect {
+        #[command(subcommand)]
+        action: ConnectCommands,
+    },
+
+    /// Repository protection profile, installation, and rollback workflow (Stage 05)
+    Protection {
+        #[command(subcommand)]
+        action: ProtectionCommands,
+    },
+}
+
+#[derive(ValueEnum, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ProtectionProfileArg {
+    AnalysisOnly,
+    ResearchMode,
+    ControlledInspection,
+    MonitoringMode,
+}
+
+impl From<ProtectionProfileArg> for crate::integration::ProtectionProfile {
+    fn from(arg: ProtectionProfileArg) -> Self {
+        match arg {
+            ProtectionProfileArg::AnalysisOnly => Self::AnalysisOnly,
+            ProtectionProfileArg::ResearchMode => Self::ResearchMode,
+            ProtectionProfileArg::ControlledInspection => Self::ControlledInspection,
+            ProtectionProfileArg::MonitoringMode => Self::MonitoringMode,
+        }
+    }
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ConnectCommands {
+    /// Register an authorized local repository path
+    Local {
+        path: PathBuf,
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+    /// Clone and register an authorized GitHub repository URL (never pass credentials in CLI)
+    Github {
+        url: String,
+        #[arg(short, long, default_value = ".brahm_clones/repo")]
+        dest: PathBuf,
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ProtectionCommands {
+    /// Preview protection installation plan without mutating repository state
+    Plan {
+        repository: PathBuf,
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+        #[arg(short, long, value_enum, default_value = "controlled-inspection")]
+        profile: ProtectionProfileArg,
+    },
+    /// Validate baseline integrity and production exclusion guarantees
+    Validate {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+    /// Install approved BRAHM protection workspace & configuration
+    Install {
+        repository: PathBuf,
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+        #[arg(short, long, value_enum, default_value = "controlled-inspection")]
+        profile: ProtectionProfileArg,
+        /// Explicit installation authorization flag
+        #[arg(long)]
+        approve: bool,
+    },
+    /// Show current connected repository protection status
+    Status {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+    /// Rollback ONLY BRAHM-owned decoys, workspaces, and config backups
+    Rollback {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+        /// Preview rollback removals without modifying disk
+        #[arg(long)]
+        dry_run: bool,
+    },
 }
 
 #[derive(ValueEnum, Clone, Copy, Debug, PartialEq, Eq)]

@@ -3,8 +3,8 @@
 //! Provides CLI execution, structured logging initialization, and exit code management.
 
 use brahm::cli::{
-    ArchitectureCommands, Cli, Commands, DeceptionCommands, DecoyCommands, InitArgs,
-    PolicyCommands, ScanArgs, SessionCommands,
+    ArchitectureCommands, Cli, Commands, ConnectCommands, DeceptionCommands, DecoyCommands,
+    InitArgs, PolicyCommands, ProtectionCommands, ScanArgs, SessionCommands,
 };
 use brahm::config::BrahmConfig;
 use brahm::deception::decoy::{DecoyEngine, DecoyGenerationProfile, DecoyRegistry};
@@ -12,6 +12,7 @@ use brahm::deception::{
     DeceptionPolicy, DeceptionPolicyEngine, DeceptionPolicyProfile, InspectionSessionManager,
 };
 use brahm::errors::{BrahmError, Result};
+use brahm::integration::{ProtectionInstaller, RepositoryInputManager};
 use clap::Parser;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -279,6 +280,78 @@ fn handle_deception(action: DeceptionCommands) -> Result<()> {
     Ok(())
 }
 
+fn handle_connect(action: ConnectCommands) -> Result<()> {
+    let mgr = RepositoryInputManager::new();
+    match action {
+        ConnectCommands::Local { path, state_dir } => {
+            let conn = mgr.connect_local(&path, &state_dir, None)?;
+            println!(
+                "Connected local repository '{}' ({}) baseline={}",
+                conn.record.name, conn.record.repository_id, conn.record.baseline_fingerprint
+            );
+        }
+        ConnectCommands::Github {
+            url,
+            dest,
+            state_dir,
+        } => {
+            let conn = mgr.connect_github(&url, &dest, &state_dir)?;
+            println!(
+                "Connected GitHub repository '{}' ({}) at {}",
+                conn.record.name,
+                conn.record.repository_id,
+                conn.record.local_path.display()
+            );
+        }
+    }
+    Ok(())
+}
+
+fn handle_protection(action: ProtectionCommands) -> Result<()> {
+    let installer = ProtectionInstaller::new();
+    match action {
+        ProtectionCommands::Plan {
+            repository,
+            state_dir,
+            profile,
+        } => {
+            let plan = installer.plan(&repository, &state_dir, profile.into())?;
+            println!("{}", serde_json::to_string_pretty(&plan)?);
+        }
+        ProtectionCommands::Validate { state_dir } => {
+            let (rec, ok, msg) = installer.validate_installation(&state_dir)?;
+            println!("Repository '{}' ({}): {}", rec.name, rec.repository_id, msg);
+            if !ok {
+                return Err(BrahmError::Integration(msg));
+            }
+        }
+        ProtectionCommands::Install {
+            repository,
+            state_dir,
+            profile,
+            approve,
+        } => {
+            let out = installer.install(&repository, &state_dir, profile.into(), approve)?;
+            println!(
+                "Installed protection profile '{}' for '{}' (report: {})",
+                out.record.active_profile,
+                out.record.name,
+                out.install_report_path.display()
+            );
+        }
+        ProtectionCommands::Status { state_dir } => {
+            let (rec, ok, msg) = installer.validate_installation(&state_dir)?;
+            println!("{}", serde_json::to_string_pretty(&rec)?);
+            println!("Validation status: {} ({})", ok, msg);
+        }
+        ProtectionCommands::Rollback { state_dir, dry_run } => {
+            let rep = installer.rollback(&state_dir, dry_run)?;
+            println!("{}", serde_json::to_string_pretty(&rep)?);
+        }
+    }
+    Ok(())
+}
+
 fn run() -> Result<()> {
     let cli = Cli::parse();
     init_logging(cli.verbose);
@@ -292,6 +365,8 @@ fn run() -> Result<()> {
         },
         Commands::Decoy { action } => handle_decoy(action)?,
         Commands::Deception { action } => handle_deception(action)?,
+        Commands::Connect { action } => handle_connect(action)?,
+        Commands::Protection { action } => handle_protection(action)?,
     }
 
     Ok(())

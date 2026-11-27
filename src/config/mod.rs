@@ -5,6 +5,7 @@
 use crate::deception::decoy::DecoyGenerationProfile;
 use crate::deception::policy::DeceptionPolicyProfile;
 use crate::errors::{BrahmError, Result};
+use crate::integration::ProtectionProfile;
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -20,6 +21,8 @@ pub struct BrahmConfig {
     pub decoy: DecoyConfig,
     #[serde(default)]
     pub deception: DeceptionConfig,
+    #[serde(default)]
+    pub integration: IntegrationConfig,
 }
 
 impl Default for BrahmConfig {
@@ -29,6 +32,29 @@ impl Default for BrahmConfig {
             scanner: ScannerConfig::default(),
             decoy: DecoyConfig::default(),
             deception: DeceptionConfig::default(),
+            integration: IntegrationConfig::default(),
+        }
+    }
+}
+
+/// Stage 05 Agent Integration & Protection configuration.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct IntegrationConfig {
+    #[serde(default)]
+    pub protection_profile: ProtectionProfile,
+    #[serde(default = "default_authorized_agent")]
+    pub authorized_agent: String,
+}
+
+fn default_authorized_agent() -> String {
+    "brahm-local-test-agent".to_string()
+}
+
+impl Default for IntegrationConfig {
+    fn default() -> Self {
+        Self {
+            protection_profile: ProtectionProfile::AnalysisOnly,
+            authorized_agent: default_authorized_agent(),
         }
     }
 }
@@ -231,9 +257,31 @@ impl BrahmConfig {
     pub fn save_to_path<P: AsRef<Path>>(&self, path: P) -> Result<()> {
         let path = path.as_ref();
         self.validate()?;
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
         let toml_str = toml::to_string_pretty(self)?;
         fs::write(path, toml_str)?;
         Ok(())
+    }
+
+    /// Creates a `.bak` backup if `path` exists before saving updated configuration.
+    pub fn backup_and_save<P: AsRef<Path>>(&self, path: P) -> Result<Option<PathBuf>> {
+        let p = path.as_ref();
+        let backup = if p.is_file() {
+            let mut bak = p.to_path_buf();
+            let filename = p
+                .file_name()
+                .and_then(|n| n.to_str())
+                .unwrap_or("brahm.toml");
+            bak.set_file_name(format!("{}.bak", filename));
+            fs::copy(p, &bak)?;
+            Some(bak)
+        } else {
+            None
+        };
+        self.save_to_path(p)?;
+        Ok(backup)
     }
 
     /// Validates configuration values.
