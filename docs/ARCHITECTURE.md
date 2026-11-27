@@ -64,7 +64,21 @@ flowchart TD
 
 ---
 
-## 3. Reliability & Cybersecurity Guarantees
+## 3. Stage 02 Code Intelligence Pipeline Extension
+
+Stage 02 adds deep deterministic static analysis on top of Stage 01's discovered files:
+
+- Detailed technical design documents:
+  - [`docs/STAGE_02.md`](STAGE_02.md) — Stage 02 Architecture Overview
+  - [`docs/PARSER_ARCHITECTURE.md`](PARSER_ARCHITECTURE.md) — Tree-sitter AST Engine
+  - [`docs/SYMBOL_EXTRACTION.md`](SYMBOL_EXTRACTION.md) — Multi-language Symbol Extraction & Indexing
+  - [`docs/DEPENDENCY_ANALYSIS.md`](DEPENDENCY_ANALYSIS.md) — Import Resolution & Cycle Detection
+  - [`docs/ARCHITECTURE_GRAPH.md`](ARCHITECTURE_GRAPH.md) — `petgraph` Topology & Blast Radius Engine
+  - [`docs/LANGUAGE_SUPPORT.md`](LANGUAGE_SUPPORT.md) — Language, Framework, API & ORM Support Matrix
+
+---
+
+## 4. Reliability & Cybersecurity Guarantees
 - **No Runtime AI Models:** Deterministic algorithms eliminate prompt injection risks and hallucinated structures.
 - **Fail-Safe Defaults:** Symlinks are non-traversing by default; configuration files will not overwrite existing assets without `--force`.
 - **Zero Secret Exposure:** Credentials, private keys, and `.env` values are excluded from report output.

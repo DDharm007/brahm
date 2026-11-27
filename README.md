@@ -3,7 +3,7 @@
 **Blind Reverse-engineering & Adversarial Honeypot Mechanism**
 
 > **Category:** Cybersecurity / Software Deception / Repository Protection  
-> **Status:** Stage 01 — Foundation & Repository Analyzer
+> **Status:** Stage 01 (Repository Analyzer) & Stage 02 (Code Intelligence & Architecture Mapping Engine)
 
 ---
 
@@ -11,19 +11,26 @@
 
 BRAHM is an experimental cybersecurity framework engineered to analyze software repositories, map genuine application architectures deterministically, and establish the structural foundation for controlled repository deception and adversarial honeypots.
 
-BRAHM operates **strictly without runtime AI models or LLM APIs**. All intelligence extraction, parsing, categorization, and integrity verification is performed using deterministic algorithms, hardcoded rules, and conventional systems programming in Rust.
+BRAHM operates **strictly without runtime AI models or LLM APIs**. All intelligence extraction, AST parsing, dependency mapping, graph analysis, categorization, and integrity verification are performed using deterministic algorithms, hardcoded rules, Tree-sitter grammars, and conventional systems programming in Rust.
 
 ---
 
-## 2. Stage 01 Objective: Repository Analyzer
+## 2. Capabilities (Stage 01 + Stage 02)
 
-Stage 01 delivers the **BRAHM Repository Analyzer**, which performs high-assurance analysis of software repositories:
-
+### Stage 01 — Repository Analyzer
 - **Recursive Traversal:** Secure scanning with path canonicalization, symlink boundary protection, and file size quotas.
-- **Language & File Classification:** Deterministic identification of programming languages and structural roles (source code, configuration, tests, database, assets, infrastructure).
-- **Framework & Manifest Discovery:** Evidence-backed framework indicators (React, Next.js, Vite, Node.js, Rust, Django, Flask, Go, Java) with explicit confidence ranking.
+- **Language & File Classification:** Deterministic identification of 25 programming languages and 13 structural file roles.
+- **Framework & Manifest Discovery:** Evidence-backed framework indicators (React, Next.js, Vite, Node.js, Rust, Django, Flask, Go, Java) with confidence rankings.
 - **Integrity Fingerprinting:** Streaming cryptographic hashing (BLAKE3) without loading large files into memory.
-- **Multi-Format Intelligence Reporting:** Terminal, structured JSON (`BRAHM_REPOSITORY_REPORT.json`), and comprehensive Markdown (`BRAHM_REPOSITORY_REPORT.md`).
+- **Multi-Format Reporting:** Terminal, structured JSON (`BRAHM_REPOSITORY_REPORT.json`), and Markdown (`BRAHM_REPOSITORY_REPORT.md`).
+
+### Stage 02 — Code Intelligence & Architecture Mapping Engine
+- **Multi-Language AST Parsing (`src/parser/`):** Powered by Tree-sitter 0.25 across Rust, JavaScript, TypeScript/TSX, Python, Go, Java, C, and C++ with error recovery.
+- **Symbol Index (`src/symbols/`):** Extracts functions, methods, classes, interfaces, structs, enums, and modules with deterministic BLAKE3 symbol IDs (`BRAHM_SYMBOL_INDEX.json`).
+- **Dependency & Cycle Resolution (`src/dependencies/`):** Resolves internal module imports vs. external ecosystem packages and detects circular dependencies via DFS.
+- **Application Structure Landmarks (`src/structure/`):** Detects executable/library/server entry points, HTTP API routes (Express, Fastify, Next.js, FastAPI, Flask, Gin, Echo, Axum, Actix, Spring Boot), and ORM/SQL models.
+- **Architecture Graph Engine (`src/graph/`):** Constructs a `petgraph` directed architecture graph with topological sorting, Tarjan SCC cycle detection, centrality ranking, and blast radius impact metrics (`BRAHM_DEPENDENCY_GRAPH.json`).
+- **Architecture Blueprints (`src/architecture/`, `src/reporting/`):** Synthesizes architectural patterns and layers, separating deterministic static facts from heuristics/inferences (`BRAHM_ARCHITECTURE.json`, `BRAHM_ARCHITECTURE.md`).
 
 ---
 
@@ -38,14 +45,20 @@ brahm/
 │   ├── scanner/           # Recursive filesystem traversal engine
 │   ├── detection/         # Language, manifest, and framework detection
 │   ├── classification/    # File categorization logic
-│   ├── analysis/          # Repository statistics aggregation
+│   ├── analysis/          # Repository statistics aggregation & BLAKE3 hashing
+│   ├── parser/            # Stage 02: Multi-language Tree-sitter AST engine
+│   ├── symbols/           # Stage 02: Symbol extraction & BLAKE3 symbol index
+│   ├── dependencies/      # Stage 02: Import/export analysis & cycle detector
+│   ├── structure/         # Stage 02: Entry point, API route & ORM detection
+│   ├── graph/             # Stage 02: Petgraph dependency graph & blast radius
+│   ├── architecture/      # Stage 02: Architecture intelligence orchestrator
 │   ├── config/            # TOML configuration parser and validation
 │   ├── reporting/         # Terminal, JSON, and Markdown report generators
 │   ├── models/            # Domain data models and Serde schemas
 │   └── errors/            # Centralized thiserror-based error handling
-├── tests/                 # Integration and property tests
-├── fixtures/              # Test fixture repositories
-├── docs/                  # Architecture and technical documentation
+├── tests/                 # Stage 01 & Stage 02 integration & validation suites
+├── fixtures/              # Test fixture repositories (Fixtures A, B, C, D)
+├── docs/                  # Architecture and Stage technical specifications
 ├── Cargo.toml
 └── README.md
 ```
@@ -76,8 +89,13 @@ brahm --version
 # Initialize default configuration
 brahm init
 
-# Scan a target repository
+# Run Stage 01 repository scan
 brahm scan ./my-project --format all --output ./reports
+
+# Run Stage 01 + Stage 02 deep code intelligence & architecture mapping
+brahm scan ./my-project --arch --format all --output ./reports
+# Or use the dedicated subcommand:
+brahm arch ./my-project --format all --output ./reports
 ```
 
 ---
