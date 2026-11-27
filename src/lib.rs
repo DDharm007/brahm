@@ -15,6 +15,7 @@ pub mod config;
 pub mod dependencies;
 pub mod detection;
 pub mod errors;
+pub mod graph;
 pub mod models;
 pub mod parser;
 pub mod reporting;

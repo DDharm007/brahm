@@ -151,6 +151,11 @@ impl SymbolIndex {
         &self.symbols
     }
 
+    /// Iterator over all indexed symbols.
+    pub fn iter(&self) -> std::slice::Iter<'_, Symbol> {
+        self.symbols.iter()
+    }
+
     /// Consume index into vector of symbols.
     pub fn into_vec(self) -> Vec<Symbol> {
         self.symbols
