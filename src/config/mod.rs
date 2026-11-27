@@ -6,6 +6,7 @@ use crate::deception::decoy::DecoyGenerationProfile;
 use crate::deception::policy::DeceptionPolicyProfile;
 use crate::errors::{BrahmError, Result};
 use crate::integration::ProtectionProfile;
+use crate::monitoring::ScoringWeights;
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -23,6 +24,8 @@ pub struct BrahmConfig {
     pub deception: DeceptionConfig,
     #[serde(default)]
     pub integration: IntegrationConfig,
+    #[serde(default)]
+    pub monitoring: MonitoringConfig,
 }
 
 impl Default for BrahmConfig {
@@ -33,6 +36,49 @@ impl Default for BrahmConfig {
             decoy: DecoyConfig::default(),
             deception: DeceptionConfig::default(),
             integration: IntegrationConfig::default(),
+            monitoring: MonitoringConfig::default(),
+        }
+    }
+}
+
+/// Stage 06 Monitoring & Intelligence configuration.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct MonitoringConfig {
+    #[serde(default = "default_monitoring_db_path")]
+    pub db_path: String,
+    #[serde(default = "default_api_bind_addr")]
+    pub api_bind_addr: String,
+    #[serde(default)]
+    pub enable_api: bool,
+    #[serde(default)]
+    pub allow_remote_api: bool,
+    #[serde(default = "default_api_rate_limit")]
+    pub rate_limit_per_minute: usize,
+    #[serde(default)]
+    pub scoring_weights: ScoringWeights,
+}
+
+fn default_monitoring_db_path() -> String {
+    ".brahm_state/brahm_monitoring.db".to_string()
+}
+
+fn default_api_bind_addr() -> String {
+    "127.0.0.1:8787".to_string()
+}
+
+fn default_api_rate_limit() -> usize {
+    120
+}
+
+impl Default for MonitoringConfig {
+    fn default() -> Self {
+        Self {
+            db_path: default_monitoring_db_path(),
+            api_bind_addr: default_api_bind_addr(),
+            enable_api: false,
+            allow_remote_api: false,
+            rate_limit_per_minute: default_api_rate_limit(),
+            scoring_weights: ScoringWeights::default(),
         }
     }
 }

@@ -20,6 +20,7 @@ pub mod errors;
 pub mod graph;
 pub mod integration;
 pub mod models;
+pub mod monitoring;
 pub mod parser;
 pub mod reporting;
 pub mod scanner;

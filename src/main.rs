@@ -4,15 +4,21 @@
 
 use brahm::cli::{
     ArchitectureCommands, Cli, Commands, ConnectCommands, DeceptionCommands, DecoyCommands,
-    InitArgs, PolicyCommands, ProtectionCommands, ScanArgs, SessionCommands,
+    EventsCommands, InitArgs, IntegrityCommands, MonitorCommands, PolicyCommands,
+    ProtectionCommands, ReportsCommands, ScanArgs, SessionCommands, SessionsTimelineCommands,
 };
 use brahm::config::BrahmConfig;
 use brahm::deception::decoy::{DecoyEngine, DecoyGenerationProfile, DecoyRegistry};
 use brahm::deception::{
     DeceptionPolicy, DeceptionPolicyEngine, DeceptionPolicyProfile, InspectionSessionManager,
+    ProductionIntegrityGuard,
 };
 use brahm::errors::{BrahmError, Result};
-use brahm::integration::{ProtectionInstaller, RepositoryInputManager};
+use brahm::integration::{ProtectionInstaller, RepositoryInputManager, RepositoryRecord};
+use brahm::monitoring::{
+    generate_all_monitoring_reports, serve_monitoring_api, EventStore, IntegrityMonitor,
+    MonitoringApiConfig, RuleBasedClassifier, ScoringWeights, SqliteEventStore, TimelineCorrelator,
+};
 use clap::Parser;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -352,6 +358,199 @@ fn handle_protection(action: ProtectionCommands) -> Result<()> {
     Ok(())
 }
 
+fn handle_monitor(action: MonitorCommands) -> Result<()> {
+    match action {
+        MonitorCommands::Start {
+            state_dir,
+            bind,
+            allow_remote,
+        } => {
+            let token = std::env::var("BRAHM_MONITOR_TOKEN").map_err(|_| {
+                BrahmError::Unauthorized(
+                    "BRAHM_MONITOR_TOKEN environment variable (min 16 chars) is required before starting Monitoring API"
+                        .to_string(),
+                )
+            })?;
+            let bind_addr: std::net::SocketAddr = bind.parse().map_err(|e| {
+                BrahmError::Config(format!("Invalid bind address '{}': {}", bind, e))
+            })?;
+
+            let db_path = state_dir.join("brahm_monitoring.db");
+            let store = SqliteEventStore::open(&db_path)?;
+            let cfg = MonitoringApiConfig {
+                bind_addr,
+                allow_remote,
+                auth_token: token,
+                rate_limit_per_minute: 120,
+                state_dir,
+            };
+            let rt = tokio::runtime::Runtime::new().map_err(|e| {
+                BrahmError::Monitoring(format!("Failed starting tokio runtime: {}", e))
+            })?;
+            println!(
+                "Starting authenticated BRAHM monitoring API on http://{}",
+                bind_addr
+            );
+            rt.block_on(serve_monitoring_api(cfg, store))?;
+        }
+        MonitorCommands::Status { state_dir } => {
+            let db_path = state_dir.join("brahm_monitoring.db");
+            let store = SqliteEventStore::open(&db_path)?;
+            let count = store.count_events()?;
+            println!(
+                "Monitoring DB: {}\nRecorded Events: {}",
+                db_path.display(),
+                count
+            );
+        }
+        MonitorCommands::Stop { state_dir } => {
+            let db_path = state_dir.join("brahm_monitoring.db");
+            if db_path.is_file() {
+                let store = SqliteEventStore::open(&db_path)?;
+                store.set_config("monitor_status", "stopped")?;
+            }
+            println!("Monitoring service state marked stopped.");
+        }
+    }
+    Ok(())
+}
+
+fn handle_events(action: EventsCommands) -> Result<()> {
+    match action {
+        EventsCommands::List {
+            db,
+            repository_id,
+            session_id,
+            limit,
+        } => {
+            let store = SqliteEventStore::open(&db)?;
+            let evts = store.list_events(repository_id.as_deref(), session_id.as_deref(), limit)?;
+            println!("{}", serde_json::to_string_pretty(&evts)?);
+        }
+        EventsCommands::Inspect { event_id, db } => {
+            let store = SqliteEventStore::open(&db)?;
+            let evt = store
+                .get_event(&event_id)?
+                .ok_or_else(|| BrahmError::Monitoring(format!("Event '{}' not found", event_id)))?;
+            println!("{}", serde_json::to_string_pretty(&evt)?);
+        }
+    }
+    Ok(())
+}
+
+fn handle_sessions_timeline(action: SessionsTimelineCommands) -> Result<()> {
+    match action {
+        SessionsTimelineCommands::Timeline {
+            session_id,
+            state_dir,
+        } => {
+            let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
+            let evts = store.list_events(None, Some(&session_id), 1000)?;
+            let repo_id = evts
+                .first()
+                .map(|e| e.repository_id.as_str())
+                .unwrap_or("unknown_repo");
+            let timeline =
+                TimelineCorrelator::new().build_session_timeline(&session_id, repo_id, &evts);
+            println!("{}", serde_json::to_string_pretty(&timeline)?);
+        }
+    }
+    Ok(())
+}
+
+fn handle_integrity_check(action: IntegrityCommands) -> Result<()> {
+    match action {
+        IntegrityCommands::Check { state_dir } => {
+            let cfg_path = state_dir.join("BRAHM_REPOSITORY_CONFIG.json");
+            let rec: RepositoryRecord = serde_json::from_str(&fs::read_to_string(&cfg_path)?)?;
+            let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
+
+            let guard = ProductionIntegrityGuard::new();
+            let baseline = guard.capture_genuine_baseline(&rec.local_path)?;
+
+            let reg_and_root = rec
+                .decoy_registry_path
+                .as_ref()
+                .filter(|p| p.is_file())
+                .and_then(|p| DecoyRegistry::load_from_path(p).ok())
+                .map(|r| {
+                    let root = PathBuf::from(&r.data().decoy_layer_root);
+                    (r, root)
+                });
+
+            let monitor = IntegrityMonitor::new();
+            let corr_id = format!("corr_{}", chrono::Utc::now().timestamp());
+            let expected_paths = std::collections::HashSet::new();
+            let (record, evts) = monitor.check_integrity(
+                &rec.repository_id,
+                &rec.local_path,
+                &baseline,
+                reg_and_root.as_ref().map(|(r, p)| (r, p.as_path())),
+                &expected_paths,
+                &corr_id,
+            )?;
+            store.record_integrity(&record)?;
+            store.record_events_batch(&evts)?;
+            println!("{}", serde_json::to_string_pretty(&record)?);
+        }
+    }
+    Ok(())
+}
+
+fn handle_reports_generate(action: ReportsCommands) -> Result<()> {
+    match action {
+        ReportsCommands::Generate { state_dir, output } => {
+            let out_dir = output.unwrap_or_else(|| state_dir.clone());
+            let cfg_path = state_dir.join("BRAHM_REPOSITORY_CONFIG.json");
+            let rec: RepositoryRecord = serde_json::from_str(&fs::read_to_string(&cfg_path)?)?;
+            let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
+            let events = store.list_events(Some(&rec.repository_id), None, 10_000)?;
+            let sess_mgr = InspectionSessionManager::new(state_dir.join("sessions"));
+            let sessions = sess_mgr.list_sessions()?;
+
+            let integrity = match store.latest_integrity(&rec.repository_id)? {
+                Some(r) => r,
+                None => {
+                    let baseline = ProductionIntegrityGuard::new()
+                        .capture_genuine_baseline(&rec.local_path)?;
+                    IntegrityMonitor::new()
+                        .check_integrity(
+                            &rec.repository_id,
+                            &rec.local_path,
+                            &baseline,
+                            None,
+                            &std::collections::HashSet::new(),
+                            "report_gen",
+                        )?
+                        .0
+                }
+            };
+
+            let classifier = RuleBasedClassifier::new(ScoringWeights::default());
+            let generated = generate_all_monitoring_reports(
+                &rec.repository_id,
+                &rec.name,
+                &events,
+                integrity,
+                sessions.len(),
+                &classifier,
+                &out_dir,
+            )?;
+
+            println!(
+                "Generated Stage 06 Intelligence Reports in {}:",
+                out_dir.display()
+            );
+            println!("  - {}", generated.monitoring_report_path.display());
+            println!("  - {}", generated.events_path.display());
+            println!("  - {}", generated.timeline_path.display());
+            println!("  - {}", generated.integrity_path.display());
+            println!("  - {}", generated.markdown_path.display());
+        }
+    }
+    Ok(())
+}
+
 fn run() -> Result<()> {
     let cli = Cli::parse();
     init_logging(cli.verbose);
@@ -367,6 +566,11 @@ fn run() -> Result<()> {
         Commands::Deception { action } => handle_deception(action)?,
         Commands::Connect { action } => handle_connect(action)?,
         Commands::Protection { action } => handle_protection(action)?,
+        Commands::Monitor { action } => handle_monitor(action)?,
+        Commands::Events { action } => handle_events(action)?,
+        Commands::Sessions { action } => handle_sessions_timeline(action)?,
+        Commands::Integrity { action } => handle_integrity_check(action)?,
+        Commands::Reports { action } => handle_reports_generate(action)?,
     }
 
     Ok(())

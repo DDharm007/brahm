@@ -70,6 +70,110 @@ pub enum Commands {
         #[command(subcommand)]
         action: ProtectionCommands,
     },
+
+    /// Start, stop, or inspect monitoring service & optional API (Stage 06)
+    Monitor {
+        #[command(subcommand)]
+        action: MonitorCommands,
+    },
+
+    /// List or inspect recorded telemetry events (Stage 06)
+    Events {
+        #[command(subcommand)]
+        action: EventsCommands,
+    },
+
+    /// Correlate and inspect session event timelines (Stage 06)
+    Sessions {
+        #[command(subcommand)]
+        action: SessionsTimelineCommands,
+    },
+
+    /// Verify repository & decoy integrity against BLAKE3 baseline (Stage 06)
+    Integrity {
+        #[command(subcommand)]
+        action: IntegrityCommands,
+    },
+
+    /// Generate complete Stage 06 security intelligence reports
+    Reports {
+        #[command(subcommand)]
+        action: ReportsCommands,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum MonitorCommands {
+    /// Start optional localhost Axum monitoring API server (requires token via BRAHM_MONITOR_TOKEN)
+    Start {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+        #[arg(long, default_value = "127.0.0.1:8787")]
+        bind: String,
+        #[arg(long)]
+        allow_remote: bool,
+    },
+    /// Show monitoring database status and event count
+    Status {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+    /// Record monitoring stop/shutdown marker cleanly
+    Stop {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum EventsCommands {
+    /// List recorded monitoring events
+    List {
+        #[arg(short, long, default_value = ".brahm_state/brahm_monitoring.db")]
+        db: PathBuf,
+        #[arg(long)]
+        repository_id: Option<String>,
+        #[arg(long)]
+        session_id: Option<String>,
+        #[arg(short, long, default_value_t = 50)]
+        limit: usize,
+    },
+    /// Inspect detailed fields for a single event ID
+    Inspect {
+        event_id: String,
+        #[arg(short, long, default_value = ".brahm_state/brahm_monitoring.db")]
+        db: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum SessionsTimelineCommands {
+    /// Build ordered timeline for a specific session ID
+    Timeline {
+        session_id: String,
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum IntegrityCommands {
+    /// Compare genuine repository and staged decoys against baseline BLAKE3 digests
+    Check {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ReportsCommands {
+    /// Generate BRAHM_MONITORING_REPORT.json, SECURITY_EVENTS.json, TIMELINE.json, INTEGRITY.json & INTELLIGENCE_REPORT.md
+    Generate {
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+        #[arg(short, long)]
+        output: Option<PathBuf>,
+    },
 }
 
 #[derive(ValueEnum, Clone, Copy, Debug, PartialEq, Eq)]
