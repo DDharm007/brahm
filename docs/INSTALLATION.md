@@ -1,6 +1,6 @@
 # BRAHM Installation & Build Guide
 
-This document details the build prerequisites, environment configuration, and verification steps for **BRAHM Stage 01**.
+This document details the build prerequisites, environment configuration, and verification steps for **BRAHM (Stages 01–06)**.
 
 ---
 
@@ -10,12 +10,13 @@ This document details the build prerequisites, environment configuration, and ve
 - **Windows 10 / 11** (x86_64), Linux, or macOS.
 
 ### Toolchain Components
-- **Rust Stable** (version 1.80.0 or later).
+- **Rust Stable** (version 1.80.0 or later; verified cleanly on `rustc 1.100.0`).
 - **Cargo** package manager.
-- **Linker & Runtime**:
-  - Windows: Either Microsoft C++ Build Tools (`link.exe` via Visual Studio) or MinGW-w64 (`gcc` / `ld` / `WinLibs`).
+- **C Compiler / Linker** (needed for Tree-sitter grammars and bundled SQLite `libsqlite3-sys`):
+  - Windows: Either MinGW-w64 (`x86_64-pc-windows-gnu` `gcc`/`ld`) or Visual Studio Build Tools (`x86_64-pc-windows-msvc`).
   - Linux: `build-essential` (`gcc`, `ld`).
   - macOS: Xcode Command Line Tools.
+- **Git CLI** (`git`): Required only when running `brahm connect github <url>` to clone authorized remote repositories.
 
 ---
 
