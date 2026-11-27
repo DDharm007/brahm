@@ -7,9 +7,12 @@
 **Deterministic Pure-Rust Anti-Reverse-Engineering CLI, Code Intelligence Engine & Controlled Deception Telemetry Framework**
 
 ![Rust Edition](https://img.shields.io/badge/Core-Pure%20Rust%20(MSRV%201.80)-DC2626?style=for-the-badge)
+![License: MIT](https://img.shields.io/badge/License-MIT-B91C1C?style=for-the-badge)
 ![Deterministic Engine](https://img.shields.io/badge/AI%20Runtime%20Deps-0%20(100%25%20Deterministic)-111827?style=for-the-badge)
 ![Verified Score](https://img.shields.io/badge/BRAHM%20Rating-82.0%20%2F%20100%20(Strong)-EF4444?style=for-the-badge)
 ![Tests Passing](https://img.shields.io/badge/Verified%20Tests-134%20%2F%20134%20Pass-16A34A?style=for-the-badge)
+
+> **Dedicated AI Agent Guide:** See [`AGENT_README.md`](AGENT_README.md) for step-by-step setup with **Google Antigravity, OpenAI Codex CLI, Claude Code, Cursor, and custom agents** · [`LICENSE`](LICENSE) (MIT)
 
 </div>
 
@@ -202,7 +205,9 @@ Authenticated endpoints: `GET /api/v1/{repositories,architecture,deception,event
 
 ## 13. Coding Agent / AI Inspection Integration Instructions
 
-Add the block below to your external assistant configuration (`AGENTS.md`, `CLAUDE.md`, or CI reviewer guidelines) so external coding agents **never read raw unmonitored production directories** and always inspect through BRAHM's controlled workspace:
+For full copy-paste setups covering **Google Antigravity**, **OpenAI Codex CLI**, **Claude Code**, **Cursor**, **Windsurf**, and custom automation runners, read the dedicated guide: [**`AGENT_README.md`**](AGENT_README.md).
+
+Quick boundary rule block for `AGENTS.md`, `CLAUDE.md`, or `.cursorrules`:
 
 ```markdown
 ## Repository Inspection Boundary (BRAHM Protected Workflow)
@@ -269,4 +274,6 @@ brahm/
 
 ## 18. License & Ethical Use
 
-BRAHM is intended exclusively for **authorized repository protection, defensive deception research, and controlled inspection monitoring** on repositories you own or have explicit written authorization to protect. See [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) and [`reports/BRAHM_ISSUE_REGISTER.md`](reports/BRAHM_ISSUE_REGISTER.md).
+Licensed under the [**MIT License**](LICENSE) (`Copyright (c) 2026 Dharm Patel`).
+
+BRAHM is intended exclusively for **authorized repository protection, defensive deception research, and controlled inspection monitoring** on repositories you own or have explicit written authorization to protect. See [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md), [`AGENT_README.md`](AGENT_README.md), and [`reports/BRAHM_ISSUE_REGISTER.md`](reports/BRAHM_ISSUE_REGISTER.md).
