@@ -40,6 +40,87 @@ pub enum Commands {
 
     /// Run Stage 01 + Stage 02 deep code intelligence and architecture mapping
     Arch(ScanArgs),
+
+    /// Architecture analysis commands (Stage 02)
+    Architecture {
+        #[command(subcommand)]
+        action: ArchitectureCommands,
+    },
+
+    /// Decoy generation and registry management (Stage 03)
+    Decoy {
+        #[command(subcommand)]
+        action: DecoyCommands,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ArchitectureCommands {
+    /// Analyze a repository and build Stage 02 architecture intelligence baseline
+    Analyze(ScanArgs),
+}
+
+#[derive(ValueEnum, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DecoyProfileArg {
+    Disabled,
+    Conservative,
+    Standard,
+    Research,
+}
+
+impl From<DecoyProfileArg> for crate::deception::decoy::DecoyGenerationProfile {
+    fn from(arg: DecoyProfileArg) -> Self {
+        match arg {
+            DecoyProfileArg::Disabled => Self::Disabled,
+            DecoyProfileArg::Conservative => Self::Conservative,
+            DecoyProfileArg::Standard => Self::Standard,
+            DecoyProfileArg::Research => Self::Research,
+        }
+    }
+}
+
+#[derive(Subcommand, Debug)]
+pub enum DecoyCommands {
+    /// Generate controlled synthetic decoys from Stage 02 architecture baseline
+    Generate {
+        /// Target repository path
+        repository: PathBuf,
+        /// Output directory for isolated decoy staging & registry files
+        #[arg(short, long, default_value = ".brahm_decoys")]
+        output: PathBuf,
+        /// Generation profile (disabled, conservative, standard, research)
+        #[arg(short, long, value_enum, default_value = "standard")]
+        profile: DecoyProfileArg,
+    },
+    /// List registered decoys from a BRAHM decoy registry
+    List {
+        /// Path to BRAHM_DECOY_REGISTRY.json
+        #[arg(short, long, default_value = ".brahm_decoys/BRAHM_DECOY_REGISTRY.json")]
+        registry: PathBuf,
+    },
+    /// Inspect metadata for a specific decoy artifact ID
+    Inspect {
+        /// Artifact ID to inspect
+        artifact_id: String,
+        /// Path to BRAHM_DECOY_REGISTRY.json
+        #[arg(short, long, default_value = ".brahm_decoys/BRAHM_DECOY_REGISTRY.json")]
+        registry: PathBuf,
+    },
+    /// Validate integrity of staged decoys against registry fingerprints
+    Validate {
+        /// Path to BRAHM_DECOY_REGISTRY.json
+        #[arg(short, long, default_value = ".brahm_decoys/BRAHM_DECOY_REGISTRY.json")]
+        registry: PathBuf,
+    },
+    /// Safely remove ONLY BRAHM-owned decoys inside isolated staging directory
+    Remove {
+        /// Path to BRAHM_DECOY_REGISTRY.json
+        #[arg(short, long, default_value = ".brahm_decoys/BRAHM_DECOY_REGISTRY.json")]
+        registry: PathBuf,
+        /// Preview removals without modifying disk
+        #[arg(long)]
+        dry_run: bool,
+    },
 }
 
 /// Output report format options

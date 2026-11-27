@@ -13,6 +13,7 @@ pub mod architecture;
 pub mod classification;
 pub mod cli;
 pub mod config;
+pub mod deception;
 pub mod dependencies;
 pub mod detection;
 pub mod errors;

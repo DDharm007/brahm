@@ -2,15 +2,64 @@
 //!
 //! Handles `brahm.toml` loading, validation, and serialization.
 
+use crate::deception::decoy::DecoyGenerationProfile;
 use crate::errors::{BrahmError, Result};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
 
 /// Root configuration for BRAHM.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct BrahmConfig {
+    #[serde(default = "default_config_schema_version")]
+    pub schema_version: String,
+    #[serde(default)]
     pub scanner: ScannerConfig,
+    #[serde(default)]
+    pub decoy: DecoyConfig,
+}
+
+impl Default for BrahmConfig {
+    fn default() -> Self {
+        Self {
+            schema_version: default_config_schema_version(),
+            scanner: ScannerConfig::default(),
+            decoy: DecoyConfig::default(),
+        }
+    }
+}
+
+fn default_config_schema_version() -> String {
+    "2.0".to_string()
+}
+
+/// Stage 03 Decoy Generation configuration.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct DecoyConfig {
+    #[serde(default)]
+    pub profile: DecoyGenerationProfile,
+    #[serde(default = "default_decoy_staging_dir")]
+    pub staging_dir: String,
+    #[serde(default = "default_exclude_from_production")]
+    pub exclude_from_production_builds: bool,
+}
+
+fn default_decoy_staging_dir() -> String {
+    ".brahm/decoys".to_string()
+}
+
+fn default_exclude_from_production() -> bool {
+    true
+}
+
+impl Default for DecoyConfig {
+    fn default() -> Self {
+        Self {
+            profile: DecoyGenerationProfile::Standard,
+            staging_dir: default_decoy_staging_dir(),
+            exclude_from_production_builds: default_exclude_from_production(),
+        }
+    }
 }
 
 /// Scanner subsystem configuration.

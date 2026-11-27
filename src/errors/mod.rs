@@ -43,6 +43,33 @@ pub enum BrahmError {
 
     #[error("Parser error: {0}")]
     Parser(#[from] crate::parser::ParserError),
+
+    #[error("Decoy generation error: {0}")]
+    Decoy(String),
+
+    #[error("Template engine error: {0}")]
+    Template(String),
+
+    #[error("Deception engine error: {0}")]
+    Deception(String),
+
+    #[error("Policy violation: {0}")]
+    PolicyViolation(String),
+
+    #[error("Inspection session error: {0}")]
+    Session(String),
+
+    #[error("Repository integration error: {0}")]
+    Integration(String),
+
+    #[error("Monitoring engine error: {0}")]
+    Monitoring(String),
+
+    #[error("Storage / database error: {0}")]
+    Database(String),
+
+    #[error("Unauthorized operation: {0}")]
+    Unauthorized(String),
 }
 
 /// Standard Result alias for BRAHM operations.
