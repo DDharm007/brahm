@@ -306,22 +306,21 @@ impl Scanner {
 /// Detects if a file is hidden (starts with '.' or has Windows hidden attribute).
 fn is_hidden_file(entry: &DirEntry) -> bool {
     let name = entry.file_name().to_string_lossy();
-    if name.starts_with('.') && name != "." && name != ".." {
-        return true;
-    }
+    let dot_hidden = name.starts_with('.') && name != "." && name != "..";
 
+    // Windows FILE_ATTRIBUTE_HIDDEN check (compiled out on other platforms).
     #[cfg(windows)]
-    {
-        use std::os::windows::fs::MetadataExt;
+    if !dot_hidden {
         if let Ok(meta) = entry.metadata() {
-            const FILE_ATTRIBUTE_HIDDEN: u32 = 0x00000002;
+            use std::os::windows::fs::MetadataExt;
+            const FILE_ATTRIBUTE_HIDDEN: u32 = 0x0000_0002;
             if (meta.file_attributes() & FILE_ATTRIBUTE_HIDDEN) != 0 {
                 return true;
             }
         }
     }
 
-    false
+    dot_hidden
 }
 
 /// Inspects the first 8 KB of a file to reliably determine if it contains binary data.
