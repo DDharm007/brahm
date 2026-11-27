@@ -149,12 +149,24 @@ fn test_02_strict_readonly_stage02() {
 
 #[test]
 fn test_03_secret_protection_stage02() {
-    let fixture_path = Path::new("fixtures/fixture_d_mixed");
+    let repo_dir = tempdir().unwrap();
     let out_dir = tempdir().unwrap();
 
-    let stage1 = run_repository_analysis(fixture_path, BrahmConfig::default()).unwrap();
+    fs::write(
+        repo_dir.path().join(".env"),
+        "SUPER_SECRET_DB_PASSWORD=do_not_leak_in_brahm_reports_99999\n",
+    )
+    .unwrap();
+    fs::write(
+        repo_dir.path().join("private_key.pem"),
+        "-----BEGIN PRIVATE KEY-----\nSECRET_KEY_MATERIAL_DO_NOT_LEAK\n-----END PRIVATE KEY-----\n",
+    )
+    .unwrap();
+    fs::write(repo_dir.path().join("main.rs"), "pub fn main() {}\n").unwrap();
+
+    let stage1 = run_repository_analysis(repo_dir.path(), BrahmConfig::default()).unwrap();
     let bundle = ArchitectureEngine::new()
-        .analyze(fixture_path, &stage1)
+        .analyze(repo_dir.path(), &stage1)
         .unwrap();
     dispatch_architecture_reports(&bundle, OutputFormat::All, Some(out_dir.path())).unwrap();
 
@@ -173,6 +185,11 @@ fn test_03_secret_protection_stage02() {
         assert!(
             !content.contains("SUPER_SECRET_DB_PASSWORD"),
             "Secret key leaked into {}",
+            artifact
+        );
+        assert!(
+            !content.contains("SECRET_KEY_MATERIAL_DO_NOT_LEAK"),
+            "PEM key leaked into {}",
             artifact
         );
     }
