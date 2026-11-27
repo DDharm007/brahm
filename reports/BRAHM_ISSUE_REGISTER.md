@@ -11,7 +11,7 @@
 | `ISSUE-005` | Medium | Stage 02 Code Intelligence | `src/structure/datamodels.rs`, `src/structure/routes.rs` | Fixed and verified | `stage07_audit_regressions::test_issue_005_schema_sql_tables_and_middleware_express_handler` |
 | `ISSUE-006` | Medium | Monitoring HTTP API & CORS | `src/monitoring/api.rs` | Fixed and verified | `stage07_audit_regressions::test_issue_006_monitoring_api_endpoints_and_localhost_cors` |
 | `ISSUE-007` | Low | Decoy Artifact Cleanup | `src/deception/decoy/registry.rs` | Fixed and verified | `stage07_audit_regressions::test_issue_007_cleanup_prunes_empty_decoy_subdirs` |
-| `ISSUE-008` | Low | Documentation & CLI Apply UX | `README.md`, `src/cli/mod.rs`, `src/integration/installer.rs` | `brahm apply` implemented; README in Phase 9 (GUI omitted per owner) | `stage07_audit_regressions::test_apply_one_command_workflow_and_dry_run` |
+| `ISSUE-008` | Low | Documentation & CLI Apply UX | `README.md`, `src/cli/mod.rs`, `src/integration/installer.rs` | Fixed and verified (GUI omitted per owner) | `stage07_audit_regressions::test_apply_one_command_workflow_and_dry_run` + `README.md` |
 | `ISSUE-009` | Informational | Windows Path Formatting | `src/analysis/aggregator.rs`, `src/deception/mirror.rs` | Documented known platform behavior | `tests/milestone07_stage02_validation.rs` |
 
 ---
@@ -69,8 +69,8 @@
 ### ISSUE-008 — Stage 07 Public README Overhaul & Single-Command Apply UX `[Low]`
 - **Affected Files:** `README.md`, `src/cli/mod.rs`, `src/integration/installer.rs`
 - **Root Cause:** Public root documentation belonged to Phase 9 after rating/experiment evidence compiled, and operators needed a single-command `brahm apply <path>` entrypoint for loading a user project and applying anti-reverse-engineering protection directly via CLI (React `dashboard/` UI intentionally omitted per owner directive).
-- **Fix Applied:** Implemented `brahm apply` (`brahm protect`) + `ProtectionInstaller::apply` + `verify_state`; `README.md` overhaul completes in Phase 9.
-- **Verification:** `test_apply_one_command_workflow_and_dry_run` (PASS).
+- **Fix Applied:** Implemented `brahm apply` (`brahm protect`) + `ProtectionInstaller::apply` + `verify_state`, and completed the full public `README.md` overhaul with SVG branding badge, empirical ratings, and coding-agent boundary rules (React web UI omitted per owner directive).
+- **Verification:** `test_apply_one_command_workflow_and_dry_run` + `scripts/reproduce_experiment.ps1` (PASS).
 
 ### ISSUE-009 — Windows UNC Extended Path Prefix (`\\?\`) in Display Output `[Informational]`
 - **Affected Files:** `src/analysis/aggregator.rs`, `src/deception/mirror.rs`

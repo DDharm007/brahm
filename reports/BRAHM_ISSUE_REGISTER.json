@@ -9,9 +9,9 @@
     "medium": 3,
     "low": 2,
     "informational": 1,
-    "fixed_and_verified": 6,
+    "fixed_and_verified": 7,
     "documented_limitation_or_behavior": 2,
-    "scheduled_for_later_phase": 1
+    "scheduled_for_later_phase": 0
   },
   "issues": [
     {
@@ -100,7 +100,7 @@
       "impact": "Public documentation required Phase 9 overhaul; streamlined CLI apply workflow added for single-command protection.",
       "fix_applied": "Added `brahm apply` (`brahm protect`) single-command protection workflow + `verify_state`; `README.md` overhaul scheduled in Phase 9.",
       "verification_method": "cargo test --test stage07_audit_regressions test_apply_one_command_workflow_and_dry_run",
-      "status": "CLI workflow implemented; README scheduled for Phase 9"
+      "status": "Fixed and verified (README.md & brahm apply complete; GUI omitted per owner)"
     },
     {
       "issue_id": "ISSUE-009",

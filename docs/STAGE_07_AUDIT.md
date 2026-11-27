@@ -39,8 +39,7 @@ All project-owned Rust source modules, test suites, configuration structures, sc
 
 A total of **9 issues** were identified during the full audit (`1 Critical`, `2 High`, `3 Medium`, `2 Low`, `1 Informational`).
 
-- **7 engineering issues resolved & regression-tested (`ISSUE-001`, `ISSUE-002`, `ISSUE-003`, `ISSUE-005`, `ISSUE-006`, `ISSUE-007`, plus `brahm apply` CLI UX under `ISSUE-008`)** and 1 CLI workflow alignment documented (`ISSUE-004`).
-- **Remaining documentation deliverable (`README.md` under `ISSUE-008`)** completes in Phase 9 (optional web frontend `dashboard/` intentionally omitted per owner directive keeping BRAHM pure CLI/Rust).
+- **All 7 actionable engineering/documentation issues resolved & verified (`ISSUE-001`, `ISSUE-002`, `ISSUE-003`, `ISSUE-005`, `ISSUE-006`, `ISSUE-007`, and `ISSUE-008` including `brahm apply` CLI & root `README.md`; optional web frontend `dashboard/` intentionally omitted per owner directive keeping BRAHM pure CLI/Rust)** alongside 1 CLI workflow alignment documented (`ISSUE-004`).
 - **1 informational Windows platform behavior (`ISSUE-009`)** documented cleanly.
 
 See [BRAHM_ISSUE_REGISTER.json](../reports/BRAHM_ISSUE_REGISTER.json) and [BRAHM_ISSUE_REGISTER.md](../reports/BRAHM_ISSUE_REGISTER.md) for the complete issue ledger.

@@ -1,0 +1,7 @@
+# BRAHM-SYNTHETIC-ARTIFACT: decoy_325c74c5d81d5c05
+service:
+  name: "brahm-commerce-demo-inspection-stub"
+  synthetic: true
+  canary_marker: "BRAHM-CANARY-70D688A4E9C0"
+  endpoint: "https://decoy-endpoint.invalid/api"
+  timeout_ms: 5000

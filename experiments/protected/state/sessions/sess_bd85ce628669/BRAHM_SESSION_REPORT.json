@@ -1,0 +1,34 @@
+{
+  "session_id": "sess_bd85ce628669",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "genuine_repo_path": "\\\\?\\D:\\Personal Projects\\Brahm BLA\\demo\\brahm-commerce-demo",
+  "workspace_path": "\\\\?\\D:\\Personal Projects\\Brahm BLA\\experiments\\protected\\state\\sessions\\sess_bd85ce628669\\workspace",
+  "state_dir": "d:\\Personal Projects\\Brahm BLA\\experiments\\protected\\state\\sessions\\sess_bd85ce628669",
+  "policy_id": "pol_research_v1",
+  "policy_version": "1.0.0",
+  "policy_profile": "research",
+  "registered_artifacts": [
+    "decoy_18c46ced59d40a22",
+    "decoy_677ffff5a968188f",
+    "decoy_d9f0b7c160f4d297",
+    "decoy_811112c2221985c8",
+    "decoy_c34470c51dc68c6d",
+    "decoy_54dd6c0bd4fdf907",
+    "decoy_325c74c5d81d5c05",
+    "decoy_f14e3db038406867",
+    "decoy_afd0e437f6eb4c60",
+    "decoy_e82c958168b620b7",
+    "decoy_75b673cbdb07ad53"
+  ],
+  "baseline_fingerprint": "11927d3800ede10a5deca0654eac02f5bb5082d0dd698974c662a8ad93015b1e",
+  "inspection_view_fingerprint": "e7425b0d16eb024735941e4f294ec94be1b7e5102747d188ff68010335ab088d",
+  "created_at": "2026-11-27T06:37:56.782359700Z",
+  "expires_at": "2026-11-27T07:37:56.782359700Z",
+  "updated_at": "2026-11-27T06:37:56.783634Z",
+  "status": "active",
+  "audit_notes": [
+    "Created session sess_bd85ce628669",
+    "Prepared mirror with 37 genuine and 11 synthetic artifacts",
+    "Session activated"
+  ]
+}

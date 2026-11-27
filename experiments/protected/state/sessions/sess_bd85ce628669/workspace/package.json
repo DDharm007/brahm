@@ -1,0 +1,25 @@
+{
+  "name": "brahm-commerce-api",
+  "version": "1.0.0",
+  "description": "Reference TypeScript, Express, and SQLite e-commerce backend service used as the target codebase for BRAHM anti-reverse-engineering experiments.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/server.js",
+    "test": "tsc && node --test dist/tests/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "name": "brahm-commerce-demo",
+  "source_kind": "local_path",
+  "local_path": "\\\\?\\D:\\Personal Projects\\Brahm BLA\\demo\\brahm-commerce-demo",
+  "registered_at": "2026-11-27T06:37:56.532019100Z",
+  "updated_at": "2026-11-27T06:37:56.789098600Z",
+  "baseline_fingerprint": "11927d3800ede10a5deca0654eac02f5bb5082d0dd698974c662a8ad93015b1e",
+  "active_profile": "research_mode",
+  "state_dir": "d:\\Personal Projects\\Brahm BLA\\experiments\\protected\\state",
+  "architecture_pattern": "REST API / Backend Service",
+  "decoy_registry_path": "d:\\Personal Projects\\Brahm BLA\\experiments\\protected\\state\\decoys\\BRAHM_DECOY_REGISTRY.json",
+  "active_session_id": "sess_bd85ce628669"
+}

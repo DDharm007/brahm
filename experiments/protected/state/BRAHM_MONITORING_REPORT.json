@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-27T06:42:06.658912100Z",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "repository_name": "brahm-commerce-demo",
+  "monitoring_start": "2026-11-27T06:37:56.685643400Z",
+  "monitoring_end": "2026-11-27T06:42:06.072000400Z",
+  "total_events": 23,
+  "canary_events_count": 11,
+  "decoy_interactions_count": 11,
+  "session_count": 1,
+  "aggregate_risk_score": 20,
+  "integrity_status": {
+    "record_id": "int_867c4232b2bb",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "checked_at": "2026-11-27T06:42:06.464757100Z",
+    "baseline_matches": true,
+    "decoy_integrity_valid": true,
+    "unexpected_change_count": 0,
+    "diffs": [],
+    "remediation_guidance": "No unexpected integrity drift detected."
+  },
+  "findings": [
+    {
+      "finding_id": "fnd_50f6fce72b40",
+      "rule_id": "R01_REPEATED_CANARY_ACCESS",
+      "rule_name": "Repeated Registered Canary Access",
+      "severity": "high",
+      "confidence": 0.85,
+      "score_contribution": 20,
+      "evidence": [
+        "Observed 11 distinct registered canary marker interactions"
+      ],
+      "supporting_event_ids": [
+        "evt_3191157e4456",
+        "evt_9d5f2b33aaaa",
+        "evt_8c0f7f24ef2b",
+        "evt_8d4ae25b160a",
+        "evt_9a64ed685b40",
+        "evt_0955c846849d",
+        "evt_176205250e74",
+        "evt_f13eea1220da",
+        "evt_6b7fe9491650",
+        "evt_85bb495110ae",
+        "evt_49315a9b936c"
+      ],
+      "detected_at": "2026-11-27T06:42:06.658904900Z",
+      "attribution_disclaimer": "Actor attribution remains explicitly uncertain: telemetry observes interaction with a registered artifact inside the instrumented boundary and does not independently identify human vs. AI agent identity."
+    }
+  ],
+  "known_limitations": [
+    "BRAHM cannot claim prevention of reverse engineering or copying from observed decoy hits alone.",
+    "Canary interactions establish observed artifact access inside the telemetry boundary; actor attribution (human vs. AI model) remains uncertain without external corroboration.",
+    "File integrity checks validate cryptographic BLAKE3 match against baseline snapshots, not runtime semantic safety."
+  ],
+  "recommended_actions": [
+    "Review supporting rule evidence and correlate session timelines before taking defensive action."
+  ]
+}

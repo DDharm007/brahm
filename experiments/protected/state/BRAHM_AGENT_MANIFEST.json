@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-27T06:37:56.789923100Z",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "registered_adapters": [
+    "brahm-local-test-agent"
+  ],
+  "sessions": [
+    {
+      "agent_session_id": "agent_49ca767a115b",
+      "agent_name": "brahm-local-test-agent",
+      "inspection_session_id": "sess_bd85ce628669",
+      "workspace_path": "\\\\?\\D:\\Personal Projects\\Brahm BLA\\experiments\\protected\\state\\sessions\\sess_bd85ce628669\\workspace",
+      "prepared_at": "2026-11-27T06:37:56.788953200Z"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "policy_id": "pol_research_v1",
+  "version": "1.0.0",
+  "profile": "research",
+  "priority": 300,
+  "include_categories": [
+    "synthetic_source",
+    "synthetic_documentation",
+    "synthetic_configuration",
+    "canary_artifact",
+    "synthetic_dependency"
+  ],
+  "exclude_categories": [],
+  "include_artifact_ids": [],
+  "exclude_artifact_ids": [],
+  "include_docs_projection": true,
+  "include_synthetic_configs": true,
+  "register_canaries": true,
+  "allow_secret_exposure": false,
+  "allow_production_deployment": false,
+  "max_artifacts": null
+}

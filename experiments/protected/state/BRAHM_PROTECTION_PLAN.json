@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "plan_3d1c5ce85465",
+  "generated_at": "2026-11-27T06:37:56.535796300Z",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "repository_name": "brahm-commerce-demo",
+  "current_profile": "analysis_only",
+  "target_profile": "research_mode",
+  "proposed_steps": [
+    "Run Stage 01 & Stage 02 baseline analysis",
+    "Generate Research-tier synthetic decoys & canaries in isolated staging",
+    "Prepare isolated controlled inspection workspace (no genuine mutations)",
+    "Validate production build exclusion invariants"
+  ],
+  "will_generate_decoys": true,
+  "will_create_mirror": true,
+  "production_exclusions_verified": true,
+  "requires_explicit_approval": true
+}

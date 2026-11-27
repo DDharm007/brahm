@@ -1,0 +1,303 @@
+{
+  "schema_version": "1.0",
+  "session_id": "sess_bd85ce628669",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "generated_at": "2026-11-27T06:37:56.782329700Z",
+  "workspace_root": "//?/D:/Personal Projects/Brahm BLA/experiments/protected/state/sessions/sess_bd85ce628669/workspace",
+  "baseline_fingerprint": "11927d3800ede10a5deca0654eac02f5bb5082d0dd698974c662a8ad93015b1e",
+  "inspection_view_fingerprint": "e7425b0d16eb024735941e4f294ec94be1b7e5102747d188ff68010335ab088d",
+  "policy_id": "pol_research_v1",
+  "stripped_secret_count": 0,
+  "genuine_file_count": 37,
+  "synthetic_file_count": 11,
+  "entries": [
+    {
+      "relative_path": ".env.example",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "15f9d14e796cf18734f945cdbf9fbddad1fb4f6d0dbd8d9f4d6174c029f6809e"
+    },
+    {
+      "relative_path": ".gitignore",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "872a9995a1706ee0318f29cd36cb4b6150e1b4825684ebdef36202bff4619f90"
+    },
+    {
+      "relative_path": "API_DOCUMENTATION.md",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "69f863cfee0b617f0ca405fe9791227b9de3712fd121e4ece2dda8dee6415c56"
+    },
+    {
+      "relative_path": "ARCHITECTURE.md",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "fc8b45d2491d0c5e645ae8f3e55eb5af082e3bf58c174c76900cd2cbdcf46f75"
+    },
+    {
+      "relative_path": "DATABASE_SCHEMA.md",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "9b15dc11aeb8b9713d9816c16856aea067d1fcb5c2ada35c40dd7e731f3bd208"
+    },
+    {
+      "relative_path": "README.md",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "4e1aa6f165b5825aff2fe729071661a59bb31aca5d657ee1502fe8bb3407688f"
+    },
+    {
+      "relative_path": "canary/BRAHM_CANARY_ANCHOR.md",
+      "is_synthetic": true,
+      "artifact_id": "decoy_18c46ced59d40a22",
+      "sha_or_blake3": "23fe73a7bc61dfacb64d43f947001b8f0871c75e67ec844b336f330eea056e9b"
+    },
+    {
+      "relative_path": "canary/inspection_canary_token.json",
+      "is_synthetic": true,
+      "artifact_id": "decoy_75b673cbdb07ad53",
+      "sha_or_blake3": "c1ff170da2c1aedb6842a539275d18f037fb55655b6962f71f28e4b818625b43"
+    },
+    {
+      "relative_path": "config/api.decoy.json",
+      "is_synthetic": true,
+      "artifact_id": "decoy_54dd6c0bd4fdf907",
+      "sha_or_blake3": "1c9af86f0401c13872276572bd2de321237e61327041f8f95c9c52bc146f5fd8"
+    },
+    {
+      "relative_path": "config/service.decoy.yaml",
+      "is_synthetic": true,
+      "artifact_id": "decoy_325c74c5d81d5c05",
+      "sha_or_blake3": "5c2cdba100730440449bd0f6032e3b8dc35be675a093d4ad5d215a30ceb8a354"
+    },
+    {
+      "relative_path": "db/migrations/001_initial_commerce.sql",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "32586c4d630a01bd61b51114301965b642983c3c10a2d7a1dc197d1ba175429a"
+    },
+    {
+      "relative_path": "db/schema.decoy.sql",
+      "is_synthetic": true,
+      "artifact_id": "decoy_f14e3db038406867",
+      "sha_or_blake3": "3d01948d00358428a06c782f56363ea7c3a58cfd0844b0839282835840414052"
+    },
+    {
+      "relative_path": "db/schema.sql",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "3d4362f6ec5f637eaac7f3eed913ae63a01e4129a27de4c7ef4cd007dcef2f76"
+    },
+    {
+      "relative_path": "docs/COMPONENT_OVERVIEW.md",
+      "is_synthetic": true,
+      "artifact_id": "decoy_e82c958168b620b7",
+      "sha_or_blake3": "ebe96bc647f5cdbcc9f1e0f36bcd7c1768444e91096f8b7fb4d05be47dcc90e9"
+    },
+    {
+      "relative_path": "docs/INTERNAL_DESIGN.md",
+      "is_synthetic": true,
+      "artifact_id": "decoy_d9f0b7c160f4d297",
+      "sha_or_blake3": "3dccda400b5627941f0440a20fd1e0453c1fe2e81fd82a10650d04a183eec167"
+    },
+    {
+      "relative_path": "docs/SERVICE_DEPENDENCIES.md",
+      "is_synthetic": true,
+      "artifact_id": "decoy_afd0e437f6eb4c60",
+      "sha_or_blake3": "25981c72502dd2cb269aa1b8342b00cff58edb6b2a36485bfe2df1f999820d6c"
+    },
+    {
+      "relative_path": "docs/SYSTEM_ARCHITECTURE.md",
+      "is_synthetic": true,
+      "artifact_id": "decoy_677ffff5a968188f",
+      "sha_or_blake3": "145badb98e4da0134810efe2ab81837e33f40e94f21cac9dab25af5dff24ad06"
+    },
+    {
+      "relative_path": "manifests/synthetic_dependencies.decoy.json",
+      "is_synthetic": true,
+      "artifact_id": "decoy_811112c2221985c8",
+      "sha_or_blake3": "18a76d1907468c3155d71614e9167b16452d136b0e8cb45f363128aa1a3dec11"
+    },
+    {
+      "relative_path": "package-lock.json",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "e2d201b1ec6a6d78638221c9f4fb12618af3badd837a73758ef13bf15420fad1"
+    },
+    {
+      "relative_path": "package.json",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "29dc8bc4297f2bb627494fec7cee09bbe96f6e43459627412ce22d93b0d28cf2"
+    },
+    {
+      "relative_path": "src/app.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "8b4ca93e80e569d1fba3a916cc2b9262a8095fcb1487f4e8a75d887294bb880a"
+    },
+    {
+      "relative_path": "src/config/env.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "0fd83f8c2705f9cb0c2ce042295669e7ecd12af072a21555da83bbd2f54515b0"
+    },
+    {
+      "relative_path": "src/db/database.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "f1bd4b8d252848a48408b5fdbfba00dcefd4bbbba99db4f02b2b9b65433bc928"
+    },
+    {
+      "relative_path": "src/middleware/auth.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "8b7f76a475875871c0c6e081f0faec2f7e2079f30694c879a03f15b739cd70a4"
+    },
+    {
+      "relative_path": "src/middleware/errors.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "125f8a1a93108ae1a20204f298dead82b8a0e8b02c6367778ab3fa95f39bbe5f"
+    },
+    {
+      "relative_path": "src/middleware/rateLimit.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "eaea4f0ed13c4e6782786921c456eab44fe1406c984b30fce12efebf36e2e721"
+    },
+    {
+      "relative_path": "src/middleware/validation.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "50fbafe194e6af44c75372e5db8c7a2407a686d16fa2dd42912d7c7f0600d4ec"
+    },
+    {
+      "relative_path": "src/models/types.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "02c0956359d6457952bc4143aaf872236b5e731748c903ce8ad7540d3004e8e8"
+    },
+    {
+      "relative_path": "src/routes/admin.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "5cf1e1da62d4c44832881bbb31e5ad90386c6a5a14dd8c372ecc5ef0dfb5f007"
+    },
+    {
+      "relative_path": "src/routes/auth.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "ff136415615459b7c2f95b258eb615e50bd1a848ea568dfff917423a19f6d957"
+    },
+    {
+      "relative_path": "src/routes/cart.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "cc44c1ea58aa940df5a98932996c762a83d41ed69d35dfaa1849ebc951521eee"
+    },
+    {
+      "relative_path": "src/routes/health.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "06039285e253ab60ee7285429a1c436b2deb2bedf28cbc092cbaa07eadf318a7"
+    },
+    {
+      "relative_path": "src/routes/orders.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "7e9e67749f3d58168e0b6228c8c4386c71bde848df304de2cde2db6079355404"
+    },
+    {
+      "relative_path": "src/routes/payments.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "fe511576f6791fa8ac1d18d2d769adcaf0a0b45b12d0e31e8ad28396dfa26bdc"
+    },
+    {
+      "relative_path": "src/routes/products.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "85c3c63ebc192f585a1e5bde8c9e6abf2568bc890a288d44b18fd5c6ecf14d08"
+    },
+    {
+      "relative_path": "src/server.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "0713b4d69a33d534b33daa460618bff983ac775f1ae6725b3c9e1b8f0bd33c03"
+    },
+    {
+      "relative_path": "src/services/adminService.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "e9a932866587e28a199834badfefc6a6cbb8013b0eaebb8554e41351fcb1f4ee"
+    },
+    {
+      "relative_path": "src/services/authService.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "f15217a425fd81259b6e33667e7f5fbc81642a7afca195f81f29f5eb87ab2101"
+    },
+    {
+      "relative_path": "src/services/cartService.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "96eec4149ae1a2fae32d7743e14329e4cadc9c45b393957319bfb5c7aefd6e09"
+    },
+    {
+      "relative_path": "src/services/catalogService.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "5cdd1f50d1e186340873c0fd0b1323219a8883ef5cb9ed57ac147222229ecf2d"
+    },
+    {
+      "relative_path": "src/services/orderService.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "201972bf1e60e49210f7897ffc28d9ac710ad84a92a0f561eb6f297e03c85ff8"
+    },
+    {
+      "relative_path": "src/services/paymentService.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "e3aec0035a19db19bb43ab6a9d18a36067a96dd57b40f878735f75c294aa47c3"
+    },
+    {
+      "relative_path": "src/syntheticTelemetryBridge.ts",
+      "is_synthetic": true,
+      "artifact_id": "decoy_c34470c51dc68c6d",
+      "sha_or_blake3": "5e15ed73c27e3f2628c79737a5884fcf58703f66d86971c3b88d19785077dc2e"
+    },
+    {
+      "relative_path": "src/utils/password.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "7fa8f33ffe0a57364b0f3012afb568393d8c876164f4f7e42009a477f94d6b03"
+    },
+    {
+      "relative_path": "src/utils/pricing.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "530b1221d7e2f6a07fc89cb11a3c16332ccf7a35790faf0572ce43a8730e67f2"
+    },
+    {
+      "relative_path": "src/utils/token.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "97612e215875a83e3a9b5ce876c391f41b27d3e84d47a43e0dd067f86af32eea"
+    },
+    {
+      "relative_path": "tests/commerce.test.ts",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "c685128e136d530e00f0fd2d3dcc3d7eb60e4dd609a5141f573ab4a39ee93b5c"
+    },
+    {
+      "relative_path": "tsconfig.json",
+      "is_synthetic": false,
+      "artifact_id": null,
+      "sha_or_blake3": "fbce1d68621f0efe820dafbb432e3c6f458a095cc094451ccd8ba5380b47193c"
+    }
+  ]
+}

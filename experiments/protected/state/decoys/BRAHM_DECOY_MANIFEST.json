@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-27T06:37:56.682242300Z",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "total_artifacts": 11,
+  "production_build_excluded": true,
+  "entries": [
+    {
+      "artifact_id": "decoy_18c46ced59d40a22",
+      "relative_path": "canary/BRAHM_CANARY_ANCHOR.md",
+      "category": "canary_artifact",
+      "integrity_fingerprint": "23fe73a7bc61dfacb64d43f947001b8f0871c75e67ec844b336f330eea056e9b",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-E77BFAF46362"
+    },
+    {
+      "artifact_id": "decoy_677ffff5a968188f",
+      "relative_path": "docs/SYSTEM_ARCHITECTURE.md",
+      "category": "synthetic_documentation",
+      "integrity_fingerprint": "145badb98e4da0134810efe2ab81837e33f40e94f21cac9dab25af5dff24ad06",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-A0FC6F45E10C"
+    },
+    {
+      "artifact_id": "decoy_d9f0b7c160f4d297",
+      "relative_path": "docs/INTERNAL_DESIGN.md",
+      "category": "synthetic_documentation",
+      "integrity_fingerprint": "3dccda400b5627941f0440a20fd1e0453c1fe2e81fd82a10650d04a183eec167",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-11C0A24C8660"
+    },
+    {
+      "artifact_id": "decoy_811112c2221985c8",
+      "relative_path": "manifests/synthetic_dependencies.decoy.json",
+      "category": "synthetic_dependency",
+      "integrity_fingerprint": "18a76d1907468c3155d71614e9167b16452d136b0e8cb45f363128aa1a3dec11",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-5BA11E9B86E3"
+    },
+    {
+      "artifact_id": "decoy_c34470c51dc68c6d",
+      "relative_path": "src/syntheticTelemetryBridge.ts",
+      "category": "synthetic_source",
+      "integrity_fingerprint": "5e15ed73c27e3f2628c79737a5884fcf58703f66d86971c3b88d19785077dc2e",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-F7D7DBA6FFC3"
+    },
+    {
+      "artifact_id": "decoy_54dd6c0bd4fdf907",
+      "relative_path": "config/api.decoy.json",
+      "category": "synthetic_configuration",
+      "integrity_fingerprint": "1c9af86f0401c13872276572bd2de321237e61327041f8f95c9c52bc146f5fd8",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-909524652FD1"
+    },
+    {
+      "artifact_id": "decoy_325c74c5d81d5c05",
+      "relative_path": "config/service.decoy.yaml",
+      "category": "synthetic_configuration",
+      "integrity_fingerprint": "5c2cdba100730440449bd0f6032e3b8dc35be675a093d4ad5d215a30ceb8a354",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-70D688A4E9C0"
+    },
+    {
+      "artifact_id": "decoy_f14e3db038406867",
+      "relative_path": "db/schema.decoy.sql",
+      "category": "synthetic_configuration",
+      "integrity_fingerprint": "3d01948d00358428a06c782f56363ea7c3a58cfd0844b0839282835840414052",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-3732F08AFC7B"
+    },
+    {
+      "artifact_id": "decoy_afd0e437f6eb4c60",
+      "relative_path": "docs/SERVICE_DEPENDENCIES.md",
+      "category": "synthetic_documentation",
+      "integrity_fingerprint": "25981c72502dd2cb269aa1b8342b00cff58edb6b2a36485bfe2df1f999820d6c",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-6D86EB7068EC"
+    },
+    {
+      "artifact_id": "decoy_e82c958168b620b7",
+      "relative_path": "docs/COMPONENT_OVERVIEW.md",
+      "category": "synthetic_documentation",
+      "integrity_fingerprint": "ebe96bc647f5cdbcc9f1e0f36bcd7c1768444e91096f8b7fb4d05be47dcc90e9",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-CF5ADDDCCA0A"
+    },
+    {
+      "artifact_id": "decoy_75b673cbdb07ad53",
+      "relative_path": "canary/inspection_canary_token.json",
+      "category": "canary_artifact",
+      "integrity_fingerprint": "c1ff170da2c1aedb6842a539275d18f037fb55655b6962f71f28e4b818625b43",
+      "brahm_owned": true,
+      "synthetic_status": true,
+      "canary_token": "BRAHM-CANARY-B408524C6D45"
+    }
+  ]
+}

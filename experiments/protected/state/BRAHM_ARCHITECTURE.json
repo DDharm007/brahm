@@ -1,0 +1,711 @@
+{
+  "schema_version": "2.0",
+  "brahm_version": "0.1.0",
+  "generated_at": "2026-11-27T06:37:56.624795900Z",
+  "analysis_duration_ms": 35,
+  "repository": {
+    "name": "brahm-commerce-demo",
+    "root_path": "//?/D:/Personal Projects/Brahm BLA/demo/brahm-commerce-demo",
+    "canonical_path": "//?/D:/Personal Projects/Brahm BLA/demo/brahm-commerce-demo"
+  },
+  "pattern": {
+    "primary_pattern": "REST API / Backend Service",
+    "confidence": "High",
+    "detected_frameworks": [
+      "Node.js"
+    ],
+    "languages_parsed": [
+      "TypeScript"
+    ],
+    "rationale": [
+      "Explicit HTTP routing layer with 20 endpoint(s)",
+      "Backed by 10 persistence schema(s)/ORM model(s)"
+    ]
+  },
+  "metrics": {
+    "total_files_scanned": 37,
+    "files_parsed_ast": 26,
+    "files_with_syntax_errors": 0,
+    "total_symbols": 87,
+    "symbols_by_kind": {
+      "class": 8,
+      "interface": 17,
+      "constructor": 8,
+      "method": 25,
+      "type_alias": 3,
+      "function": 26
+    },
+    "total_imports": 108,
+    "internal_imports": 70,
+    "external_imports": 38,
+    "unique_external_packages": 12,
+    "circular_dependency_count": 0,
+    "entry_point_count": 1,
+    "api_route_count": 20,
+    "data_model_count": 10,
+    "graph_nodes": 155,
+    "graph_edges": 434,
+    "graph_is_dag": false,
+    "graph_density": 0.01818181818181818
+  },
+  "layers": [
+    {
+      "name": "API & Transport Layer",
+      "role": "HTTP route handlers, controllers, and server entrypoints",
+      "directory_paths": [
+        "src",
+        "src/routes"
+      ],
+      "file_count": 8,
+      "symbol_count": 7,
+      "route_count": 20
+    },
+    {
+      "name": "Configuration & Build Manifests",
+      "role": "Dependency manifests, build configs, and runtime settings",
+      "directory_paths": [
+        "."
+      ],
+      "file_count": 5,
+      "symbol_count": 0,
+      "route_count": 0
+    },
+    {
+      "name": "Core Application & Domain Logic",
+      "role": "Primary business logic, services, parsers, and utilities",
+      "directory_paths": [
+        "src",
+        "src/config",
+        "src/middleware",
+        "src/services",
+        "src/utils"
+      ],
+      "file_count": 15,
+      "symbol_count": 64,
+      "route_count": 0
+    },
+    {
+      "name": "Documentation",
+      "role": "Architecture specifications, READMEs, and guides",
+      "directory_paths": [
+        "."
+      ],
+      "file_count": 4,
+      "symbol_count": 0,
+      "route_count": 0
+    },
+    {
+      "name": "Persistence & Data Layer",
+      "role": "Database schemas, migrations, and ORM entities",
+      "directory_paths": [
+        "db",
+        "db/migrations",
+        "src/db",
+        "src/models"
+      ],
+      "file_count": 4,
+      "symbol_count": 15,
+      "route_count": 0
+    },
+    {
+      "name": "Verification & Test Suite",
+      "role": "Automated unit, integration, and verification tests",
+      "directory_paths": [
+        "tests"
+      ],
+      "file_count": 1,
+      "symbol_count": 1,
+      "route_count": 0
+    }
+  ],
+  "entry_points": [
+    {
+      "file_path": "src/server.ts",
+      "kind": "server_entry",
+      "symbol_name": null,
+      "span": null,
+      "description": "Web server startup module",
+      "confidence": 0.9
+    }
+  ],
+  "api_routes": [
+    {
+      "method": "GET",
+      "path_pattern": "/api/admin/metrics",
+      "handler_name": "getMetricsHandler",
+      "file_path": "src/routes/admin.ts",
+      "span": {
+        "start_line": 21,
+        "start_col": 3,
+        "end_line": 21,
+        "end_col": 81,
+        "start_byte": 747,
+        "end_byte": 825
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/admin/audit-logs",
+      "handler_name": "listAuditLogsHandler",
+      "file_path": "src/routes/admin.ts",
+      "span": {
+        "start_line": 22,
+        "start_col": 3,
+        "end_line": 22,
+        "end_col": 87,
+        "start_byte": 829,
+        "end_byte": 913
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/auth/register",
+      "handler_name": "registerHandler",
+      "file_path": "src/routes/auth.ts",
+      "span": {
+        "start_line": 56,
+        "start_col": 3,
+        "end_line": 56,
+        "end_col": 83,
+        "start_byte": 1673,
+        "end_byte": 1753
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/auth/login",
+      "handler_name": "loginHandler",
+      "file_path": "src/routes/auth.ts",
+      "span": {
+        "start_line": 57,
+        "start_col": 3,
+        "end_line": 57,
+        "end_col": 74,
+        "start_byte": 1757,
+        "end_byte": 1828
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/auth/me",
+      "handler_name": "meHandler",
+      "file_path": "src/routes/auth.ts",
+      "span": {
+        "start_line": 58,
+        "start_col": 3,
+        "end_line": 58,
+        "end_col": 53,
+        "start_byte": 1832,
+        "end_byte": 1882
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/cart",
+      "handler_name": "getCartHandler",
+      "file_path": "src/routes/cart.ts",
+      "span": {
+        "start_line": 59,
+        "start_col": 3,
+        "end_line": 59,
+        "end_col": 55,
+        "start_byte": 1735,
+        "end_byte": 1787
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/cart/items",
+      "handler_name": "addCartItemHandler",
+      "file_path": "src/routes/cart.ts",
+      "span": {
+        "start_line": 60,
+        "start_col": 3,
+        "end_line": 60,
+        "end_col": 95,
+        "start_byte": 1791,
+        "end_byte": 1883
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "PATCH",
+      "path_pattern": "/api/cart/items/:productId",
+      "handler_name": "patchCartItemHandler",
+      "file_path": "src/routes/cart.ts",
+      "span": {
+        "start_line": 61,
+        "start_col": 3,
+        "end_line": 66,
+        "end_col": 4,
+        "start_byte": 1887,
+        "end_byte": 2016
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "DELETE",
+      "path_pattern": "/api/cart/items/:productId",
+      "handler_name": "removeCartItemHandler",
+      "file_path": "src/routes/cart.ts",
+      "span": {
+        "start_line": 67,
+        "start_col": 3,
+        "end_line": 67,
+        "end_col": 82,
+        "start_byte": 2020,
+        "end_byte": 2099
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/health",
+      "handler_name": "(_req, res) => {\n    res.json({ status: 'ok', service: 'brahm-commerce-api' });\n  }",
+      "file_path": "src/routes/health.ts",
+      "span": {
+        "start_line": 5,
+        "start_col": 3,
+        "end_line": 7,
+        "end_col": 5,
+        "start_byte": 111,
+        "end_byte": 217
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/orders",
+      "handler_name": "checkoutOrderHandler",
+      "file_path": "src/routes/orders.ts",
+      "span": {
+        "start_line": 60,
+        "start_col": 3,
+        "end_line": 60,
+        "end_col": 97,
+        "start_byte": 1830,
+        "end_byte": 1924
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/orders",
+      "handler_name": "listOrdersHandler",
+      "file_path": "src/routes/orders.ts",
+      "span": {
+        "start_line": 61,
+        "start_col": 3,
+        "end_line": 61,
+        "end_col": 60,
+        "start_byte": 1928,
+        "end_byte": 1985
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/orders/:id",
+      "handler_name": "getOrderHandler",
+      "file_path": "src/routes/orders.ts",
+      "span": {
+        "start_line": 62,
+        "start_col": 3,
+        "end_line": 62,
+        "end_col": 62,
+        "start_byte": 1989,
+        "end_byte": 2048
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/orders/:id/cancel",
+      "handler_name": "cancelOrderHandler",
+      "file_path": "src/routes/orders.ts",
+      "span": {
+        "start_line": 63,
+        "start_col": 3,
+        "end_line": 63,
+        "end_col": 73,
+        "start_byte": 2052,
+        "end_byte": 2122
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/payments/intent",
+      "handler_name": "createIntentHandler",
+      "file_path": "src/routes/payments.ts",
+      "span": {
+        "start_line": 51,
+        "start_col": 3,
+        "end_line": 56,
+        "end_col": 4,
+        "start_byte": 1563,
+        "end_byte": 1687
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/payments/webhook",
+      "handler_name": "webhookHandler",
+      "file_path": "src/routes/payments.ts",
+      "span": {
+        "start_line": 57,
+        "start_col": 3,
+        "end_line": 57,
+        "end_col": 55,
+        "start_byte": 1691,
+        "end_byte": 1743
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/products",
+      "handler_name": "listProductsHandler",
+      "file_path": "src/routes/products.ts",
+      "span": {
+        "start_line": 65,
+        "start_col": 3,
+        "end_line": 65,
+        "end_col": 51,
+        "start_byte": 2123,
+        "end_byte": 2171
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "GET",
+      "path_pattern": "/api/products/:slug",
+      "handler_name": "getProductHandler",
+      "file_path": "src/routes/products.ts",
+      "span": {
+        "start_line": 66,
+        "start_col": 3,
+        "end_line": 66,
+        "end_col": 55,
+        "start_byte": 2175,
+        "end_byte": 2227
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "POST",
+      "path_pattern": "/api/products",
+      "handler_name": "createProductHandler",
+      "file_path": "src/routes/products.ts",
+      "span": {
+        "start_line": 67,
+        "start_col": 3,
+        "end_line": 73,
+        "end_col": 4,
+        "start_byte": 2231,
+        "end_byte": 2368
+      },
+      "framework": "Express/Fastify"
+    },
+    {
+      "method": "PATCH",
+      "path_pattern": "/api/products/:id",
+      "handler_name": "patchProductHandler",
+      "file_path": "src/routes/products.ts",
+      "span": {
+        "start_line": 74,
+        "start_col": 3,
+        "end_line": 80,
+        "end_col": 4,
+        "start_byte": 2372,
+        "end_byte": 2512
+      },
+      "framework": "Express/Fastify"
+    }
+  ],
+  "data_models": [
+    {
+      "name": "001_initial_commerce.sql",
+      "kind": "sql_migration",
+      "file_path": "db/migrations/001_initial_commerce.sql",
+      "span": null,
+      "framework_or_orm": "SQL Migration",
+      "table_name": null,
+      "fields": []
+    },
+    {
+      "name": "users",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "users",
+      "fields": []
+    },
+    {
+      "name": "sessions",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "sessions",
+      "fields": []
+    },
+    {
+      "name": "categories",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "categories",
+      "fields": []
+    },
+    {
+      "name": "products",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "products",
+      "fields": []
+    },
+    {
+      "name": "cart_items",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "cart_items",
+      "fields": []
+    },
+    {
+      "name": "orders",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "orders",
+      "fields": []
+    },
+    {
+      "name": "order_items",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "order_items",
+      "fields": []
+    },
+    {
+      "name": "payments",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "payments",
+      "fields": []
+    },
+    {
+      "name": "audit_logs",
+      "kind": "schema_definition",
+      "file_path": "db/schema.sql",
+      "span": null,
+      "framework_or_orm": "SQL DDL",
+      "table_name": "audit_logs",
+      "fields": []
+    }
+  ],
+  "dependencies": {
+    "external_packages": [
+      "cors",
+      "express",
+      "helmet",
+      "node:assert",
+      "node:crypto",
+      "node:fs",
+      "node:http",
+      "node:path",
+      "node:sqlite",
+      "node:test",
+      "node:url",
+      "zod"
+    ],
+    "circular_dependencies": [],
+    "graph_scc_cycles": [
+      [
+        "sym:sym_ea887e423994fc25",
+        "sym:sym_86d712adff54299b",
+        "sym:sym_16248093f881180e",
+        "sym:sym_1160ee553c56c0d8",
+        "sym:sym_754a4a71bc055ce1",
+        "sym:sym_4e4c2f2d29a01374"
+      ],
+      [
+        "sym:sym_09a306cb020575fb",
+        "sym:sym_1252c366c0962a5d",
+        "sym:sym_1aa196dfbee0cfb0",
+        "sym:sym_83104e5698caa8ca",
+        "sym:sym_dbd1a60f8b8131e6"
+      ],
+      [
+        "sym:sym_dc3eb24356e23e64",
+        "sym:sym_0a038edae47d1914"
+      ],
+      [
+        "sym:sym_96fb6ab12a80fb11",
+        "sym:sym_39c553bb5d44e131",
+        "sym:sym_6401fa6052d4a9cf"
+      ],
+      [
+        "sym:sym_6507fb3ace984a24",
+        "sym:sym_344838745f335f77",
+        "sym:sym_5b2c13dde64ede55",
+        "sym:sym_9e36d08916b95fd7",
+        "sym:sym_c254cd7fdb6b70ef"
+      ],
+      [
+        "sym:sym_fa9ec874deac4220",
+        "sym:sym_da31191fcb769293",
+        "sym:sym_7496eef7b043e40c",
+        "sym:sym_1dacbfb1b91157da",
+        "sym:sym_c311b25fa23590bd"
+      ],
+      [
+        "sym:sym_c46bf099d5b5bdb3",
+        "sym:sym_ec5db67960bd8cd2"
+      ],
+      [
+        "sym:sym_2be0152eaefdfc22",
+        "sym:sym_9d89082c0a304d62",
+        "sym:sym_1f5efe31a61b196e",
+        "sym:sym_4f668382ce1d059e"
+      ],
+      [
+        "sym:sym_9d6a1592fa96d2f2",
+        "sym:sym_0fdeb68f20f887f6"
+      ],
+      [
+        "sym:sym_895528ef3f1fc1c5",
+        "sym:sym_89885fdedc333f27"
+      ]
+    ],
+    "unresolved_internal_imports": []
+  },
+  "hotspots": [
+    {
+      "node_id": "pkg:express",
+      "name": "express",
+      "kind": "external_package",
+      "file_path": null,
+      "fan_in": 12,
+      "fan_out": 0,
+      "blast_radius_count": 19
+    },
+    {
+      "node_id": "file:src/middleware/errors.ts",
+      "name": "errors.ts",
+      "kind": "file",
+      "file_path": "src/middleware/errors.ts",
+      "fan_in": 11,
+      "fan_out": 4,
+      "blast_radius_count": 17
+    },
+    {
+      "node_id": "sym:sym_3e331fcddb4edae1",
+      "name": "runInTransaction",
+      "kind": "method",
+      "file_path": "src/db/database.ts",
+      "fan_in": 10,
+      "fan_out": 2,
+      "blast_radius_count": 31
+    },
+    {
+      "node_id": "sym:sym_09a306cb020575fb",
+      "name": "signSessionToken",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "fan_in": 9,
+      "fan_out": 4,
+      "blast_radius_count": 32
+    },
+    {
+      "node_id": "sym:sym_16248093f881180e",
+      "name": "createProduct",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "fan_in": 8,
+      "fan_out": 5,
+      "blast_radius_count": 14
+    },
+    {
+      "node_id": "sym:sym_4e4c2f2d29a01374",
+      "name": "updateInventoryOrPrice",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "fan_in": 8,
+      "fan_out": 5,
+      "blast_radius_count": 14
+    },
+    {
+      "node_id": "sym:sym_86d712adff54299b",
+      "name": "getProductBySlug",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "fan_in": 8,
+      "fan_out": 5,
+      "blast_radius_count": 14
+    },
+    {
+      "node_id": "sym:sym_dbd1a60f8b8131e6",
+      "name": "verifyWebhookSignature",
+      "kind": "function",
+      "file_path": "src/utils/token.ts",
+      "fan_in": 8,
+      "fan_out": 4,
+      "blast_radius_count": 32
+    },
+    {
+      "node_id": "sym:sym_ea887e423994fc25",
+      "name": "listProducts",
+      "kind": "method",
+      "file_path": "src/services/catalogService.ts",
+      "fan_in": 8,
+      "fan_out": 5,
+      "blast_radius_count": 14
+    },
+    {
+      "node_id": "file:src/db/database.ts",
+      "name": "database.ts",
+      "kind": "file",
+      "file_path": "src/db/database.ts",
+      "fan_in": 7,
+      "fan_out": 8,
+      "blast_radius_count": 15
+    }
+  ],
+  "confidence_breakdown": {
+    "detected_facts": [
+      "Deterministically parsed 26 source files into Tree-sitter concrete syntax trees (0 with syntax error recovery)",
+      "Extracted 87 unique AST symbols with deterministic BLAKE3 identifiers",
+      "Observed 108 import declarations (70 internal, 38 external across 12 unique packages)",
+      "Constructed directed graph containing 155 vertices and 434 edges (DAG: false)",
+      "Detected 20 explicit API route declarations across source/framework conventions",
+      "Detected 10 explicit ORM entities, SQL migrations, or schema declarations"
+    ],
+    "inferred_relationships": [
+      "Inferred primary architectural style 'REST API / Backend Service' (Confidence: High)",
+      "Classified repository contents into 6 logical architectural layers via path and manifest heuristics",
+      "Heuristically inferred 186 function/method call edge(s) from identifier invocation syntax"
+    ],
+    "unresolved_references_count": 0,
+    "unresolved_references_sample": []
+  },
+  "warnings": []
+}

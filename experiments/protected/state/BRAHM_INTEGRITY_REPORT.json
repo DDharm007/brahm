@@ -1,0 +1,10 @@
+{
+  "record_id": "int_867c4232b2bb",
+  "repository_id": "repo_b7153cf65c6656d9",
+  "checked_at": "2026-11-27T06:42:06.464757100Z",
+  "baseline_matches": true,
+  "decoy_integrity_valid": true,
+  "unexpected_change_count": 0,
+  "diffs": [],
+  "remediation_guidance": "No unexpected integrity drift detected."
+}

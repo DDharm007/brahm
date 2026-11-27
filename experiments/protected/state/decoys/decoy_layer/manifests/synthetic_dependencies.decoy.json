@@ -1,0 +1,14 @@
+{
+  "brahm_synthetic": true,
+  "artifact_id": "decoy_811112c2221985c8",
+  "canary_marker": "BRAHM-CANARY-5BA11E9B86E3",
+  "isolated_from_production": true,
+  "observed_languages": "TypeScript",
+  "synthetic_packages": [
+    {
+      "name": "brahm-synthetic-inspection-shim",
+      "version": "0.0.0-synthetic",
+      "purpose": "Controlled deception baseline marker"
+    }
+  ]
+}

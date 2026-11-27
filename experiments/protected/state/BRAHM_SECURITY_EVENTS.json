@@ -1,0 +1,342 @@
+[
+  {
+    "event_id": "evt_63e472610edc",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_18c46ced59d40a22",
+    "timestamp": "2026-11-27T06:37:56.685643400Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "canary/BRAHM_CANARY_ANCHOR.md"
+    }
+  },
+  {
+    "event_id": "evt_bd2e575dee47",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_677ffff5a968188f",
+    "timestamp": "2026-11-27T06:37:56.690952Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "docs/SYSTEM_ARCHITECTURE.md"
+    }
+  },
+  {
+    "event_id": "evt_4dc955d6c681",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_d9f0b7c160f4d297",
+    "timestamp": "2026-11-27T06:37:56.695643100Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "docs/INTERNAL_DESIGN.md"
+    }
+  },
+  {
+    "event_id": "evt_ded1292ee2bc",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_811112c2221985c8",
+    "timestamp": "2026-11-27T06:37:56.700836Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "manifests/synthetic_dependencies.decoy.json"
+    }
+  },
+  {
+    "event_id": "evt_988543dac149",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_c34470c51dc68c6d",
+    "timestamp": "2026-11-27T06:37:56.706904500Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "src/syntheticTelemetryBridge.ts"
+    }
+  },
+  {
+    "event_id": "evt_06afbf20c11a",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_54dd6c0bd4fdf907",
+    "timestamp": "2026-11-27T06:37:56.712187600Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "config/api.decoy.json"
+    }
+  },
+  {
+    "event_id": "evt_d2ac6c3159b4",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_325c74c5d81d5c05",
+    "timestamp": "2026-11-27T06:37:56.718464500Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "config/service.decoy.yaml"
+    }
+  },
+  {
+    "event_id": "evt_f57490066d91",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_f14e3db038406867",
+    "timestamp": "2026-11-27T06:37:56.724896600Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "db/schema.decoy.sql"
+    }
+  },
+  {
+    "event_id": "evt_3e99b7963813",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_afd0e437f6eb4c60",
+    "timestamp": "2026-11-27T06:37:56.730139600Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "docs/SERVICE_DEPENDENCIES.md"
+    }
+  },
+  {
+    "event_id": "evt_d3a056aff3c8",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_e82c958168b620b7",
+    "timestamp": "2026-11-27T06:37:56.735733500Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "docs/COMPONENT_OVERVIEW.md"
+    }
+  },
+  {
+    "event_id": "evt_739d2e7a6fda",
+    "event_type": "decoy_created",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "artifact_id": "decoy_75b673cbdb07ad53",
+    "timestamp": "2026-11-27T06:37:56.741565300Z",
+    "source": "decoy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465",
+    "metadata": {
+      "relative_path": "canary/inspection_canary_token.json"
+    }
+  },
+  {
+    "event_id": "evt_4535d3152ea6",
+    "event_type": "inspection_session_started",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "timestamp": "2026-11-27T06:37:56.786719200Z",
+    "source": "policy_engine",
+    "severity": "informational",
+    "correlation_id": "install_plan_3d1c5ce85465"
+  },
+  {
+    "event_id": "evt_3191157e4456",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_18c46ced59d40a22",
+    "timestamp": "2026-11-27T06:42:06.067047400Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-E77BFAF46362",
+      "classification": "ConfirmedSignal",
+      "context": "canary/BRAHM_CANARY_ANCHOR.md",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_9d5f2b33aaaa",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_75b673cbdb07ad53",
+    "timestamp": "2026-11-27T06:42:06.067401900Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-B408524C6D45",
+      "classification": "ConfirmedSignal",
+      "context": "canary/inspection_canary_token.json",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_8c0f7f24ef2b",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_54dd6c0bd4fdf907",
+    "timestamp": "2026-11-27T06:42:06.067549200Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-909524652FD1",
+      "classification": "ConfirmedSignal",
+      "context": "config/api.decoy.json",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_8d4ae25b160a",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_325c74c5d81d5c05",
+    "timestamp": "2026-11-27T06:42:06.067665300Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-70D688A4E9C0",
+      "classification": "ConfirmedSignal",
+      "context": "config/service.decoy.yaml",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_9a64ed685b40",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_f14e3db038406867",
+    "timestamp": "2026-11-27T06:42:06.068021900Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-3732F08AFC7B",
+      "classification": "ConfirmedSignal",
+      "context": "db/schema.decoy.sql",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_0955c846849d",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_e82c958168b620b7",
+    "timestamp": "2026-11-27T06:42:06.068287800Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-CF5ADDDCCA0A",
+      "classification": "ConfirmedSignal",
+      "context": "docs/COMPONENT_OVERVIEW.md",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_176205250e74",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_d9f0b7c160f4d297",
+    "timestamp": "2026-11-27T06:42:06.068441500Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-11C0A24C8660",
+      "classification": "ConfirmedSignal",
+      "context": "docs/INTERNAL_DESIGN.md",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_f13eea1220da",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_afd0e437f6eb4c60",
+    "timestamp": "2026-11-27T06:42:06.068551900Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-6D86EB7068EC",
+      "classification": "ConfirmedSignal",
+      "context": "docs/SERVICE_DEPENDENCIES.md",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_6b7fe9491650",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_677ffff5a968188f",
+    "timestamp": "2026-11-27T06:42:06.068680Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-A0FC6F45E10C",
+      "classification": "ConfirmedSignal",
+      "context": "docs/SYSTEM_ARCHITECTURE.md",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_85bb495110ae",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_811112c2221985c8",
+    "timestamp": "2026-11-27T06:42:06.068794300Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-5BA11E9B86E3",
+      "classification": "ConfirmedSignal",
+      "context": "manifests/synthetic_dependencies.decoy.json",
+      "duplicate": "false"
+    }
+  },
+  {
+    "event_id": "evt_49315a9b936c",
+    "event_type": "canary_accessed",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "session_id": "sess_bd85ce628669",
+    "artifact_id": "decoy_c34470c51dc68c6d",
+    "timestamp": "2026-11-27T06:42:06.072000400Z",
+    "source": "canary_detector",
+    "severity": "medium",
+    "correlation_id": "agent_agent_93c69d0ca681",
+    "metadata": {
+      "canary_token": "BRAHM-CANARY-F7D7DBA6FFC3",
+      "classification": "ConfirmedSignal",
+      "context": "src/syntheticTelemetryBridge.ts",
+      "duplicate": "false"
+    }
+  }
+]

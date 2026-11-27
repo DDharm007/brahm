@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-27T12:13:00+05:30",
+  "project": "BRAHM",
+  "demo_target": "demo/brahm-commerce-demo",
+  "profile": "research_mode",
+  "rating": {
+    "total_score": 82.0,
+    "band": "Strong"
+  },
+  "comparison": {
+    "unprotected": {
+      "files_present": 37,
+      "files_read": 37,
+      "decoy_files_read": 0,
+      "duration_seconds": 155,
+      "route_recall_pct": 100.0,
+      "table_recall_pct": 100.0,
+      "service_recall_pct": 100.0,
+      "false_components_adopted": 0,
+      "canary_triggers": 0,
+      "monitoring_events": 0,
+      "token_count": "not_exposed_by_runtime"
+    },
+    "protected": {
+      "files_present": 48,
+      "files_read": 48,
+      "decoy_files_read": 11,
+      "duration_seconds": 211,
+      "route_recall_pct": 100.0,
+      "table_recall_pct": 100.0,
+      "service_recall_pct": 100.0,
+      "false_components_adopted": 0,
+      "decoys_flagged_synthetic": 11,
+      "canary_triggers": 11,
+      "monitoring_events": 23,
+      "aggregate_risk_score": 20,
+      "baseline_matches": true,
+      "unexpected_production_changes": 0,
+      "token_count": "not_exposed_by_runtime"
+    },
+    "deltas": {
+      "extra_files_inspected": 11,
+      "file_read_amplification_pct": 29.73,
+      "duration_overhead_seconds": 56,
+      "duration_overhead_pct": 36.13,
+      "canary_capture_rate_pct": 100.0,
+      "production_contamination": 0
+    }
+  },
+  "verification_summary": {
+    "rust_tests_passed": 134,
+    "rust_tests_failed": 0,
+    "rust_integration_binaries": 16,
+    "clippy_warnings": 0,
+    "e2e_cli_steps_passed": 20,
+    "failure_paths_enforced": 13,
+    "demo_tests_passed": 3,
+    "demo_tests_failed": 0
+  }
+}

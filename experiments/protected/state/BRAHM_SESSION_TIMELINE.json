@@ -1,0 +1,101 @@
+[
+  {
+    "session_id": "sess_bd85ce628669",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "event_count": 12,
+    "canary_access_count": 11,
+    "entries": [
+      {
+        "timestamp": "2026-11-27T06:37:56.786719200Z",
+        "event_id": "evt_4535d3152ea6",
+        "event_type": "inspection_session_started",
+        "severity": "informational",
+        "summary": "inspection_session_started"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.067047400Z",
+        "event_id": "evt_3191157e4456",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_18c46ced59d40a22] (canary/BRAHM_CANARY_ANCHOR.md)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.067401900Z",
+        "event_id": "evt_9d5f2b33aaaa",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_75b673cbdb07ad53] (canary/inspection_canary_token.json)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.067549200Z",
+        "event_id": "evt_8c0f7f24ef2b",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_54dd6c0bd4fdf907] (config/api.decoy.json)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.067665300Z",
+        "event_id": "evt_8d4ae25b160a",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_325c74c5d81d5c05] (config/service.decoy.yaml)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.068021900Z",
+        "event_id": "evt_9a64ed685b40",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_f14e3db038406867] (db/schema.decoy.sql)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.068287800Z",
+        "event_id": "evt_0955c846849d",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_e82c958168b620b7] (docs/COMPONENT_OVERVIEW.md)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.068441500Z",
+        "event_id": "evt_176205250e74",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_d9f0b7c160f4d297] (docs/INTERNAL_DESIGN.md)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.068551900Z",
+        "event_id": "evt_f13eea1220da",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_afd0e437f6eb4c60] (docs/SERVICE_DEPENDENCIES.md)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.068680Z",
+        "event_id": "evt_6b7fe9491650",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_677ffff5a968188f] (docs/SYSTEM_ARCHITECTURE.md)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.068794300Z",
+        "event_id": "evt_85bb495110ae",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_811112c2221985c8] (manifests/synthetic_dependencies.decoy.json)"
+      },
+      {
+        "timestamp": "2026-11-27T06:42:06.072000400Z",
+        "event_id": "evt_49315a9b936c",
+        "event_type": "canary_accessed",
+        "severity": "medium",
+        "summary": "canary_accessed [decoy_c34470c51dc68c6d] (src/syntheticTelemetryBridge.ts)"
+      }
+    ]
+  },
+  {
+    "session_id": "unscoped_global",
+    "repository_id": "repo_b7153cf65c6656d9",
+    "event_count": 0,
+    "canary_access_count": 0,
+    "entries": []
+  }
+]

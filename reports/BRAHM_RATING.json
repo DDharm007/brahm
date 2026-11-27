@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "project": "BRAHM",
+  "evaluated_at": "2026-11-27T12:13:00+05:30",
+  "total_score": 82.0,
+  "max_score": 100.0,
+  "rating_band": "Strong",
+  "scale_definitions": {
+    "90-100": "Exemplary",
+    "75-89": "Strong",
+    "60-74": "Moderate",
+    "0-59": "Foundational"
+  },
+  "dimensions": [
+    {
+      "id": "architecture_discovery",
+      "name": "Architecture Discovery Accuracy",
+      "weight": 15.0,
+      "score": 14.0,
+      "evidence": "Stage 02 analyzed demo/brahm-commerce-demo in 25ms with 26/26 AST files parsed (0 errors), 20/20 API routes (100% recall), 10/10 schema/migration models (100% recall), 87 symbols, and 155-node dependency graph; 134/134 Rust tests passing. Deducted 1.0pt for single-level router prefix assumption on multi-file subrouter composition.",
+      "strengths": ["Fast tree-sitter multi-language AST parsing", "Accurate middleware-wrapped Express handler & SQL DDL extraction (ISSUE-005 fix)"],
+      "gaps": ["Mounted subrouter prefix propagation across modular routers not yet synthesized globally"]
+    },
+    {
+      "id": "decoy_realism_and_fit",
+      "name": "Decoy Realism & Structural Fit",
+      "weight": 15.0,
+      "score": 9.0,
+      "evidence": "All 11 Research-profile decoys match Node/TypeScript project idioms, contain zero real secrets or dependency conflicts, and compile cleanly under strict tsc. However, explicit naming markers (.decoy., BRAHM_CANARY_ANCHOR, syntheticTelemetryBridge) and synthetic headers enabled the inspecting LLM agent to identify all 11 overlays as non-genuine.",
+      "strengths": ["Zero build breakage or secret leakage", "Language-appropriate TS/SQL/JSON/YAML/Markdown placement"],
+      "gaps": ["Predictable .decoy. / CANARY naming and unimported dead code make semantic detection trivial under white-box static inspection"]
+    },
+    {
+      "id": "re_confusion_effort_amplification",
+      "name": "Reverse-Engineering Confusion & Effort Amplification",
+      "weight": 15.0,
+      "score": 7.0,
+      "evidence": "Protected experiment expanded inspecting surface from 37 to 48 files (+29.73%) and increased subagent duration from 155s to 211s (+36.13%). However, the white-box LLM agent maintained 100% route (20/20), table (9/9), and service (6/6) recall and adopted 0 false components.",
+      "strengths": ["Measurable +29.73% inspection file overhead and +36.13% time amplification", "Secret stripping removes credential files when creating inspection mirrors"],
+      "gaps": ["Does not degrade genuine architectural comprehension when genuine source modules remain plaintext inside the mirror"]
+    },
+    {
+      "id": "canary_detection_and_telemetry",
+      "name": "Canary Detection & Telemetry Effectiveness",
+      "weight": 15.0,
+      "score": 14.0,
+      "evidence": "Replaying the protected subagent's exact 48 file accesses via `brahm agent run sess_bd85ce628669` detected 11/11 (100%) canary accesses, persisted 23 correlated events in SQLite, fired R01_REPEATED_CANARY_ACCESS (High, 0.85 confidence) with explicit actor-attribution uncertainty, and FAIL-09 blocked sandbox path traversal.",
+      "strengths": ["100% deterministic canary capture & SQLite timeline persistence", "Honest rule-based classification & attribution disclaimer"],
+      "gaps": ["Requires adapter/workspace read mediation rather than OS kernel filesystem hooks for external unmediated editors"]
+    },
+    {
+      "id": "production_safety_and_integrity",
+      "name": "Production Safety & Repository Integrity",
+      "weight": 15.0,
+      "score": 15.0,
+      "evidence": "Genuine demo repo stayed 100% unmodified across all phases (`git status` clean, zero decoy contamination). Stored `BRAHM_BASELINE.json` caught live `src/server.ts` tampering in E2E-18 & ISSUE-001 test; symlink traversal (ISSUE-002) and secret files (.env/.pem) safely skipped; ownership rollback left zero unowned edits (ISSUE-007).",
+      "strengths": ["Zero production source mutation guarantee", "Cryptographic BLAKE3 baseline diffing and safe rollback"],
+      "gaps": []
+    },
+    {
+      "id": "operational_usability_and_automation",
+      "name": "Operational Usability & Automation Integration",
+      "weight": 15.0,
+      "score": 13.0,
+      "evidence": "All 20 E2E CLI steps and 13 failure/security gates passed cleanly (`brahm_monitoring` Axum API verified with bearer auth, rate limit, and localhost CORS). New `brahm apply` (`protect`) loads any user project and secures it in one command; clean stdout JSON / stderr logging split verified.",
+      "strengths": ["Single-command `brahm apply` plus modular 6-stage CLI", "Strict localhost Axum API & 13/13 security gates verified"],
+      "gaps": ["Standalone `decoy`/`deception` subcommands use separate default directories vs `--state-dir` (`ISSUE-004`)", "Windows canonical paths show `//?/` UNC prefix (`ISSUE-009`)"]
+    },
+    {
+      "id": "deterministic_execution_and_verification",
+      "name": "Deterministic Execution & Verification Discipline",
+      "weight": 10.0,
+      "score": 10.0,
+      "evidence": "Zero AI/LLM/Python runtime dependencies in Rust engine. All 134/134 automated unit + integration tests pass across 16 integration suites, `cargo fmt --check` clean, `cargo clippy --all-targets --all-features -- -D warnings` zero warnings, release binary verified.",
+      "strengths": ["100% deterministic pure-Rust analysis, policy, deception, and SQLite telemetry", "Strict formatting, clippy, and regression coverage"],
+      "gaps": []
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "_brahm_synthetic": true,
+  "artifact_id": "decoy_54dd6c0bd4fdf907",
+  "canary_marker": "BRAHM-CANARY-909524652FD1",
+  "service": "brahm-commerce-demo",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/_synthetic/health",
+      "synthetic": true
+    }
+  ]
+}
