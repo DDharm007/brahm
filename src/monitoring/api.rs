@@ -8,8 +8,15 @@
 //! - Never exposes credentials or source code contents
 
 use axum::{
-    extract::{Query, State},
-    http::{header::AUTHORIZATION, HeaderMap, StatusCode},
+    extract::{Query, Request, State},
+    http::{
+        header::{
+            ACCESS_CONTROL_ALLOW_HEADERS, ACCESS_CONTROL_ALLOW_METHODS,
+            ACCESS_CONTROL_ALLOW_ORIGIN, AUTHORIZATION, ORIGIN,
+        },
+        HeaderMap, HeaderValue, Method, StatusCode,
+    },
+    middleware::{self, Next},
     response::{IntoResponse, Response},
     routing::get,
     Json, Router,
@@ -87,12 +94,75 @@ pub fn build_monitoring_router(state: ApiState) -> Router {
     Router::new()
         .route("/api/v1/health", get(handle_health))
         .route("/api/v1/repositories", get(handle_repositories))
+        .route("/api/v1/architecture", get(handle_architecture))
+        .route("/api/v1/deception", get(handle_deception))
         .route("/api/v1/events", get(handle_events))
         .route("/api/v1/sessions", get(handle_sessions))
         .route("/api/v1/decoys", get(handle_decoys))
         .route("/api/v1/integrity", get(handle_integrity))
         .route("/api/v1/reports", get(handle_reports))
+        .route("/api/v1/rating", get(handle_rating))
+        .route("/api/v1/experiment", get(handle_experiment))
         .with_state(state)
+        .layer(middleware::from_fn(localhost_cors_middleware))
+}
+
+async fn localhost_cors_middleware(req: Request, next: Next) -> Response {
+    let origin = req
+        .headers()
+        .get(ORIGIN)
+        .and_then(|v| v.to_str().ok())
+        .map(|s| s.to_string());
+
+    let allowed_origin = origin.as_deref().filter(|o| is_localhost_origin(o));
+
+    if req.method() == Method::OPTIONS {
+        let mut resp = StatusCode::NO_CONTENT.into_response();
+        if let Some(orig) = allowed_origin {
+            if let Ok(val) = HeaderValue::from_str(orig) {
+                resp.headers_mut().insert(ACCESS_CONTROL_ALLOW_ORIGIN, val);
+                resp.headers_mut().insert(
+                    ACCESS_CONTROL_ALLOW_HEADERS,
+                    HeaderValue::from_static("Authorization, Content-Type"),
+                );
+                resp.headers_mut().insert(
+                    ACCESS_CONTROL_ALLOW_METHODS,
+                    HeaderValue::from_static("GET, OPTIONS"),
+                );
+            }
+        }
+        return resp;
+    }
+
+    let orig_owned = allowed_origin.map(|s| s.to_string());
+    let mut resp = next.run(req).await;
+    if let Some(orig) = orig_owned {
+        if let Ok(val) = HeaderValue::from_str(&orig) {
+            resp.headers_mut().insert(ACCESS_CONTROL_ALLOW_ORIGIN, val);
+            resp.headers_mut().insert(
+                ACCESS_CONTROL_ALLOW_HEADERS,
+                HeaderValue::from_static("Authorization, Content-Type"),
+            );
+            resp.headers_mut().insert(
+                ACCESS_CONTROL_ALLOW_METHODS,
+                HeaderValue::from_static("GET, OPTIONS"),
+            );
+        }
+    }
+    resp
+}
+
+fn is_localhost_origin(origin: &str) -> bool {
+    if origin == "http://localhost" || origin == "http://127.0.0.1" {
+        return true;
+    }
+    if let Some(port) = origin
+        .strip_prefix("http://localhost:")
+        .or_else(|| origin.strip_prefix("http://127.0.0.1:"))
+    {
+        return !port.is_empty() && port.chars().all(|c| c.is_ascii_digit());
+    }
+    false
 }
 
 /// Bind and serve the Axum monitoring API asynchronously until shutdown.
@@ -298,15 +368,109 @@ async fn handle_reports(
     headers: HeaderMap,
 ) -> std::result::Result<Json<serde_json::Value>, ApiError> {
     check_auth_and_rate(&state, &headers)?;
-    let rep_path = state.config.state_dir.join("BRAHM_MONITORING_REPORT.json");
-    if rep_path.is_file() {
-        let raw = std::fs::read_to_string(&rep_path)
-            .map_err(|e| ApiError::new(StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
-        let val: serde_json::Value = serde_json::from_str(&raw).unwrap_or_default();
-        Ok(Json(val))
+    read_state_json(
+        &state.config.state_dir.join("BRAHM_MONITORING_REPORT.json"),
+        serde_json::json!({ "status": "no_monitoring_report_generated" }),
+    )
+}
+
+async fn handle_architecture(
+    State(state): State<ApiState>,
+    headers: HeaderMap,
+) -> std::result::Result<Json<serde_json::Value>, ApiError> {
+    check_auth_and_rate(&state, &headers)?;
+    read_state_json(
+        &state.config.state_dir.join("BRAHM_ARCHITECTURE.json"),
+        serde_json::json!({ "status": "no_architecture_report_generated" }),
+    )
+}
+
+async fn handle_deception(
+    State(state): State<ApiState>,
+    headers: HeaderMap,
+) -> std::result::Result<Json<serde_json::Value>, ApiError> {
+    check_auth_and_rate(&state, &headers)?;
+    let mgr = InspectionSessionManager::new(state.config.state_dir.join("sessions"));
+    let sessions = mgr
+        .list_sessions()
+        .map_err(|e| ApiError::new(StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+    if let Some(latest) = sessions.last() {
+        let pol_path = latest.state_dir.join("BRAHM_DECEPTION_POLICY.json");
+        let manifest_path = latest.state_dir.join("BRAHM_INSPECTION_MANIFEST.json");
+        let policy = if pol_path.is_file() {
+            std::fs::read_to_string(&pol_path)
+                .ok()
+                .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok())
+        } else {
+            None
+        };
+        let manifest = if manifest_path.is_file() {
+            std::fs::read_to_string(&manifest_path)
+                .ok()
+                .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok())
+        } else {
+            None
+        };
+        Ok(Json(serde_json::json!({
+            "active_session": latest,
+            "policy": policy,
+            "inspection_manifest": manifest,
+        })))
     } else {
         Ok(Json(
-            serde_json::json!({ "status": "no_monitoring_report_generated" }),
+            serde_json::json!({ "status": "no_deception_sessions" }),
         ))
+    }
+}
+
+async fn handle_rating(
+    State(state): State<ApiState>,
+    headers: HeaderMap,
+) -> std::result::Result<Json<serde_json::Value>, ApiError> {
+    check_auth_and_rate(&state, &headers)?;
+    let candidates = [
+        state.config.state_dir.join("BRAHM_RATING.json"),
+        PathBuf::from("reports/BRAHM_RATING.json"),
+    ];
+    for p in candidates {
+        if p.is_file() {
+            return read_state_json(&p, serde_json::json!({}));
+        }
+    }
+    Ok(Json(
+        serde_json::json!({ "status": "no_rating_calculated" }),
+    ))
+}
+
+async fn handle_experiment(
+    State(state): State<ApiState>,
+    headers: HeaderMap,
+) -> std::result::Result<Json<serde_json::Value>, ApiError> {
+    check_auth_and_rate(&state, &headers)?;
+    let candidates = [
+        state.config.state_dir.join("BRAHM_SCORECARD.json"),
+        PathBuf::from("reports/BRAHM_SCORECARD.json"),
+    ];
+    for p in candidates {
+        if p.is_file() {
+            return read_state_json(&p, serde_json::json!({}));
+        }
+    }
+    Ok(Json(
+        serde_json::json!({ "status": "no_experiment_scorecard" }),
+    ))
+}
+
+fn read_state_json(
+    path: &std::path::Path,
+    fallback: serde_json::Value,
+) -> std::result::Result<Json<serde_json::Value>, ApiError> {
+    if path.is_file() {
+        let raw = std::fs::read_to_string(path)
+            .map_err(|e| ApiError::new(StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        let val: serde_json::Value = serde_json::from_str(&raw).unwrap_or(fallback);
+        Ok(Json(val))
+    } else {
+        Ok(Json(fallback))
     }
 }

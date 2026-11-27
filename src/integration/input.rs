@@ -17,6 +17,9 @@ use crate::deception::decoy::generate_repository_id;
 use crate::deception::{GenuineLayer, ProductionIntegrityGuard};
 use crate::errors::{BrahmError, Result};
 use crate::models::RepositoryReport;
+use crate::reporting::architecture_json::{
+    generate_architecture_json, generate_dependency_graph_json, generate_symbol_index_json,
+};
 
 /// Validated metadata parsed from a GitHub repository URL without any credential material.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -214,22 +217,31 @@ impl RepositoryInputManager {
         fs::create_dir_all(state_dir)?;
         let config_record_path = state_dir.join("BRAHM_REPOSITORY_CONFIG.json");
 
-        let (already_registered, existing_profile, registered_at, decoy_reg, active_sess) =
-            if config_record_path.is_file() {
-                if let Ok(raw) = fs::read_to_string(&config_record_path) {
-                    if let Ok(prev) = serde_json::from_str::<RepositoryRecord>(&raw) {
+        let (
+            already_registered,
+            existing_profile,
+            registered_at,
+            decoy_reg,
+            active_sess,
+            stored_hash,
+        ) = if config_record_path.is_file() {
+            if let Ok(raw) = fs::read_to_string(&config_record_path) {
+                if let Ok(prev) = serde_json::from_str::<RepositoryRecord>(&raw) {
+                    if prev.repository_id == repo_id {
                         (
-                            prev.repository_id == repo_id,
+                            true,
                             prev.active_profile,
                             prev.registered_at,
                             prev.decoy_registry_path,
                             prev.active_session_id,
+                            Some(prev.baseline_fingerprint),
                         )
                     } else {
                         (
                             false,
                             ProtectionProfile::AnalysisOnly,
                             Utc::now(),
+                            None,
                             None,
                             None,
                         )
@@ -241,6 +253,7 @@ impl RepositoryInputManager {
                         Utc::now(),
                         None,
                         None,
+                        None,
                     )
                 }
             } else {
@@ -250,8 +263,42 @@ impl RepositoryInputManager {
                     Utc::now(),
                     None,
                     None,
+                    None,
                 )
-            };
+            }
+        } else {
+            (
+                false,
+                ProtectionProfile::AnalysisOnly,
+                Utc::now(),
+                None,
+                None,
+                None,
+            )
+        };
+
+        let baseline_fp = stored_hash.unwrap_or_else(|| genuine_layer.baseline_fingerprint.clone());
+        let baseline_path = state_dir.join("BRAHM_BASELINE.json");
+        if !already_registered || !baseline_path.is_file() {
+            fs::write(
+                &baseline_path,
+                serde_json::to_string_pretty(&genuine_layer)?,
+            )?;
+        }
+
+        // Persist Stage 02 architectural intelligence artifacts into state_dir
+        let _ = generate_architecture_json(
+            &architecture.report,
+            Some(&state_dir.join("BRAHM_ARCHITECTURE.json")),
+        )?;
+        let _ = generate_dependency_graph_json(
+            &architecture.graph_export,
+            Some(&state_dir.join("BRAHM_DEPENDENCY_GRAPH.json")),
+        )?;
+        let _ = generate_symbol_index_json(
+            &architecture.symbol_index,
+            Some(&state_dir.join("BRAHM_SYMBOL_INDEX.json")),
+        )?;
 
         let record = RepositoryRecord {
             schema_version: "1.0".to_string(),
@@ -262,7 +309,7 @@ impl RepositoryInputManager {
             source_url,
             registered_at,
             updated_at: Utc::now(),
-            baseline_fingerprint: genuine_layer.baseline_fingerprint.clone(),
+            baseline_fingerprint: baseline_fp,
             active_profile: existing_profile,
             state_dir: state_dir.to_path_buf(),
             architecture_pattern: Some(architecture.report.pattern.primary_pattern.clone()),

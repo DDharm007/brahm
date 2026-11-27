@@ -38,8 +38,10 @@ pub fn fingerprint_files(
     max_file_size_bytes: u64,
 ) {
     for entry in files.iter_mut() {
-        // 1. Never hash sensitive secret or credential files
-        if is_sensitive_credential_file(&entry.filename) {
+        // 1. Never hash sensitive secret/credential files or raw symlinks
+        if is_sensitive_credential_file(&entry.filename)
+            || entry.file_type == crate::models::FileType::Symlink
+        {
             continue;
         }
 

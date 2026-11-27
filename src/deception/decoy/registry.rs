@@ -277,6 +277,26 @@ impl DecoyRegistry {
 
         if !dry_run {
             self.data.updated_at = Utc::now();
+            // Prune empty BRAHM-owned subdirectories under decoy_layer_root
+            for rel in &removed_paths {
+                let mut curr = decoy_layer_root.join(rel).parent().map(|p| p.to_path_buf());
+                while let Some(dir) = curr {
+                    if let Ok(canon_dir) = fs::canonicalize(&dir) {
+                        if canon_dir == canonical_root || !canon_dir.starts_with(&canonical_root) {
+                            break;
+                        }
+                        if fs::read_dir(&canon_dir)
+                            .map(|mut rd| rd.next().is_none())
+                            .unwrap_or(false)
+                        {
+                            let _ = fs::remove_dir(&canon_dir);
+                            curr = dir.parent().map(|p| p.to_path_buf());
+                            continue;
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         Ok(DecoyCleanupResult {

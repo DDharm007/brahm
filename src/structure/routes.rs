@@ -72,9 +72,14 @@ impl ApiRouteDetector {
                                             clean_string_literal(parsed.node_text(&first_arg));
                                         if path_pattern.starts_with('/') {
                                             let span = parsed.node_span(&call);
-                                            let handler_name = args
-                                                .child(3)
-                                                .map(|h| parsed.node_text(&h).trim().to_string());
+                                            let named_count = args.named_child_count();
+                                            let handler_name = if named_count >= 2 {
+                                                args.named_child(named_count - 1).map(|h| {
+                                                    parsed.node_text(&h).trim().to_string()
+                                                })
+                                            } else {
+                                                None
+                                            };
 
                                             routes.push(ApiRoute {
                                                 method: http_method,

@@ -100,6 +100,27 @@ pub enum Commands {
         #[command(subcommand)]
         action: ReportsCommands,
     },
+
+    /// Execute controlled inspection agent inside an isolated session sandbox
+    Agent {
+        #[command(subcommand)]
+        action: AgentCommands,
+    },
+}
+
+#[derive(Subcommand, Debug)]
+pub enum AgentCommands {
+    /// Run the built-in LocalTestAgentAdapter over a prepared inspection session and record telemetry
+    Run {
+        /// Inspection session ID (e.g., sess_...)
+        session_id: String,
+        /// State directory holding sessions, decoy registry, and monitoring DB
+        #[arg(short, long, default_value = ".brahm_state")]
+        state_dir: PathBuf,
+        /// Specific relative file paths to inspect inside the sandbox (defaults to inspecting workspace files)
+        #[arg(long)]
+        paths: Vec<String>,
+    },
 }
 
 #[derive(Subcommand, Debug)]

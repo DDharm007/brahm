@@ -27,10 +27,7 @@ impl DataModelDetector {
 
         // 1. Relational SQL Migration & Schema files
         if norm_path.ends_with(".sql") {
-            if norm_path.contains("/migration")
-                || norm_path.contains("/db/")
-                || norm_path.contains("/sql/")
-            {
+            if norm_path.contains("/migration") {
                 let name = file_path
                     .file_name()
                     .and_then(|n| n.to_str())
@@ -49,7 +46,7 @@ impl DataModelDetector {
                 return models;
             }
 
-            // Otherwise parse CREATE TABLE declarations in .sql schema files
+            // Parse CREATE TABLE declarations in schema .sql files
             for line in source.lines() {
                 let upper = line.trim().to_ascii_uppercase();
                 if let Some(after_create) = upper.strip_prefix("CREATE TABLE ") {
@@ -72,6 +69,23 @@ impl DataModelDetector {
                         });
                     }
                 }
+            }
+
+            if models.is_empty() && (norm_path.contains("/db/") || norm_path.contains("/sql/")) {
+                let name = file_path
+                    .file_name()
+                    .and_then(|n| n.to_str())
+                    .unwrap_or("schema.sql")
+                    .to_string();
+                models.push(DataModel {
+                    name,
+                    kind: DataModelKind::SqlMigration,
+                    file_path: file_path.to_path_buf(),
+                    span: None,
+                    framework_or_orm: "SQL Migration".to_string(),
+                    table_name: None,
+                    fields: Vec::new(),
+                });
             }
             return models;
         }

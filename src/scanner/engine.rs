@@ -97,15 +97,25 @@ impl Scanner {
                 }
             }
 
-            // Check symlink safety
-            if entry.path_is_symlink() && !self.config.scanner.follow_symlinks {
-                trace!(
-                    "Skipping symlink resolution (follow_symlinks=false): {}",
-                    path.display()
-                );
-            } else if entry.path_is_symlink() && self.config.scanner.follow_symlinks {
-                if let Ok(target) = fs::canonicalize(path) {
-                    if !target.starts_with(&self.canonical_root) {
+            // Check symlink safety strictly: never read/follow symlinks when follow_symlinks=false,
+            // and confine followed symlinks strictly inside canonical_root.
+            if entry.path_is_symlink() {
+                if !self.config.scanner.follow_symlinks {
+                    let rel_path = self.relative_path_string(path);
+                    trace!(
+                        "Skipping symlink (follow_symlinks=false): {}",
+                        path.display()
+                    );
+                    output.excluded_paths.push(rel_path);
+                    if entry.file_type().is_dir() {
+                        it.skip_current_dir();
+                    }
+                    continue;
+                }
+
+                match fs::canonicalize(path) {
+                    Ok(target) if target.starts_with(&self.canonical_root) => {}
+                    Ok(target) => {
                         warn!(
                             "Symlink '{}' targets outside repository boundary '{}'. Traversal blocked.",
                             path.display(),
@@ -118,6 +128,17 @@ impl Scanner {
                                 target.display()
                             ),
                             severity: "high".to_string(),
+                        });
+                        if entry.file_type().is_dir() {
+                            it.skip_current_dir();
+                        }
+                        continue;
+                    }
+                    Err(e) => {
+                        output.warnings.push(ScanWarning {
+                            path: self.relative_path_string(path),
+                            message: format!("Unresolvable symlink skipped: {}", e),
+                            severity: "medium".to_string(),
                         });
                         if entry.file_type().is_dir() {
                             it.skip_current_dir();

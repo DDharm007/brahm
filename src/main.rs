@@ -3,21 +3,25 @@
 //! Provides CLI execution, structured logging initialization, and exit code management.
 
 use brahm::cli::{
-    ArchitectureCommands, Cli, Commands, ConnectCommands, DeceptionCommands, DecoyCommands,
-    EventsCommands, InitArgs, IntegrityCommands, MonitorCommands, PolicyCommands,
+    AgentCommands, ArchitectureCommands, Cli, Commands, ConnectCommands, DeceptionCommands,
+    DecoyCommands, EventsCommands, InitArgs, IntegrityCommands, MonitorCommands, PolicyCommands,
     ProtectionCommands, ReportsCommands, ScanArgs, SessionCommands, SessionsTimelineCommands,
 };
 use brahm::config::BrahmConfig;
 use brahm::deception::decoy::{DecoyEngine, DecoyGenerationProfile, DecoyRegistry};
 use brahm::deception::{
-    DeceptionPolicy, DeceptionPolicyEngine, DeceptionPolicyProfile, InspectionSessionManager,
-    ProductionIntegrityGuard,
+    ControlledInspectionEnvironment, DeceptionPolicy, DeceptionPolicyEngine,
+    DeceptionPolicyProfile, GenuineLayer, InspectionSessionManager,
 };
 use brahm::errors::{BrahmError, Result};
-use brahm::integration::{ProtectionInstaller, RepositoryInputManager, RepositoryRecord};
+use brahm::integration::{
+    InspectionAgent, LocalTestAgentAdapter, ProtectionInstaller, RepositoryInputManager,
+    RepositoryRecord,
+};
 use brahm::monitoring::{
-    generate_all_monitoring_reports, serve_monitoring_api, EventStore, IntegrityMonitor,
-    MonitoringApiConfig, RuleBasedClassifier, ScoringWeights, SqliteEventStore, TimelineCorrelator,
+    generate_all_monitoring_reports, serve_monitoring_api, CanaryDetector, EventSeverity,
+    EventSource, EventStore, EventType, IntegrityMonitor, MonitoringApiConfig, MonitoringEvent,
+    RuleBasedClassifier, ScoringWeights, SqliteEventStore, TimelineCorrelator,
 };
 use clap::Parser;
 use std::fs;
@@ -265,6 +269,12 @@ fn handle_deception(action: DeceptionCommands) -> Result<()> {
             } => {
                 let mgr = InspectionSessionManager::new(&sessions_dir);
                 let sess = mgr.stop_session(&session_id)?;
+                record_session_lifecycle_if_db(
+                    &sessions_dir,
+                    &sess.repository_id,
+                    &sess.session_id,
+                    EventType::InspectionSessionEnded,
+                );
                 println!(
                     "Session '{}' status updated to {:?}",
                     sess.session_id, sess.status
@@ -277,6 +287,12 @@ fn handle_deception(action: DeceptionCommands) -> Result<()> {
         } => {
             let mgr = InspectionSessionManager::new(&sessions_dir);
             let sess = mgr.cleanup_session(&session_id)?;
+            record_session_lifecycle_if_db(
+                &sessions_dir,
+                &sess.repository_id,
+                &sess.session_id,
+                EventType::CleanupCompleted,
+            );
             println!(
                 "Session '{}' workspace cleaned ({:?})",
                 sess.session_id, sess.status
@@ -458,6 +474,49 @@ fn handle_sessions_timeline(action: SessionsTimelineCommands) -> Result<()> {
     Ok(())
 }
 
+fn record_session_lifecycle_if_db(
+    sessions_dir: &Path,
+    repo_id: &str,
+    session_id: &str,
+    event_type: EventType,
+) {
+    if let Some(parent) = sessions_dir.parent() {
+        let db_path = parent.join("brahm_monitoring.db");
+        if db_path.is_file() {
+            if let Ok(store) = SqliteEventStore::open(&db_path) {
+                let _ = store.record_event(&MonitoringEvent {
+                    event_id: format!(
+                        "evt_{}",
+                        chrono::Utc::now().timestamp_nanos_opt().unwrap_or(0)
+                    ),
+                    event_type,
+                    repository_id: repo_id.to_string(),
+                    session_id: Some(session_id.to_string()),
+                    artifact_id: None,
+                    timestamp: chrono::Utc::now(),
+                    source: EventSource::PolicyEngine,
+                    severity: EventSeverity::Informational,
+                    correlation_id: format!("lifecycle_{}", session_id),
+                    metadata: std::collections::BTreeMap::new(),
+                });
+            }
+        }
+    }
+}
+
+fn load_stored_baseline(state_dir: &Path) -> Result<GenuineLayer> {
+    let baseline_path = state_dir.join("BRAHM_BASELINE.json");
+    if !baseline_path.is_file() {
+        return Err(BrahmError::Integration(format!(
+            "Stored genuine baseline '{}' not found. Connect or install protection before running integrity verification.",
+            baseline_path.display()
+        )));
+    }
+    let raw = fs::read_to_string(&baseline_path)?;
+    let baseline: GenuineLayer = serde_json::from_str(&raw)?;
+    Ok(baseline)
+}
+
 fn handle_integrity_check(action: IntegrityCommands) -> Result<()> {
     match action {
         IntegrityCommands::Check { state_dir } => {
@@ -465,8 +524,8 @@ fn handle_integrity_check(action: IntegrityCommands) -> Result<()> {
             let rec: RepositoryRecord = serde_json::from_str(&fs::read_to_string(&cfg_path)?)?;
             let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
 
-            let guard = ProductionIntegrityGuard::new();
-            let baseline = guard.capture_genuine_baseline(&rec.local_path)?;
+            // ISSUE-001 FIX: Compare live repository strictly against persisted original baseline snapshot
+            let baseline = load_stored_baseline(&state_dir)?;
 
             let reg_and_root = rec
                 .decoy_registry_path
@@ -511,8 +570,7 @@ fn handle_reports_generate(action: ReportsCommands) -> Result<()> {
             let integrity = match store.latest_integrity(&rec.repository_id)? {
                 Some(r) => r,
                 None => {
-                    let baseline = ProductionIntegrityGuard::new()
-                        .capture_genuine_baseline(&rec.local_path)?;
+                    let baseline = load_stored_baseline(&state_dir)?;
                     IntegrityMonitor::new()
                         .check_integrity(
                             &rec.repository_id,
@@ -551,6 +609,44 @@ fn handle_reports_generate(action: ReportsCommands) -> Result<()> {
     Ok(())
 }
 
+fn handle_agent(action: AgentCommands) -> Result<()> {
+    match action {
+        AgentCommands::Run {
+            session_id,
+            state_dir,
+            paths,
+        } => {
+            let cfg_path = state_dir.join("BRAHM_REPOSITORY_CONFIG.json");
+            let rec: RepositoryRecord = serde_json::from_str(&fs::read_to_string(&cfg_path)?)?;
+            let decoy_reg_path = rec.decoy_registry_path.ok_or_else(|| {
+                BrahmError::Integration("No decoy registry linked to repository state".to_string())
+            })?;
+            let registry = DecoyRegistry::load_from_path(&decoy_reg_path)?;
+
+            let sess_mgr = InspectionSessionManager::new(state_dir.join("sessions"));
+            let session = sess_mgr.load_session(&session_id)?;
+            let mut sandbox = ControlledInspectionEnvironment::open(session, registry.clone())?;
+
+            let adapter = LocalTestAgentAdapter::new();
+            let agent_res = adapter.run_inspection(&mut sandbox, &paths)?;
+
+            let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
+            let corr_id = format!("agent_{}", agent_res.agent_session_id);
+            let mut detector = CanaryDetector::new(5);
+            let (_canaries, mon_events) = detector.process_sandbox_accesses(
+                &rec.repository_id,
+                &registry,
+                sandbox.access_log(),
+                &corr_id,
+            );
+            store.record_events_batch(&mon_events)?;
+
+            println!("{}", serde_json::to_string_pretty(&agent_res)?);
+        }
+    }
+    Ok(())
+}
+
 fn run() -> Result<()> {
     let cli = Cli::parse();
     init_logging(cli.verbose);
@@ -571,6 +667,7 @@ fn run() -> Result<()> {
         Commands::Sessions { action } => handle_sessions_timeline(action)?,
         Commands::Integrity { action } => handle_integrity_check(action)?,
         Commands::Reports { action } => handle_reports_generate(action)?,
+        Commands::Agent { action } => handle_agent(action)?,
     }
 
     Ok(())

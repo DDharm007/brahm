@@ -23,6 +23,9 @@ use crate::deception::{
     ProductionIntegrityGuard,
 };
 use crate::errors::{BrahmError, Result};
+use crate::monitoring::{
+    EventSeverity, EventSource, EventStore, EventType, MonitoringEvent, SqliteEventStore,
+};
 use crate::reporting::architecture_md::generate_architecture_markdown;
 
 /// Bundle returned after running `ProtectionInstaller::install`.
@@ -182,7 +185,10 @@ impl ProtectionInstaller {
             Some(&state_dir.join("BRAHM_ARCHITECTURE.md")),
         )?;
 
-        // Generate decoys & mirror if required by profile
+        // Generate decoys & mirror if required by profile & persist telemetry refs
+        let store = SqliteEventStore::open(state_dir.join("brahm_monitoring.db"))?;
+        let corr_id = format!("install_{}", plan.plan_id);
+
         if plan.will_generate_decoys {
             let decoy_prof = match target_profile {
                 ProtectionProfile::ResearchMode => DecoyGenerationProfile::Research,
@@ -195,6 +201,27 @@ impl ProtectionInstaller {
                 &decoys_dir,
             )?;
             conn.record.decoy_registry_path = Some(decoy_res.registry_path.clone());
+
+            for art in decoy_res.registry.artifacts() {
+                store.record_decoy_ref(&conn.record.repository_id, art)?;
+                let mut meta = std::collections::BTreeMap::new();
+                meta.insert(
+                    "relative_path".to_string(),
+                    art.synthetic_relative_path.clone(),
+                );
+                store.record_event(&MonitoringEvent {
+                    event_id: format!("evt_{}", &Uuid::new_v4().simple().to_string()[..12]),
+                    event_type: EventType::DecoyCreated,
+                    repository_id: conn.record.repository_id.clone(),
+                    session_id: None,
+                    artifact_id: Some(art.artifact_id.clone()),
+                    timestamp: Utc::now(),
+                    source: EventSource::DecoyEngine,
+                    severity: EventSeverity::Informational,
+                    correlation_id: corr_id.clone(),
+                    metadata: meta,
+                })?;
+            }
 
             if plan.will_create_mirror {
                 let pol_prof = match target_profile {
@@ -210,10 +237,25 @@ impl ProtectionInstaller {
                     &policy,
                     3600,
                 )?;
-                let agent_sess = adapter.prepare_session(&outcome.session)?;
+                let active_outcome_sess = sess_mgr.activate_session(&outcome.session.session_id)?;
+                store.record_session_ref(&active_outcome_sess)?;
+                store.record_event(&MonitoringEvent {
+                    event_id: format!("evt_{}", &Uuid::new_v4().simple().to_string()[..12]),
+                    event_type: EventType::InspectionSessionStarted,
+                    repository_id: conn.record.repository_id.clone(),
+                    session_id: Some(active_outcome_sess.session_id.clone()),
+                    artifact_id: None,
+                    timestamp: Utc::now(),
+                    source: EventSource::PolicyEngine,
+                    severity: EventSeverity::Informational,
+                    correlation_id: corr_id,
+                    metadata: std::collections::BTreeMap::new(),
+                })?;
+
+                let agent_sess = adapter.prepare_session(&active_outcome_sess)?;
                 agent_sessions.push(agent_sess);
-                conn.record.active_session_id = Some(outcome.session.session_id.clone());
-                active_session = Some(outcome.session);
+                conn.record.active_session_id = Some(active_outcome_sess.session_id.clone());
+                active_session = Some(active_outcome_sess);
             }
         }
 

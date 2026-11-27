@@ -1,0 +1,117 @@
+{
+  "audit_date": "2026-11-27",
+  "baseline_commit": "1c012c9",
+  "project": "BRAHM",
+  "summary": {
+    "total": 9,
+    "critical": 1,
+    "high": 2,
+    "medium": 3,
+    "low": 2,
+    "informational": 1,
+    "fixed_and_verified": 6,
+    "documented_limitation_or_behavior": 2,
+    "scheduled_for_later_phase": 1
+  },
+  "issues": [
+    {
+      "issue_id": "ISSUE-001",
+      "severity": "Critical",
+      "subsystem": "Integrity Verification & CLI",
+      "affected_file": "src/main.rs, src/integration/input.rs",
+      "root_cause": "CLI `brahm integrity check` and `brahm reports generate` freshly scanned live disk files into a new `GenuineLayer` and compared the repository against itself, causing post-install tampering of genuine files to report 0 unexpected changes; reconnect also overwrote baseline hashes.",
+      "impact": "Integrity monitoring from the CLI failed to detect post-connect or post-install modification, deletion, or addition of repository source files.",
+      "fix_applied": "Persisted `BRAHM_BASELINE.json` inside `state_dir` during initial `RepositoryInputManager::connect_internal`, preserved `baseline_fingerprint` across idempotent re-connections, persisted `BRAHM_ARCHITECTURE.json`, `BRAHM_DEPENDENCY_GRAPH.json`, and `BRAHM_SYMBOL_INDEX.json`, and updated `handle_integrity_check` and `handle_reports_generate` in `src/main.rs` to load `BRAHM_BASELINE.json` via `load_stored_baseline`.",
+      "verification_method": "cargo test --test stage07_audit_regressions test_issue_001_stored_baseline_detects_post_install_modification",
+      "status": "Fixed and verified"
+    },
+    {
+      "issue_id": "ISSUE-002",
+      "severity": "High",
+      "subsystem": "Scanner & Cryptographic Hasher",
+      "affected_file": "src/scanner/engine.rs, src/analysis/hasher.rs",
+      "root_cause": "When `follow_symlinks = false`, symlink files still entered `inspect_file` and `fingerprint_files` (`File::open`), allowing symlinked targets outside the repository boundary to be opened or hashed; broken symlinks when `follow_symlinks = true` also risked scan failures.",
+      "impact": "Potential symlink boundary escape during inspection/hashing and noisy warnings on broken symlinks.",
+      "fix_applied": "Short-circuited symlinks cleanly in `Scanner::scan` when `follow_symlinks = false`, canonicalized and rejected broken or root-escaping symlinks when `follow_symlinks = true`, and skipped `FileType::Symlink` entries inside `fingerprint_files`.",
+      "verification_method": "cargo test --test stage07_audit_regressions test_issue_002_hasher_skips_symlinks",
+      "status": "Fixed and verified"
+    },
+    {
+      "issue_id": "ISSUE-003",
+      "severity": "High",
+      "subsystem": "Installer & Monitoring Telemetry Lifecycle",
+      "affected_file": "src/integration/installer.rs, src/main.rs, src/cli/mod.rs",
+      "root_cause": "CLI `protection install`, session lifecycle transitions (`deception stop`, `deception cleanup`), and agent sandbox inspection did not automatically record lifecycle events into `state_dir/brahm_monitoring.db`, and no `brahm agent run` CLI command existed to drive `LocalTestAgentAdapter` into persistent telemetry.",
+      "impact": "Automated telemetry correlation and SQLite audit history were incomplete unless custom Rust code manually invoked monitoring APIs.",
+      "fix_applied": "Updated `ProtectionInstaller::install` to activate the prepared inspection session and record `DecoyCreated`, `InspectionSessionStarted`, registered decoy refs, and session metadata in `brahm_monitoring.db`; added `record_session_lifecycle_if_db` for `Stop`/`Cleanup`; added `brahm agent run <session_id> --state-dir <dir> --paths ...` CLI command.",
+      "verification_method": "cargo test --test stage07_audit_regressions test_issue_003_install_auto_persists_lifecycle_events_in_sqlite",
+      "status": "Fixed and verified"
+    },
+    {
+      "issue_id": "ISSUE-004",
+      "severity": "Medium",
+      "subsystem": "CLI State Directory Alignment",
+      "affected_file": "src/cli/mod.rs, src/main.rs",
+      "root_cause": "`brahm decoy` and `brahm deception` standalone commands default to `.brahm_decoys` / `.brahm_sessions`, whereas unified workflows under `brahm protection` / `brahm monitor` nest artifacts inside `--state-dir` (`.brahm_state/{decoys,sessions}`).",
+      "impact": "Chaining standalone `decoy`/`deception` subcommands with `monitor`/`protection` requires passing matching `--decoy-dir` / `--session-dir` / `--state-dir` arguments explicitly.",
+      "fix_applied": "Preserved backward-compatible CLI defaults to avoid breaking existing automation while documenting exact flag matching conventions across integrated workflows.",
+      "verification_method": "CLI argument compatibility tests in tests/stage04_deception.rs and tests/stage05_integration.rs",
+      "status": "Documented known workflow convention"
+    },
+    {
+      "issue_id": "ISSUE-005",
+      "severity": "Medium",
+      "subsystem": "Stage 02 Code Intelligence (SQL Schemas & Express Routes)",
+      "affected_file": "src/structure/datamodels.rs, src/structure/routes.rs",
+      "root_cause": "`DataModelDetector` exited early on any `.sql` file matching `/db/` with a single `SqlMigration` model instead of parsing `CREATE TABLE` DDL definitions; `detect_js_routes` captured the first identifier argument in Express/Router calls, picking middleware names (e.g. `requireAuth`) instead of final route handlers.",
+      "impact": "Under-counted database tables in `db/schema.sql` files and misattributed route handler symbols in middleware-wrapped Express/TypeScript APIs.",
+      "fix_applied": "Updated `DataModelDetector::detect_from_text` to keep `/migration` as `SqlMigration` while parsing all `CREATE TABLE` definitions in non-migration SQL schemas as `SchemaDefinition`; updated `detect_js_routes` to extract the final named argument via `args.named_child(named_count - 1)`.",
+      "verification_method": "cargo test --test stage07_audit_regressions test_issue_005_schema_sql_tables_and_middleware_express_handler",
+      "status": "Fixed and verified"
+    },
+    {
+      "issue_id": "ISSUE-006",
+      "severity": "Medium",
+      "subsystem": "Monitoring HTTP API & CORS",
+      "affected_file": "src/monitoring/api.rs",
+      "root_cause": "Local Axum monitoring server exposed health, repositories, events, sessions, decoys, integrity, and monitoring reports, but lacked endpoints for `/api/v1/architecture`, `/api/v1/deception`, `/api/v1/rating`, and `/api/v1/experiment`, and omitted localhost-restricted CORS headers for browser UI clients.",
+      "impact": "A local browser dashboard could not retrieve architecture, deception policy, rating, or scorecard payloads or pass browser CORS preflight checks.",
+      "fix_applied": "Added authenticated GET routes `/api/v1/architecture`, `/api/v1/deception`, `/api/v1/rating`, and `/api/v1/experiment` plus strict `localhost_cors_middleware` (`http://localhost[:port]` / `http://127.0.0.1[:port]` with numeric port validation, rejecting spoofed or external origins).",
+      "verification_method": "cargo test --test stage07_audit_regressions test_issue_006_monitoring_api_endpoints_and_localhost_cors",
+      "status": "Fixed and verified"
+    },
+    {
+      "issue_id": "ISSUE-007",
+      "severity": "Low",
+      "subsystem": "Decoy Artifact Cleanup",
+      "affected_file": "src/deception/decoy/registry.rs",
+      "root_cause": "`DecoyRegistry::cleanup_owned_artifacts` deleted owned decoy files without pruning empty subdirectories created during decoy staging (`canary/`, `docs/`, `config/`, etc.).",
+      "impact": "Empty decoy subdirectories persisted on disk after non-dry-run decoy cleanup.",
+      "fix_applied": "Added bottom-up empty subdirectory pruning confined strictly inside `decoy_layer_root` during non-dry-run cleanup while keeping `decoy_layer_root` intact.",
+      "verification_method": "cargo test --test stage07_audit_regressions test_issue_007_cleanup_prunes_empty_decoy_subdirs",
+      "status": "Fixed and verified"
+    },
+    {
+      "issue_id": "ISSUE-008",
+      "severity": "Low",
+      "subsystem": "Documentation & Dashboard UI",
+      "affected_file": "README.md, dashboard/",
+      "root_cause": "Root `README.md` needed full Stage 07 documentation, BRAHM branding badge, rating integration, and Coding Agent rules; the React + TypeScript monitoring dashboard (`dashboard/`) was not yet built.",
+      "impact": "Public presentation and visual telemetry inspection required Phase 9 and Phase 10 deliverables.",
+      "fix_applied": "Scheduled in Phase 9 (`README.md`) and Phase 10 (`dashboard/`).",
+      "verification_method": "Vite TypeScript production build check and README audit in Phases 9-11",
+      "status": "Scheduled for Phases 9-10"
+    },
+    {
+      "issue_id": "ISSUE-009",
+      "severity": "Informational",
+      "subsystem": "Windows Canonical Path Formatting",
+      "affected_file": "src/analysis/aggregator.rs, src/deception/mirror.rs, src/main.rs",
+      "root_cause": "On Windows, `std::fs::canonicalize` produces extended-length UNC verbatim prefixes (`\\\\?\\D:\\...`) in absolute display paths.",
+      "impact": "Cosmetic display prefix in Windows absolute path logs; internal relative paths and POSIX normalization (`/` separators) remain unaffected.",
+      "fix_applied": "No functional mutation required; internal relative paths remain platform-normalized across reports and telemetry.",
+      "verification_method": "Verified deterministic relative path normalization across tests/milestone07_stage02_validation.rs",
+      "status": "Documented known platform behavior"
+    }
+  ]
+}
