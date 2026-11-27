@@ -40,7 +40,12 @@ fn init_logging(verbose: bool) {
     };
 
     let _ = tracing_subscriber::registry()
-        .with(fmt::layer().with_target(false).compact())
+        .with(
+            fmt::layer()
+                .with_writer(std::io::stderr)
+                .with_target(false)
+                .compact(),
+        )
         .with(filter)
         .try_init();
 }

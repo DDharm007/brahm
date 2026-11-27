@@ -122,7 +122,7 @@ pub enum AgentCommands {
         #[arg(short, long, default_value = ".brahm_state")]
         state_dir: PathBuf,
         /// Specific relative file paths to inspect inside the sandbox (defaults to inspecting workspace files)
-        #[arg(long)]
+        #[arg(long, num_args = 1..)]
         paths: Vec<String>,
     },
 }
