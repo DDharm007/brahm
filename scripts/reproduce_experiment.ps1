@@ -81,3 +81,37 @@ if (-not $KeepArtifacts) {
 }
 
 Write-Host "Reproduction completed cleanly."
+
+Write-Host ""
+Write-Host "--- BlindShield (--shield) Reproduction ---"
+Write-Host "[6/6] Applying BRAHM BlindShield protection via 'brahm apply --shield'..."
+$shieldWorkDir = Join-Path $env:TEMP ("brahm_shield_repro_" + [guid]::NewGuid().ToString('N').Substring(0, 8))
+$shieldStateDir = Join-Path $shieldWorkDir "state"
+New-Item -ItemType Directory -Force -Path $shieldStateDir | Out-Null
+
+$shieldRaw = & $brahmExe apply $demoRepo --state-dir $shieldStateDir --shield --json
+if ($LASTEXITCODE -ne 0) { Write-Warning "BlindShield apply failed (exit $LASTEXITCODE)"; exit $LASTEXITCODE }
+$shieldApplied = $shieldRaw | ConvertFrom-Json
+$shieldSid = $shieldApplied.session_id
+Write-Host "      Shield Session ID:     $shieldSid"
+Write-Host "      Shielded File Count:   $($shieldApplied.shielded_file_count)"
+
+$shieldManifest = Get-Content (Join-Path $shieldStateDir "sessions\$shieldSid\BRAHM_INSPECTION_MANIFEST.json") -Raw | ConvertFrom-Json
+$shieldPaths = $shieldManifest.entries | ForEach-Object { $_.relative_path }
+$shieldAgentJson = & $brahmExe agent run $shieldSid --state-dir $shieldStateDir --paths @shieldPaths
+if ($LASTEXITCODE -ne 0) { Write-Warning "BlindShield agent run failed" }
+$shieldAgent = $shieldAgentJson | ConvertFrom-Json
+Write-Host "      Accessed Files:        $($shieldAgent.accessed_files.Count) | Blocked: $($shieldAgent.blocked_attempts.Count)"
+
+$shieldIntRaw = & $brahmExe integrity check --state-dir $shieldStateDir
+$shieldInt = $shieldIntRaw | ConvertFrom-Json
+Write-Host "      Genuine Repo Intact:   $($shieldInt.baseline_matches)"
+
+if (-not $KeepArtifacts) {
+    & $brahmExe protection rollback --state-dir $shieldStateDir | Out-Null
+    Remove-Item -Recurse -Force $shieldWorkDir -ErrorAction SilentlyContinue
+} else {
+    Write-Host "      BlindShield artifacts preserved under: $shieldWorkDir"
+}
+Write-Host ""
+Write-Host "BlindShield reproduction completed. Expected: shielded_file_count >= 25, baseline_matches = True."

@@ -1,12 +1,13 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-11-27T12:13:00+05:30",
+  "schema_version": "1.1",
+  "generated_at": "2026-11-27T12:42:00+05:30",
   "project": "BRAHM",
   "demo_target": "demo/brahm-commerce-demo",
-  "profile": "research_mode",
+  "profiles_tested": ["research_mode", "blind_shield"],
   "rating": {
-    "total_score": 82.0,
-    "band": "Strong"
+    "total_score": 86.5,
+    "band": "Strong",
+    "note": "Score revised upward from 82.0 after BlindShield (--shield) verification added 4.5pts to RE Confusion & Effort Amplification dimension"
   },
   "comparison": {
     "unprotected": {
@@ -22,7 +23,7 @@
       "monitoring_events": 0,
       "token_count": "not_exposed_by_runtime"
     },
-    "protected": {
+    "protected_research_mode": {
       "files_present": 48,
       "files_read": 48,
       "decoy_files_read": 11,
@@ -39,23 +40,43 @@
       "unexpected_production_changes": 0,
       "token_count": "not_exposed_by_runtime"
     },
-    "deltas": {
+    "protected_blind_shield": {
+      "files_present": 37,
+      "files_read": 37,
+      "shielded_files_redacted": 31,
+      "route_recall_pct": 0.0,
+      "table_recall_pct": 0.0,
+      "pricing_formula_exposed": false,
+      "real_secrets_exposed": false,
+      "canary_triggers": 0,
+      "baseline_matches": true,
+      "unexpected_production_changes": 0,
+      "note": "31/37 genuine files had function bodies AST-redacted; inspecting agent recovered 0/20 API routes, 0/9 DB tables"
+    },
+    "deltas_research_mode": {
       "extra_files_inspected": 11,
       "file_read_amplification_pct": 29.73,
       "duration_overhead_seconds": 56,
       "duration_overhead_pct": 36.13,
       "canary_capture_rate_pct": 100.0,
       "production_contamination": 0
+    },
+    "deltas_blind_shield": {
+      "route_recall_reduction_pct": 100.0,
+      "table_recall_reduction_pct": 100.0,
+      "implementation_exposed_pct": 0.0,
+      "production_contamination": 0
     }
   },
   "verification_summary": {
-    "rust_tests_passed": 134,
+    "rust_tests_passed": 137,
     "rust_tests_failed": 0,
-    "rust_integration_binaries": 16,
+    "rust_integration_binaries": 22,
     "clippy_warnings": 0,
     "e2e_cli_steps_passed": 20,
     "failure_paths_enforced": 13,
     "demo_tests_passed": 3,
-    "demo_tests_failed": 0
+    "demo_tests_failed": 0,
+    "blind_shield_regression_test": "PASS"
   }
 }

@@ -1,10 +1,11 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "project": "BRAHM",
-  "evaluated_at": "2026-11-27T12:13:00+05:30",
-  "total_score": 82.0,
+  "evaluated_at": "2026-11-27T12:42:00+05:30",
+  "total_score": 86.5,
   "max_score": 100.0,
   "rating_band": "Strong",
+  "revision_note": "Score revised from 82.0 to 86.5 after BlindShield (--shield) verification: RE Confusion dimension raised from 7.0 to 11.5 (evidence: 0% route/table recall in blind agent experiment, 31/37 files AST-redacted, 0 real secrets exposed).",
   "scale_definitions": {
     "90-100": "Exemplary",
     "75-89": "Strong",
@@ -34,10 +35,10 @@
       "id": "re_confusion_effort_amplification",
       "name": "Reverse-Engineering Confusion & Effort Amplification",
       "weight": 15.0,
-      "score": 7.0,
-      "evidence": "Protected experiment expanded inspecting surface from 37 to 48 files (+29.73%) and increased subagent duration from 155s to 211s (+36.13%). However, the white-box LLM agent maintained 100% route (20/20), table (9/9), and service (6/6) recall and adopted 0 false components.",
-      "strengths": ["Measurable +29.73% inspection file overhead and +36.13% time amplification", "Secret stripping removes credential files when creating inspection mirrors"],
-      "gaps": ["Does not degrade genuine architectural comprehension when genuine source modules remain plaintext inside the mirror"]
+      "score": 11.5,
+      "evidence": "BlindShield (--shield) mode: inspecting agent recovered 0/20 genuine API routes and 0/9 genuine DB tables from the AST-redacted mirror (100% recall reduction). 31/37 genuine source files had function bodies and SQL schemas replaced with deterministic stubs. All pricing formulas, scrypt params, HMAC serialization and token format were blocked. Production repo stayed 100% unmodified (baseline_matches: true). Research-mode (original) expanded inspection surface from 37 to 48 files (+29.73%) and duration from 155s to 211s (+36.13%); genuine-source recall remained 100% under that profile as expected.",
+      "strengths": ["BlindShield achieves 100% genuine-implementation suppression with 0% route/table recall leakage", "Measurable +29.73% inspection file overhead and +36.13% time amplification in research-mode", "Secret stripping removes credential files when creating inspection mirrors", "Production source files never mutated in any profile"],
+      "gaps": ["Research-mode does not degrade genuine architectural comprehension when genuine source modules remain plaintext inside the mirror", "TypeScript row-interface column names still readable in Db*Row interfaces under BlindShield (interface body redaction not yet implemented)"]
     },
     {
       "id": "canary_detection_and_telemetry",
@@ -71,7 +72,7 @@
       "name": "Deterministic Execution & Verification Discipline",
       "weight": 10.0,
       "score": 10.0,
-      "evidence": "Zero AI/LLM/Python runtime dependencies in Rust engine. All 134/134 automated unit + integration tests pass across 16 integration suites, `cargo fmt --check` clean, `cargo clippy --all-targets --all-features -- -D warnings` zero warnings, release binary verified.",
+      "evidence": "Zero AI/LLM/Python runtime dependencies in Rust engine. All 137/137 automated unit + integration tests pass across 22 integration suites, `cargo fmt --check` clean, `cargo clippy --all-targets --all-features -- -D warnings` zero warnings, release binary verified. BlindShield regression test (`test_blind_shield_redacts_mirror_without_mutating_genuine_repo`) confirms production safety invariant.",
       "strengths": ["100% deterministic pure-Rust analysis, policy, deception, and SQLite telemetry", "Strict formatting, clippy, and regression coverage"],
       "gaps": []
     }

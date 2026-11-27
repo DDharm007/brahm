@@ -9,10 +9,11 @@
 ![Rust Edition](https://img.shields.io/badge/Core-Pure%20Rust%20(MSRV%201.80)-DC2626?style=for-the-badge)
 ![License: MIT](https://img.shields.io/badge/License-MIT-B91C1C?style=for-the-badge)
 ![Deterministic Engine](https://img.shields.io/badge/AI%20Runtime%20Deps-0%20(100%25%20Deterministic)-111827?style=for-the-badge)
-![Verified Score](https://img.shields.io/badge/BRAHM%20Rating-82.0%20%2F%20100%20(Strong)-EF4444?style=for-the-badge)
+![Verified Score](https://img.shields.io/badge/BRAHM%20Rating-86.5%20%2F%20100%20(Strong)-EF4444?style=for-the-badge)
 ![Tests Passing](https://img.shields.io/badge/Verified%20Tests-137%20%2F%20137%20Pass-16A34A?style=for-the-badge)
+![Release](https://img.shields.io/github/v/release/DDharm007/brahm?style=for-the-badge&color=7C3AED&label=Latest%20Release)
 
-> **Quick Navigation:** [**Quick Start**](#7-quick-start-load-any-project--apply-brahm-protection) · [**Using BRAHM with AI Agents (Antigravity / Codex / Claude Code / Cursor)**](#ai-coding-agent-quickstart-antigravity--codex--claude-code--any-agent) · [**Full Agent Guide (`AGENT_README.md`)**](AGENT_README.md) · [**Benchmark Score (`82.0 / 100`)**](#11-evidence-based-brahm-rating-820--100-strong) · [**MIT License (`LICENSE`)**](LICENSE)
+> **Quick Navigation:** [**Quick Start**](#7-quick-start-load-any-project--apply-brahm-protection) · [**Using BRAHM with AI Agents (Antigravity / Codex / Claude Code / Cursor)**](#ai-coding-agent-quickstart-antigravity--codex--claude-code--any-agent) · [**Full Agent Guide (`AGENT_README.md`)**](AGENT_README.md) · [**Benchmark Score (`86.5 / 100`)**](#11-evidence-based-brahm-rating-820--100-strong) · [**MIT License (`LICENSE`)**](LICENSE)
 
 </div>
 
@@ -214,18 +215,18 @@ See full comparative analysis and Mermaid diagrams in [`reports/BRAHM_FINAL_EXPE
 
 ---
 
-## 11. Evidence-Based BRAHM Rating: **82.0 / 100 (`Strong`)**
+## 11. Evidence-Based BRAHM Rating: **86.5 / 100 (`Strong`)**
 
 | Dimension | Weight | Score | Summary Evidence |
 | :--- | ---: | ---: | :--- |
 | Architecture Discovery Accuracy | 15.0 | **14.0** | `100%` route/SQL/symbol extraction in `25 ms` on demo (`20/20` routes, `10/10` models). |
 | Decoy Realism & Structural Fit | 15.0 | **9.0** | Zero build breakage or secret leakage; docked `-6.0` for `.decoy.`/`CANARY` markers identifiable in white-box review. |
-| RE Confusion & Effort Amplification | 15.0 | **7.0** | Measurable `+29.73%` files / `+36.13%` time overhead without preventing genuine route recovery under full white-box read. |
+| RE Confusion & Effort Amplification | 15.0 | **11.5** | `--shield` mode: blind agent recovered **0 / 20 routes** and **0 / 9 tables** (`100%` recall suppression, `31/37` files AST-redacted). Research-mode adds `+29.73%` files / `+36.13%` time overhead. |
 | Canary Detection & Telemetry | 15.0 | **14.0** | `11/11` canary triggers (`23` events, `R01` alert, traversal block); mediated workspace boundary (`-1.0`). |
 | Production Safety & Integrity | 15.0 | **15.0** | Zero repo contamination, cryptographic tamper alerts (`E2E-18`), symlink/secret guards, ownership rollback. |
 | Operational Usability & CLI | 15.0 | **13.0** | Single-command `brahm apply`, `20/20` E2E + `13/13` failure checks, strict localhost API (`-2.0` CLI defaults & UNC paths). |
-| Deterministic Execution & Tests | 10.0 | **10.0** | Pure Rust (`0` AI dependencies), `134/134` tests passing, `0` clippy warnings. |
-| **Total** | **100.0** | **82.0** | **Band: `Strong` (`75–89`)** — see [`reports/BRAHM_RATING.md`](reports/BRAHM_RATING.md) |
+| Deterministic Execution & Tests | 10.0 | **10.0** | Pure Rust (`0` AI dependencies), `137/137` tests passing, `0` clippy warnings. |
+| **Total** | **100.0** | **86.5** | **Band: `Strong` (`75–89`)** — see [`reports/BRAHM_RATING.md`](reports/BRAHM_RATING.md) |
 
 ---
 
